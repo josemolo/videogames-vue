@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "title": "Cyber Adventure",
+    "description": "Un juego de acción futurista.",
+    "image": "https://picsum.photos/300/180"
+  },
+  {
+    "id": 2,
+    "title": "Fantasy World",
+    "description": "Explora un mundo lleno de magia.",
+    "image": "https://picsum.photos/300/180"
+  },
+  {
+    "id": 3,
+    "title": "Racing Pro",
+    "description": "Carreras a máxima velocidad.",
+    "image": "https://picsum.photos/300/180"
+  }
+]

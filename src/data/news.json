@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "title": "Nuevo lanzamiento",
+    "description": "El juego X salió hoy",
+    "image": "https://picsum.photos/250/150"
+  },
+  {
+    "id": 2,
+    "title": "Evento gamer",
+    "description": "Torneo este fin de semana",
+    "image": "https://picsum.photos/250/150"
+  },
+  {
+    "id": 3,
+    "title": "Oferta especial",
+    "description": "20% en consolas",
+    "image": "https://picsum.photos/250/150"
+  }
+]
