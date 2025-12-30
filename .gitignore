@@ -4,8 +4,22 @@ logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+package-lock.json*
+yarn.lock*
 pnpm-debug.log*
 lerna-debug.log*
+
+# Carpeta de build/compilación
+dist/
+build/
+
+# Configuraciones de Visual Studio / VSCode
+.vs/
+.vscode/
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
 
 node_modules
 dist
