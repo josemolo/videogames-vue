@@ -1,9 +1,13 @@
-<template>
+<template>  
   <canvas ref="canvasRef" class="particle-canvas"></canvas>
   <div class="home">
 
     <!-- HERO -->
-    <Hero />
+    <Hero 
+     :video="gamingBg"
+     @shop="goToShop"
+     @news="goToNews"
+    />
 
     <!--
       :video="gamingBg"
@@ -89,15 +93,17 @@
 import { useHead } from '@vueuse/head'
 
 useHead({
-  title: 'VortexGames | Consolas, Juegos y Accesorios Gamer',
+  /*title: 'VortexGames | Consolas, Juegos y Accesorios Gamer',*/
   meta: [
-    { name: 'description', content: 'Compra consolas, juegos y accesorios gamer con envíos rápidos y precios competitivos.' }
+    { property: 'og:title', content: 'VortexGames | Consolas y Juegos' },
+    { property: 'og:description', name: 'description', content: 'Compra consolas, juegos y accesorios gamer con envíos rápidos y precios competitivos.' },
+    { property: 'og:image', content: 'https://res.cloudinary.com/usuario/image/upload/banner.jpg'}
   ]
 })  
 
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-//import gamingBg from '@/assets/videos/gaming.mp4'
+/*import gamingBg from '@/assets/videos/gaming.mp4'*/
 import Hero from '@/components/Hero.vue'
 import SectionGrid from '@/components/SectionGrid.vue'
 import Card from '@/components/Card.vue'
@@ -114,7 +120,7 @@ useScrollAnimation('.card')
 //useHead({ title:'VortexGames | Consolas, Juegos y Accesorios Gamer', meta:[{ name:'description', content:'Compra consolas, juegos y accesorios gamer con envíos rápidos y precios competitivos.' }] })
   
 
-const gamingBgUrl = "https://drive.google.com/file/d/1v55Ln8l_qEfxMiFhb1eRhT013OtlxGG_/view?usp=drive_link";
+const gamingBg = "https://res.cloudinary.com/dakkfinnu/video/upload/v1767195871/gaming_g0o04l.mp4";
 
 const router = useRouter()
 const goToShop = () => router.push('/consoles')
@@ -173,6 +179,10 @@ const games = [
 */
 
 console.log('games:', games)
+
+defineProps({
+  video: String
+})
 </script>
 
 

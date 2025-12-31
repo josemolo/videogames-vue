@@ -2,8 +2,8 @@
   <section class="hero">
 
     <!-- Video de fondo -->
-    <video autoplay muted loop playsinline class="hero-video">
-      <source :src="gamingBgUrl" type="video/mp4" />
+    <video autoplay muted loop playsinline class="hero-video"> <!--crossorigin="anonymous"-->
+      <source :src="video" type="video/mp4" />
     </video>
 
     <div class="hero-overlay"></div>
@@ -27,17 +27,31 @@
 
 <script setup>
 import { onMounted, onUnmounted, ref } from 'vue'
+
+/*
+const props = defineProps({
+  video: { type: String, required: true }
+})
+*/
+
+defineProps({
+  video: {
+    type: String,
+    required: true
+  }
+})
+
 import { useRouter } from 'vue-router'
 
 // URL pública del video, evita problemas con Git LFS
-//const gamingBg = "https://https://drive.google.com/drive/folders/1oF-Yx7FGFQPmhbHHXrvZdq_uw4Aay6Ab?usp=drive_link -videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4"
+/*const gamingBg = "https://https://drive.google.com/drive/folders/1oF-Yx7FGFQPmhbHHXrvZdq_uw4Aay6Ab?usp=drive_link -videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4"*/
 
 const router = useRouter()
 const goToShop = () => router.push('/consoles')
 const goToNews = () => router.push('/news')
 
 // Video público
-const gamingBgUrl = "https://drive.google.com/file/d/1v55Ln8l_qEfxMiFhb1eRhT013OtlxGG_/view?usp=drive_link"
+const gamingBgUrl = "https://res.cloudinary.com/dakkfinnu/video/upload/v1767195871/gaming_g0o04l.mp4"
 
 const particleCanvas = ref(null)
 let animationId = null  
