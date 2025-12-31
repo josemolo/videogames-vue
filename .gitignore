@@ -12,9 +12,8 @@ lerna-debug.log*
 # Carpeta de build/compilación
 dist/
 build/
-src/
-assets/
-videos/
+
+/src/assets/videos/gaming.mp4
 
 # Configuraciones de Visual Studio / VSCode
 .vs/
