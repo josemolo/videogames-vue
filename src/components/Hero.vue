@@ -28,14 +28,19 @@
 <script setup>
 import { onMounted, onUnmounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
-import gamingBg from '@/assets/videos/gaming.mp4'
+
+// URL pública del video, evita problemas con Git LFS
+//const gamingBg = "https://https://drive.google.com/drive/folders/1oF-Yx7FGFQPmhbHHXrvZdq_uw4Aay6Ab?usp=drive_link -videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4"
 
 const router = useRouter()
 const goToShop = () => router.push('/consoles')
 const goToNews = () => router.push('/news')
 
+// Video público
+const gamingBg = "https://sample-https://drive.google.com/drive/folders/1oF-Yx7FGFQPmhbHHXrvZdq_uw4Aay6Ab?usp=drive_link.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4"
+
 const particleCanvas = ref(null)
-let animationId = null
+let animationId = null  
 
 onMounted(() => {
   const canvas = particleCanvas.value
@@ -97,6 +102,7 @@ onMounted(() => {
 
     animationId = requestAnimationFrame(animate)
   }
+  
 
   animate()
 
@@ -123,7 +129,6 @@ onMounted(() => {
   color: #9f0e0e9c;
 }
 
-/* Video de fondo */
 .hero-video {
   position: absolute;
   inset: 0;
@@ -141,7 +146,6 @@ onMounted(() => {
   z-index: -2;
 }
 
-/* Contenido */
 .hero-content {
   position: relative;
   max-width: 900px;
@@ -161,7 +165,6 @@ onMounted(() => {
   text-shadow: 0 0 5px rgba(127,92,255,0.8);
 }
 
-/* Neon text */
 .neon-text {
   color: #7f5cff;
   text-shadow:
@@ -179,7 +182,6 @@ onMounted(() => {
   20%, 24%, 55% { opacity: 0.7; }
 }
 
-/* Botones */
 .hero-actions {
   margin-top: 2rem;
   display: flex;
@@ -220,7 +222,6 @@ onMounted(() => {
   background: rgba(184, 167, 230, 0.15);
 }
 
-/* Canvas de partículas */
 .particle-canvas {
   position: absolute;
   inset: 0;
@@ -228,16 +229,13 @@ onMounted(() => {
   pointer-events: none;
 }
 
-/* Animación fadeUp */
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(30px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* Responsive */
 @media (max-width: 600px) {
   .hero-actions { flex-direction: column; }
   .hero-content h1 { font-size: 3rem; }
 }
 </style>
-

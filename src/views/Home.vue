@@ -3,12 +3,14 @@
   <div class="home">
 
     <!-- HERO -->
-    <Hero
+    <Hero />
+
+    <!--
       :video="gamingBg"
       @shop="goToShop"
       @news="goToNews"
       :refCanvas="canvasRef" 
-    />
+    -->
 
     <!-- SECCIONES SIMPLES -->
  <SectionGrid v-if="games && games.length" title="Juegos Destacados">
@@ -95,7 +97,7 @@ useHead({
 
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import gamingBg from '@/assets/videos/gaming.mp4'
+//import gamingBg from '@/assets/videos/gaming.mp4'
 import Hero from '@/components/Hero.vue'
 import SectionGrid from '@/components/SectionGrid.vue'
 import Card from '@/components/Card.vue'
@@ -109,6 +111,10 @@ import { useScrollAnimation } from '@/composables/useScrollAnimation'
 
 useScrollAnimation('.card') 
 
+useHead({ title:'VortexGames | Consolas, Juegos y Accesorios Gamer', meta:[{ name:'description', content:'Compra consolas, juegos y accesorios gamer con envíos rápidos y precios competitivos.' }] })
+  
+
+const gamingBg = "https://drive.google.com/drive/folders/1oF-Yx7FGFQPmhbHHXrvZdq_uw4Aay6Ab?usp=drive_link";
 
 const router = useRouter()
 const goToShop = () => router.push('/consoles')
