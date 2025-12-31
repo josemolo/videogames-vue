@@ -1,0 +1,95 @@
+[33mcommit bc41c5015f9d3399bd97b859534558f0c35b75d5[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m
+Author: josem <jjmondragon@vlacademy.com>
+Date:   Tue Dec 30 20:01:09 2025 -0600
+
+    Eliminar video grande e ignorar carpeta de videos
+
+ .gitignore | 3 [32m+++[m
+ 1 file changed, 3 insertions(+)
+
+[33mcommit 780e4cdbcfa0d86a696f50ee7ae156ebed906ea0[m
+Author: josem <jjmondragon@vlacademy.com>
+Date:   Tue Dec 30 19:39:38 2025 -0600
+
+    Configurar LFS para videos
+
+ .gitattributes | 1 [32m+[m
+ 1 file changed, 1 insertion(+)
+
+[33mcommit f05cdc456920b734729aa7b969e8b4cc773f0f78[m
+Author: josem <jjmondragon@vlacademy.com>
+Date:   Tue Dec 30 16:49:15 2025 -0600
+
+    cambios
+    
+    "Primer commit de todos los archivos"
+
+ .gitignore     | 14 [32m++++++++++++++[m
+ .gitignore.txt |  0
+ 2 files changed, 14 insertions(+)
+
+[33mcommit 563a6e7fbe0391733a217ce57a485621df08edd7[m
+Author: josem <jjmondragon@vlacademy.com>
+Date:   Tue Dec 30 13:16:05 2025 -0600
+
+    Limpiar archivos grandes
+
+ .gitattributes | 4 [32m++++[m
+ 1 file changed, 4 insertions(+)
+
+[33mcommit f085a8ae8f1d81c34f3e3683c67b7462650555a7[m
+Author: josem <jjmondragon@vlacademy.com>
+Date:   Tue Dec 30 11:17:43 2025 -0600
+
+    Initial release - VortexGames
+
+ .gitignore                            |   24 [32m+[m
+ .vscode/extensions.json               |    3 [32m+[m
+ README.md                             |    5 [32m+[m
+ index.html                            |   15 [32m+[m
+ package-lock.json                     | 1514 [32m+++++++++++++++++++++++++++++++++[m
+ package.json                          |   28 [32m+[m
+ public/images/3ds.png                 |  Bin [31m0[m -> [32m188010[m bytes
+ public/images/atari.png               |  Bin [31m0[m -> [32m1152890[m bytes
+ public/images/oculus.png              |  Bin [31m0[m -> [32m660370[m bytes
+ public/images/ps4.png                 |  Bin [31m0[m -> [32m88730[m bytes
+ public/images/ps5.png                 |  Bin [31m0[m -> [32m91190[m bytes
+ public/images/steamdeck.png           |  Bin [31m0[m -> [32m242995[m bytes
+ public/images/switch.png              |  Bin [31m0[m -> [32m511196[m bytes
+ public/images/xboxs.png               |  Bin [31m0[m -> [32m260369[m bytes
+ public/images/xboxx.png               |  Bin [31m0[m -> [32m424023[m bytes
+ public/vite.svg                       |    1 [32m+[m
+ src/App.vue                           |   25 [32m+[m
+ src/assets/style.css                  |   13 [32m+[m
+ src/assets/vue.svg                    |    1 [32m+[m
+ src/components/Card.vue               |  138 [32m+++[m
+ src/components/GameGrid.vue           |   43 [32m+[m
+ src/components/HelloWorld.vue         |   41 [32m+[m
+ src/components/Hero.vue               |  243 [32m++++++[m
+ src/components/LoginModal.vue         |   17 [32m+[m
+ src/components/Navbar.vue             |  173 [32m++++[m
+ src/components/ScrollReveal.vue       |   23 [32m+[m
+ src/components/SectionGrid.vue        |   40 [32m+[m
+ src/composables/useParticles.js       |  100 [32m+++[m
+ src/composables/useScrollAnimation.js |   27 [32m+[m
+ src/data/featuredProducts.json        |   26 [32m+[m
+ src/data/games.json                   |   20 [32m+[m
+ src/data/news.json                    |   20 [32m+[m
+ src/data/products.json                |   26 [32m+[m
+ src/main.ts                           |   21 [32m+[m
+ src/router/index.js                   |   63 [32m++[m
+ src/shims-vue.d.ts                    |    5 [32m+[m
+ src/stores/cart.js                    |   19 [32m+[m
+ src/stores/favorites.js               |   13 [32m+[m
+ src/style.css                         |   79 [32m++[m
+ src/views/Consoles.vue                |  163 [32m++++[m
+ src/views/Contact.vue                 |  355 [32m++++++++[m
+ src/views/Home.vue                    |  233 [32m+++++[m
+ src/views/Library.vue                 |  132 [32m+++[m
+ src/views/News.vue                    |   57 [32m++[m
+ src/views/Register.vue                |  135 [32m+++[m
+ tsconfig.app.json                     |   16 [32m+[m
+ tsconfig.json                         |    7 [32m+[m
+ tsconfig.node.json                    |   26 [32m+[m
+ vite.config.ts                        |   12 [32m+[m
+ 49 files changed, 3902 insertions(+)
