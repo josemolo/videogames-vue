@@ -111,10 +111,10 @@ import { useScrollAnimation } from '@/composables/useScrollAnimation'
 
 useScrollAnimation('.card') 
 
-useHead({ title:'VortexGames | Consolas, Juegos y Accesorios Gamer', meta:[{ name:'description', content:'Compra consolas, juegos y accesorios gamer con envíos rápidos y precios competitivos.' }] })
+//useHead({ title:'VortexGames | Consolas, Juegos y Accesorios Gamer', meta:[{ name:'description', content:'Compra consolas, juegos y accesorios gamer con envíos rápidos y precios competitivos.' }] })
   
 
-const gamingBg = "https://drive.google.com/drive/folders/1oF-Yx7FGFQPmhbHHXrvZdq_uw4Aay6Ab?usp=drive_link";
+const gamingBgUrl = "https://drive.google.com/file/d/1v55Ln8l_qEfxMiFhb1eRhT013OtlxGG_/view?usp=drive_link";
 
 const router = useRouter()
 const goToShop = () => router.push('/consoles')

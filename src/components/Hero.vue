@@ -3,7 +3,7 @@
 
     <!-- Video de fondo -->
     <video autoplay muted loop playsinline class="hero-video">
-      <source :src="gamingBg" type="video/mp4" />
+      <source :src="gamingBgUrl" type="video/mp4" />
     </video>
 
     <div class="hero-overlay"></div>
@@ -37,7 +37,7 @@ const goToShop = () => router.push('/consoles')
 const goToNews = () => router.push('/news')
 
 // Video público
-const gamingBg = "https://sample-https://drive.google.com/drive/folders/1oF-Yx7FGFQPmhbHHXrvZdq_uw4Aay6Ab?usp=drive_link.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4"
+const gamingBgUrl = "https://drive.google.com/file/d/1v55Ln8l_qEfxMiFhb1eRhT013OtlxGG_/view?usp=drive_link"
 
 const particleCanvas = ref(null)
 let animationId = null  
@@ -102,7 +102,7 @@ onMounted(() => {
 
     animationId = requestAnimationFrame(animate)
   }
-  
+
 
   animate()
 
