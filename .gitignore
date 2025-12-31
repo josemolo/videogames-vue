@@ -12,6 +12,9 @@ lerna-debug.log*
 # Carpeta de build/compilación
 dist/
 build/
+src/
+assets/
+videos/
 
 # Configuraciones de Visual Studio / VSCode
 .vs/
