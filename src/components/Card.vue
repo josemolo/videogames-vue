@@ -22,14 +22,16 @@ onMounted(() => {
   const observer = new IntersectionObserver(
     ([entry]) => {
       if (entry.isIntersecting) {
-        entry.target.classList.add('show')
+        entry.target.classList.add('visible')
         observer.unobserve(entry.target)
       }
     },
     { threshold: 0.15 }
   )
-
-  observer.observe(cardRef.value)
+  
+  if (cardRef.value) {
+    observer.observe(cardRef.value)
+  }
 })   
 
 defineProps({
@@ -45,32 +47,40 @@ defineProps({
     type: String,
     required: true
   },
+  /*
   desc: String,
   img: String,
   button: String
+  */
 })
 </script>
 
 <style scoped>
 .card {
   background: #111;
-  border-radius: 12px;
+  border-radius: 14px;
   padding: 1rem;
   color: white;
   text-align: center;
+  position: relative;
+  overflow: hidden;
   transition: 
-    transform 0.6s ease,
-    box-shadow 0.35s ease,
-    opacity 0.6s ease;
+    all 0.5s ease,
+    transform 0.5s ease,
+    box-shadow 0.5s ease,
+    opacity 0.4s ease;
   opacity: 0;
-  transform: translateY(40px) scale(0.97);
-  animation: fadeInUp 0.6s ease forwards;
+  transform: translateY(40px) scale(0.97)
 }
 
+/*animation: fadeInUp 0.6s ease forwards;*/
+
+/*
 .card.show {
   opacity: 1;
   transform: translateY(0) scale(1);
 }
+*/
 
 @keyframes fadeInUp {
   from {
@@ -84,19 +94,44 @@ defineProps({
 }
 
 .card:hover {
-  transform: translateY(-10px) scale(1.03);
+  transform: translateY(-10px) scale(1.02);
   box-shadow: 0 0 25px rgba(127,92,255,0.6), 0 0 60px rgba(127,92,255,0.25);
   filter: drop-shadow(0 0 12px rgba(127,92,255,0.6));
 }
 
+.card::before {
+  content: "";
+  position: absolute;
+  inset: -50%;
+  background: radial-gradient(
+    circle,
+    rgba(127,92,255,0.25),
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.card:hover::before {
+  opacity: 1;
+}
 
 .card-image {
   width: 100%;
-  border-radius: 8px;
+  border-radius: 10px;
   margin-bottom: 0.8rem;
 
-  filter: blur(6px);
-  transition: filter 0.4s ease;
+  transform: scale(1.15) translateY(-6px);
+  opacity: 1;
+  filter: blur(0px);
+  transition: 
+    transform 0.8s ease,
+    opacity 0.6s ease,
+    filter 0.4s ease;
+  
+  box-shadow:
+    0 10px 25px rgba(127,92,255,0.35),
+    0 0 35px rgba(127,92,255,0.25);
 }
 
 .card-image[src] {
@@ -134,5 +169,11 @@ defineProps({
 .card:nth-child(3) { animation-delay: 0.3s }
 .card:nth-child(4) { animation-delay: 0.4s }
 
+.card.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  transition: all 0.6s ease;
+  filter: blur(0);
+}
 
 </style>

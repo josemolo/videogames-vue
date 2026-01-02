@@ -25,14 +25,12 @@
   </section>
 </template>
 
-<script setup>
-import { onMounted, onUnmounted, ref } from 'vue'
 
-/*
-const props = defineProps({
-  video: { type: String, required: true }
-})
-*/
+<script setup>
+import { onMounted, onUnmounted, ref, nextTick } from 'vue'
+
+import { useRouter } from 'vue-router'
+
 
 defineProps({
   video: {
@@ -41,7 +39,7 @@ defineProps({
   }
 })
 
-import { useRouter } from 'vue-router'
+
 
 // URL pública del video, evita problemas con Git LFS
 /*const gamingBg = "https://https://drive.google.com/drive/folders/1oF-Yx7FGFQPmhbHHXrvZdq_uw4Aay6Ab?usp=drive_link -videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4"*/
@@ -56,31 +54,45 @@ const gamingBgUrl = "https://res.cloudinary.com/dakkfinnu/video/upload/v17671958
 const particleCanvas = ref(null)
 let animationId = null  
 
-onMounted(() => {
+const prefersReducedMotion = window.matchMedia(
+  '(prefers-reduced-motion: reduce)'
+).matches
+
+onMounted(async() => {
+  if (prefersReducedMotion) return
+
+  await nextTick() //CLAVE PARA VERSEL 
+
   const canvas = particleCanvas.value
   if (!canvas) return
 
   const ctx = canvas.getContext('2d')
+  if (!ctx) return
 
   const resize = () => {
-    canvas.width = window.innerWidth
-    canvas.height = window.innerHeight
+    const dpr = window.devicePixelRatio || 1
+    canvas.width = window.innerWidth * dpr
+    canvas.height = window.innerHeight * dpr
+    canvas.style.width = `${window.innerWidth}px`
+    canvas.style.height = `${window.innerHeight}px`
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
   }
 
   resize()
+  window.addEventListener('resize', resize)
 
-  const particles = []
-  const particleCount = 40
+  const isMobile = window.innerWidth < 768
+  const particleCount = isMobile ? 18 : 40
 
-  for (let i = 0; i < particleCount; i++) {
-    particles.push({
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height,
-      vx: (Math.random() - 0.5) * 1.2,
-      vy: (Math.random() - 0.5) * 1.2,
-      size: Math.random() * 3 + 2,
-    })
-  }
+    const particles = Array.from({ length: particleCount }, () => ({
+    x: Math.random() * window.innerWidth,
+    y: Math.random() * window.innerHeight,
+    vx: (Math.random() - 0.5) * 0.8,
+    vy: (Math.random() - 0.5) * 0.8,
+    size: Math.random() * 2 + 1.5
+  }))
+
+  const maxDist = 120 * 120
 
   const animate = () => {
     ctx.clearRect(0, 0, canvas.width, canvas.height)
@@ -98,15 +110,16 @@ onMounted(() => {
       ctx.fill()
     })
 
-    for (let i = 0; i < particleCount; i++) {
-      for (let j = i + 1; j < particleCount; j++) {
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
         const dx = particles[i].x - particles[j].x
         const dy = particles[i].y - particles[j].y
-        const dist = Math.sqrt(dx * dx + dy * dy)
+        const distSq = dx * dx + dy * dy
 
-        if (dist < 120) {
+        if (distSq < maxDist) {
+          const opacity = 1 - distSq / maxDist
           ctx.beginPath()
-          ctx.strokeStyle = `rgba(127,92,255,${1 - dist / 120})`
+          ctx.strokeStyle = `rgba(127,92,255,${1 - distSq / 120})`
           ctx.moveTo(particles[i].x, particles[i].y)
           ctx.lineTo(particles[j].x, particles[j].y)
           ctx.stroke()
@@ -120,11 +133,20 @@ onMounted(() => {
 
   animate()
 
-  window.addEventListener('resize', resize)
+  const handleVisibility = () => {
+    if (document.hidden) {
+      cancelAnimationFrame(animationId)
+    } else {
+      animate()
+    }
+  }
+
+  document.addEventListener('visibilitychange', handleVisibility)
 
   onUnmounted(() => {
     cancelAnimationFrame(animationId)
     window.removeEventListener('resize', resize)
+    document.removeEventListener('visibilitychange', handleVisibility)
   })
 })
 </script>
@@ -214,16 +236,55 @@ onMounted(() => {
 }
 
 .primary {
+  position: relative;
+  padding: 0.9rem 2.4rem;
+  font-size: 1.05rem;
+  border-radius: 14px;
   border: none;
+  cursor: pointer;
+  font-weight: 600;
+  color: white;
+
   background: linear-gradient(45deg, #7f5cff, #503ec2);
-  color: #fff;
-  box-shadow: 0 0 20px #7f5cff, 0 0 40px #503ec2;
+  box-shadow: 0 0 20px rgba(127,92,255,0.45);
+
+  transition:
+  transform 0.25s ease,
+  box-shadow 0.25s ease,
+  filter 0.25s ease
 }
 
 .primary:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 0 30px #7f5cff, 0 0 60px #503ec2;
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 0 35px rgba(127,92,255,0.7), 0 0 70px rgba(80,62,194,0.4);
 }
+
+.primary:active {
+  transform: translateY(1px) scale(0.98);
+  box-shadow:
+    0 0 15px rgba(127,92,255,0.6);
+}
+
+.primary::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(127,92,255,0.6),
+    transparent
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.primary:hover::after {
+  opacity: 1;
+}
+
+
 
 .secondary {
   background: transparent;
@@ -239,7 +300,7 @@ onMounted(() => {
 .particle-canvas {
   position: absolute;
   inset: 0;
-  z-index: -1;
+  z-index: 1;
   pointer-events: none;
 }
 
