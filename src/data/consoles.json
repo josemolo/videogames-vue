@@ -1,0 +1,17 @@
+[
+  {
+    "id": "nintendo",
+    "name": "Nintendo Switch",
+    "subtitle": "Consola híbrida",
+    "image": "/images/switch.png",
+    "description": "Juega donde quieras con los mejores exclusivos de Nintendo.",
+    "features": [
+      "🎮 Modo portátil y TV",
+      "🧩 Joy-Con desmontables",
+      "🕹️ Multijugador local y online",
+      "📦 Juegos exclusivos"
+    ],
+    "price": 6999,
+    "stock": 5
+  }
+]

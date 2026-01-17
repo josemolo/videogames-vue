@@ -52,6 +52,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
+import { useHead } from '@vueuse/head'
 
 const particlesGlobal = ref<HTMLElement[]>([])
 const particlesContainer = ref<HTMLElement[]>([])
@@ -96,6 +97,23 @@ onMounted(() => {
       })
     })
   })
+})
+
+useHead({
+  title: 'Contacto | VortexGames',
+  meta: [
+    {
+      name: 'description',
+      content: 'Contáctanos para dudas, sugerencias o colaboraciones en VortexGames.'
+    },
+    { property: 'og:title', content: 'Contacto | VortexGames' },
+    {
+      property: 'og:description',
+      content: 'Ponte en contacto con el equipo de VortexGames.'
+    },
+    { property: 'og:type', content: 'website' },
+    { property: 'og:image', content: '/og/contact.png' }
+  ]
 })
 
 // Función de redirección

@@ -1,5 +1,5 @@
 <template>
-  <article ref="cardRef" class="card">
+  <article ref="cardRef" class="card" v-reveal>
     <img
       class="card-image"
       :src="image"
@@ -9,30 +9,78 @@
 
     <h3 class="card-title">{{ title }}</h3>
     <p class="card-text">{{ description }}</p>
+    <!--
+    <p class="card-price" v-if="price !== undefined">${{ price.toFixed(2) }}</p>
+    <p class="card-price" v-else>Precio no disponible</p>
+    -->
+    <!--
+    <p class="card-price">${{ price.toFixed(2) }}</p>
+    -->
+    <p class="card-price" v-if="price !== undefined">{{ price }}</p>
+    <p class="card-price" v-else>Precio no disponible</p>
+
+    <!--
+    <button @click="$emit('buy')">Agregar</button>
+    -->
+
+    <!--
+    <button @click="handleBuy">
+      {{ added ? '✔ Agregado' : 'Agregar' }}
+    </button>
+    -->
+
+    <button v-if="button" @click="$emit('buy')">{{ button }}</button>
+    <slot></slot>
+  
   </article>
 </template>
 
-<script setup>
+<script setup lang="ts">
 
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onBeforeUnmount } from 'vue'
+
+//let observer: IntersectionObserver | null = null
 
 const cardRef = ref(null)
 
-onMounted(() => {
-  const observer = new IntersectionObserver(
-    ([entry]) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible')
-        observer.unobserve(entry.target)
-      }
-    },
-    { threshold: 0.15 }
-  )
+
+const added = ref(false)
+
+const handleBuy = () => {
+  added.value = true
+  emit('buy')
+
+  setTimeout(() => {
+    added.value = false
+  }, 800)
+}
+
+//
+//onMounted(() => {
+//  observer = new IntersectionObserver(
+//    ([entry]) => {
+//      if (!entry) return
+//
+//      if (entry.isIntersecting) {
+//        entry.target.classList.add('visible')
+//        observer.unobserve(entry.target)
+//      }
+//    },
+//    { threshold: 0.15 }
+//  )
   
-  if (cardRef.value) {
-    observer.observe(cardRef.value)
-  }
-})   
+//  if (cardRef.value) {
+//    observer.observe(cardRef.value)
+//  }
+//})   
+
+
+//onBeforeUnmount(() => {
+//  if (observer && cardRef.value) {
+//    observer.unobserve(cardRef.value)
+//    observer.disconnect()
+//  }
+//})
 
 defineProps({
   title: {
@@ -47,12 +95,21 @@ defineProps({
     type: String,
     required: true
   },
+  price: {
+    type: Number,
+    default: 0 
+  },
   /*
   desc: String,
   img: String,
   button: String
   */
+  button: { type: String, default: '' }
 })
+
+const emit = defineEmits<{
+  (e: 'buy'): void
+}>()
 </script>
 
 <style scoped>
@@ -65,12 +122,18 @@ defineProps({
   position: relative;
   overflow: hidden;
   transition: 
-    all 0.5s ease,
-    transform 0.5s ease,
+    all 0.6s ease,
+    transform 0.6s ease,
     box-shadow 0.5s ease,
-    opacity 0.4s ease;
+    opacity 0.6s ease;
   opacity: 0;
-  transform: translateY(40px) scale(0.97)
+  transform: translateY(20px) scale(0.97);
+  will-change: transform, opacity;
+}
+
+.card.reveal-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
 }
 
 /*animation: fadeInUp 0.6s ease forwards;*/
@@ -92,6 +155,7 @@ defineProps({
     transform: translateY(0);
   }
 }
+
 
 .card:hover {
   transform: translateY(-10px) scale(1.02);
@@ -123,7 +187,6 @@ defineProps({
 
   transform: scale(1.15) translateY(-6px);
   opacity: 1;
-  filter: blur(0px);
   transition: 
     transform 0.8s ease,
     opacity 0.6s ease,
@@ -133,10 +196,15 @@ defineProps({
     0 10px 25px rgba(127,92,255,0.35),
     0 0 35px rgba(127,92,255,0.25);
 }
+/*
+filter: blur(0px);
+*/
 
+/*
 .card-image[src] {
   filter: blur(0);
 }
+*/
 
 .card-title {
   margin: 0.5rem 0;
@@ -145,6 +213,28 @@ defineProps({
 .card-text {
   font-size: 0.9rem;
   opacity: 0.85;
+}
+
+
+button {
+  margin-top: 1rem;
+  padding: 0.6rem 1.4rem;
+  border: none;
+  background: linear-gradient(45deg,#7f5cff,#503ec2);
+  color: white;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+  background: linear-gradient(45deg,#5a3bcc,#381f9d);
+  transform: translateY(-2px);
+}
+
+
+button:active {
+  transform: scale(0.95);
 }
 
 .card button {
@@ -169,11 +259,24 @@ defineProps({
 .card:nth-child(3) { animation-delay: 0.3s }
 .card:nth-child(4) { animation-delay: 0.4s }
 
-.card.visible {
+.visible {
   opacity: 1;
   transform: translateY(0) scale(1);
   transition: all 0.6s ease;
-  filter: blur(0);
+}
+
+.card-price {
+  font-weight: bold;
+  margin-top: 0.5rem;
+  color: #7f5cff;
+}
+
+.testimonial-card {
+   will-change: transform, opacity;
+}
+
+.news-card {
+   will-change: transform, opacity;
 }
 
 </style>

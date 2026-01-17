@@ -5,7 +5,7 @@
 
       <!-- Fila superior -->
       <div class="row">
-        <div v-for="console in consoles.slice(0,3)" :key="console.id" class="console-card">
+        <div v-for="console in consoles.slice(0,3)" :key="console.id" class="console-card" @click="abrirConsola(console.name)">
           <img :src="console.image" :alt="console.name" class="console-img"/>
           <h3>{{ console.name }}</h3>
           <p>{{ console.description }}</p>
@@ -14,7 +14,7 @@
 
       <!-- Fila central -->
       <div class="row">
-        <div v-for="console in consoles.slice(3,6)" :key="console.id" class="console-card">
+        <div v-for="console in consoles.slice(3,6)" :key="console.id" class="console-card" @click="abrirConsola(console.name)">
           <img :src="console.image" :alt="console.name" class="console-img"/>
           <h3>{{ console.name }}</h3>
           <p>{{ console.description }}</p>
@@ -23,7 +23,7 @@
 
       <!-- Fila inferior -->
       <div class="row">
-        <div v-for="console in consoles.slice(6,9)" :key="console.id" class="console-card">
+        <div v-for="console in consoles.slice(6,9)" :key="console.id" class="console-card" @click="abrirConsola(console.name)">
           <img :src="console.image" :alt="console.name" class="console-img"/>
           <h3>{{ console.name }}</h3>
           <p>{{ console.description }}</p>
@@ -35,6 +35,10 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useHead } from '@vueuse/head'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
 
 interface ConsoleItem {
   id: number
@@ -54,6 +58,37 @@ const consoles = ref<ConsoleItem[]>([
   { id: 8, name: 'Oculus Quest 2', description: 'Realidad virtual todo en uno.', image: '/images/oculus.png' },
   { id: 9, name: 'Atari VCS', description: 'Consola retro con juegos clásicos.', image: '/images/atari.png' },
 ])
+
+function abrirConsola(name: string) {
+  if (name === "Nintendo Switch") {
+    // Aquí puedes abrir una URL externa
+    router.push('/console/nintendo');
+  } else if (name === "PlayStation 5") {
+    window.open("/ps5", "_blank", "width=800,height=600");
+  } else if (name === "Xbox Series X") {
+    window.open("/xbox", "_blank", "width=800,height=600");
+  } else {
+    // Por defecto, solo mostrar mensaje
+    alert(`Seleccionaste ${name}`);
+  }
+}
+
+useHead({
+  title: 'Consolas | VortexGames',
+  meta: [
+    {
+      name: 'description',
+      content: 'Explora consolas clásicas y modernas: PlayStation, Xbox, Nintendo y más.'
+    },
+    { property: 'og:title', content: 'Consolas | VortexGames' },
+    {
+      property: 'og:description',
+      content: 'Información, detalles y catálogo de consolas de videojuegos.'
+    },
+    { property: 'og:type', content: 'website' },
+    { property: 'og:image', content: '/og/consoles.png' }
+  ]
+})
 </script>
 
 <style scoped>
@@ -112,6 +147,7 @@ const consoles = ref<ConsoleItem[]>([
   display: flex;
   flex-direction: column;
   align-items: center;
+  cursor: pointer;
 }
 
 .console-card:hover {
@@ -157,6 +193,33 @@ const consoles = ref<ConsoleItem[]>([
   box-sizing: border-box;
   box-shadow: inset 0 0 10px #6d307a, inset 0 0 20px #bf97ea;
   transition: transform 0.3s, box-shadow 0.3s;
+}
+
+button.buy, button.back {
+  padding: 10px 20px;
+  border: 2px solid #00ffff;
+  border-radius: 12px;
+  background: transparent;
+  color: #00ffff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px #00ffff, 0 0 20px #6d307a;
+}
+
+button.buy:hover {
+  box-shadow: 0 0 20px #00ffff, 0 0 40px #6d307a;
+  transform: translateY(-3px);
+}
+
+button.back:hover {
+  box-shadow: 0 0 15px #bf97ea, 0 0 30px #6d307a;
+  transform: translateY(-2px);
+}
+
+/* Glow en títulos */
+h1, h2, h3 {
+  text-shadow: 0 0 8px #00ffff, 0 0 15px #6d307a;
 }
 
 </style>

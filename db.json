@@ -1,0 +1,7 @@
+{
+  "news": [
+    { "id": 1, "title": "Nuevo DLC de Zelda", "content": "Explora nuevas tierras..." },
+    { "id": 2, "title": "Mario Kart 9 anunciado", "content": "Prepárate para nuevas pistas..." },
+    { "id": 3, "title": "Minecraft actualiza mobs", "content": "Nuevos mobs y biomas..." }
+  ]
+}

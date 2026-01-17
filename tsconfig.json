@@ -1,7 +1,35 @@
+//{
+//  "compilerOptions": {
+//    "target": "ESNext",
+//    "module": "ESNext",
+//    "moduleResolution": "Node",
+//    "strict": true,
+//    "jsx": "preserve",
+//    "esModuleInterop": true,
+//    "forceConsistentCasingInFileNames": true,
+//    "baseUrl": "./src",
+//    "paths": {
+//      "@/*": ["*"]
+//    },
+//    "types": ["vite/client"]
+//  },
+//  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.vue", "src/**/*.json"],
+//  "references": [
+//    { "path": "./tsconfig.app.json" },
+//    { "path": "./tsconfig.node.json" }
+//  ]
+//}
+
 {
   "files": [],
   "references": [
     { "path": "./tsconfig.app.json" },
     { "path": "./tsconfig.node.json" }
-  ]
+  ],
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "paths": {
+      "@/*": ["*"]
+    }
+  }
 }

@@ -1,4 +1,4 @@
-// src/composables/useParticles.js
+/* src/composables/useParticles.js
 import { ref, onMounted, onUnmounted } from 'vue'
 
 export function useParticles(canvasRef) {
@@ -98,3 +98,51 @@ export function useParticles(canvasRef) {
     animationId = requestAnimationFrame(animate)
   }
 }
+*/
+
+import { onMounted, onBeforeUnmount } from 'vue'
+
+export function useParticles(canvasRef: HTMLCanvasElement | null): () => void {
+  let animationId: number | null = null
+
+  function startParticles() {
+    if (!canvasRef) return
+    const ctx = canvasRef.getContext('2d')
+    if (!ctx) return
+
+    function draw() {
+      ctx.clearRect(0, 0, canvasRef.width, canvasRef.height)
+      // Aquí va tu lógica de partículas...
+      animationId = requestAnimationFrame(draw)
+    }
+
+    draw()
+  }
+
+  onMounted(() => {
+    startParticles()
+  })
+
+  onBeforeUnmount(() => {
+    if (animationId !== null) cancelAnimationFrame(animationId)
+  })
+
+  // Retornamos función de cleanup por si alguien quiere detener manualmente
+  return () => {
+    if (animationId !== null) cancelAnimationFrame(animationId)
+  }
+}
+
+// src/composables/useParticles.ts
+//export function useParticles(canvasRef: any) {
+  // setup particles
+  // ejemplo:
+//  const animationId = requestAnimationFrame(() => {
+    // animación 
+//  })
+//
+//  return () => {
+//    cancelAnimationFrame(animationId)
+    // limpiar listeners si los hay
+//  }
+//}

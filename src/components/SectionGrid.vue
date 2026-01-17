@@ -1,5 +1,5 @@
 <template>
-  <section class="section-grid">
+  <section class="section-grid" v-reveal>
     <h2 v-if="title" class="section-title">{{ title }}</h2>
 
     <div class="grid">
@@ -19,9 +19,17 @@ defineProps({
 
 <style scoped>
 .section-grid {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
   padding: 4rem 2rem;
-    max-width: 1300px;
+  max-width: 1300px;
   margin: 0 auto;
+}
+
+.section-grid.reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .section-title {

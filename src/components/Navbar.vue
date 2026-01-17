@@ -10,16 +10,23 @@
     </button>
   </div>
   <nav :class="['nav', { open: isOpen }]">
-    <router-link to="/" @click="closeMenu">HOME</router-link>
-    <router-link to="/news" @click="closeMenu">NEWS</router-link>
-    <router-link to="/consoles" @click="closeMenu">CONSOLES</router-link>
-    <router-link to="/contact" @click="closeMenu">CONTACTS</router-link>
+    <router-link to="/" class="nav-link cart-link">HOME
+       <span v-if="cart.count > 0" class="cart-badge">
+        {{ cart.count }}
+       </span>
+    </router-link>
+    <router-link to="/news" class="nav-link">NEWS</router-link>
+    <router-link to="/consoles" class="nav-link">CONSOLES</router-link>
+    <router-link to="/contact" class="nav-link">CONTACTS</router-link>
   </nav>
 </header>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useCartStore } from '../stores/cart'
+
+const cart = useCartStore()
 
 const isOpen = ref(false)
 
@@ -168,6 +175,42 @@ h2 {
 }
 .hamburger:hover span {
   background: #8475d8;
+}
+
+.nav-link {
+  position: relative;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 0%;
+  height: 2px;
+  background: var(--neon-primary);
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+.cart-link {
+  position: relative;
+}
+
+.cart-badge {
+  position: absolute;
+  top: -8px;
+  right: -12px;
+  background: #7f5cff;
+  color: white;
+  font-size: 0.7rem;
+  font-weight: bold;
+  padding: 2px 6px;
+  border-radius: 999px;
+  box-shadow: 0 0 10px rgba(127,92,255,0.8);
 }
 
 </style>

@@ -1,21 +1,44 @@
-/*
-import { createApp } from 'vue'
-import App from './App.vue'
-import router from './router'
+  /*
+  import { createApp } from 'vue'
+  import App from './App.vue'
+  import router from './router'
 
-import './assets/style.css'
+  import './assets/style.css'
 
-createApp(App).use(router).mount('#app')
-*/
+  createApp(App).use(router).mount('#app')
+  */
 
-import { createApp } from "vue";
-import { createPinia } from "pinia";
-import App from "./App.vue";
-import router from "./router";
+  import { createApp } from "vue";
+  import { createPinia } from "pinia";
+  import { createHead } from '@vueuse/head'
+  
+  import App from "./App.vue";
+  import router from "./router/index";
+  import reveal from './directives/reveal'
 
-const app = createApp(App);
+  import '@/assets/styles/main.css'
 
-app.use(createPinia());
-app.use(router);
+  const app = createApp(App);
 
-app.mount("#app");
+  const pinia = createPinia()
+  const head = createHead()
+  
+  app
+  .use(pinia) 
+  .use(router)                  // 👈 3️⃣ usar router
+  .use(head)                    // 👈 4️⃣ usar head
+  .directive('reveal', reveal)  // 👈 5️⃣ directiva
+  .mount('#app') 
+  
+  //createApp(App)
+  //  .use(router)  
+  //  .use(head)
+  //  .directive('reveal', reveal)
+  //  .mount('#app')
+
+  //app.use(createPinia());
+  //app.use(pinia);
+  //app.use(router);
+  //app.directive('reveal', reveal)
+
+  //app.mount("#app");

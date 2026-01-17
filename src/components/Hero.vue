@@ -1,5 +1,5 @@
 <template>
-  <section class="hero">
+  <section class="hero" v-reveal>
 
     <!-- Video de fondo -->
     <video autoplay muted loop playsinline class="hero-video"> <!--crossorigin="anonymous"-->
@@ -11,11 +11,11 @@
     <!-- Contenido -->
     <div class="hero-content">
       <span class="badge">🎮 TIENDA GAMER</span>
-      <h1 class="neon-text">VortexGames</h1>
-      <p class="neon-text">Compra videojuegos y consolas al mejor precio</p>
+      <h1 class="neon-text">LucyCell</h1>
+      <p class="neon-text">Tecnología y estilo a tu alcance</p>
       <div class="hero-actions">
-        <button class="primary" @click="goToShop">Comprar ahora</button>
-        <button class="secondary" @click="goToNews">Ver novedades</button>
+        <router-link to="/consoles" class="primary glow">Comprar ahora</router-link>
+        <router-link to="/news" class="secondary glow">Ver novedades</router-link>
       </div>
     </div>
 
@@ -312,5 +312,14 @@ onMounted(async() => {
 @media (max-width: 600px) {
   .hero-actions { flex-direction: column; }
   .hero-content h1 { font-size: 3rem; }
+}
+
+.glow {
+  box-shadow: 0 0 15px rgba(127,92,255,0.8), 0 0 30px rgba(127,92,255,0.6);
+  transition: all 0.3s ease;
+}
+.glow:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 0 35px rgba(127,92,255,1), 0 0 60px rgba(127,92,255,0.8);
 }
 </style>
