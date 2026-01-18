@@ -1,12 +1,8 @@
 {
   "rewrites": [
     {
-      "source": "/assets/(.*)",
-      "Content-Type": "application/javascript"
-    },
-    {
       "source": "/(.*)",
-      "destination": "/"
+      "destination": "/index.html"
     }
   ]
 }
