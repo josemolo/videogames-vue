@@ -10,8 +10,9 @@ pnpm-debug.log*
 lerna-debug.log*
 
 # Carpeta de build/compilación
-dist/
+
 build/
+
 
 
 
@@ -24,7 +25,7 @@ build/
 Thumbs.db
 
 node_modules
-dist
+.env
 dist-ssr
 *.local
 
