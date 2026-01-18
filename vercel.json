@@ -1,14 +1,14 @@
 {
   "rewrites": [
     {
-      "src": "/assets/(.*)",
+      "source": "/assets/(.*)",
       "headers": {
       "Content-Type": "application/javascript"
       }
     },
     {
-      "src": "/(.*)",
-      "dest": "/"
+      "source": "/(.*)",
+      "destination": "/"
     }
   ]
 }
