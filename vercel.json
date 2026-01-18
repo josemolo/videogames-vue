@@ -2,9 +2,7 @@
   "rewrites": [
     {
       "source": "/assets/(.*)",
-      "headers": {
       "Content-Type": "application/javascript"
-      }
     },
     {
       "source": "/(.*)",
