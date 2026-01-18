@@ -111,6 +111,8 @@ export function useParticles(canvasRef: HTMLCanvasElement | null): () => void {
     if (!ctx) return
 
     function draw() {
+      if (!ctx || !canvasRef) return
+
       ctx.clearRect(0, 0, canvasRef.width, canvasRef.height)
       // Aquí va tu lógica de partículas...
       animationId = requestAnimationFrame(draw)

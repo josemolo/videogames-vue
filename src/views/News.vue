@@ -77,7 +77,9 @@ onMounted(async () => {
   try {
     const res = await fetch(NEWS_API)
     if (!res.ok) throw new Error('Error al cargar noticias')
-    news.value = await res.json()
+    //news.value = await res.json()
+    const data = (await res.json()) as NewsItem[]
+    news.value = data
   } catch (err) {
     console.error(err)
   } finally {

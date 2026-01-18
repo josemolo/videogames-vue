@@ -17,11 +17,11 @@
 
 import Navbar from './components/Navbar.vue'
 
-import { useRoute } from 'vue-router'
+//import { useRoute } from 'vue-router'
 
 import { useHead } from '@vueuse/head'
 
-const route = useRoute()
+//const route = useRoute()
 
 useHead({
   meta: [

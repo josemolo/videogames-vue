@@ -25,10 +25,12 @@
     "strict": true,
     "module": "ESNext",
     "moduleResolution": "bundler",
-    "target": "ES2023",
-    "lib": ["ES2023"],
+    "target": "ESNext",
+    "lib": ["ESNext", "DOM"],
+    "resolveJsonModule": true,
+    "types": ["vite/client"],
     "esModuleInterop": true,
     "skipLibCheck": true
   },
-  "include": ["src"]
+  "include": ["src/**/*.ts", "src/**/*.vue", "src/**/*.json"]
 }

@@ -16,7 +16,7 @@
   import router from "./router/index";
   import reveal from './directives/reveal'
 
-  import '@/assets/styles/main.css'
+  //import '@/assets/styles/main.css'
 
   const app = createApp(App);
 

@@ -37,7 +37,7 @@
 
 <script setup lang="ts">
 
-import { ref, onMounted, onBeforeUnmount } from 'vue'
+import { ref } from 'vue'  //onMounted, onBeforeUnmount
 
 //let observer: IntersectionObserver | null = null
 

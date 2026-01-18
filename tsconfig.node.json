@@ -31,15 +31,20 @@
     "composite": true,
     "outDir": "./dist/node",
     "rootDir": "./",
-    "target": "ES2023",
-    "lib": ["ES2023"],
+    "target": "ESNext",
+    "useDefineForClassFields": true,
+    "lib": ["ESNext", "DOM"],
     "module": "ESNext",
-    "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
+    "moduleResolution": "Bundler",
+    //"allowImportingTsExtensions": true,
     "verbatimModuleSyntax": true,
     "moduleDetection": "force",
     "noEmit": false,
     "strict": true,
+    "jsx": "preserve",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "esModuleInterop": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "erasableSyntaxOnly": true,
@@ -48,5 +53,5 @@
     "types": ["node"],
     "skipLibCheck": true
   },
-  "include": ["vite.config.ts", "src"]
+  "include": ["vite.config.ts", "src/**/*.json"]
 }
