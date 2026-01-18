@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory, type Router } from 'vue-router'
+import { createRouter as _createRouter, createWebHistory, type Router } from 'vue-router'
 
 import Home from '../views/Home.vue'
 import News from '../views/News.vue'
@@ -10,37 +10,29 @@ import ConsoleDetail from '@/views/ConsoleDetail.vue'
 
 
 const routes = [
-  {
-    path: '/',
-    name: 'Home',
-    component: Home
-  },
-  {
-    path: '/news',
-    name: 'News',
-    component: News
+  { path: '/', name: 'Home', component: Home },
+  { path: '/news', name: 'News', component: News
     // si quieres que apunte a Home como en el ejemplo:
     // component: Home
   },
   { path: '/consoles', name: 'Consoles', component: Consoles },
-  {
-    path: '/contact',
-    name: 'Contact',
-    component: Contact
-  },
+  { path: '/contact', name: 'Contact', component: Contact },
   { path: '/nintendo', name: 'Nintendo', component: Nintendo },
-  {
-    path: '/console/:id',
-    name: 'ConsoleDetail',
-    component: () => import('../views/ConsoleDetail.vue')
-  }
+  { path: '/console/:id', name: 'ConsoleDetail', component: () => import('../views/ConsoleDetail.vue'),   
+  },
 ]
 
-const router: Router = createRouter({
-  history: createWebHistory(),
-  routes,
-})
+export function createRouter() {
+  return _createRouter({
+    history: createWebHistory (),
+    routes,
+  })
+}
 
+
+
+
+const router: Router = createRouter()
 export default router
 
 
