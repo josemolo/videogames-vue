@@ -36,59 +36,59 @@ const news = ref<NewsItem[]>([
   { id: 3, title: 'Minecraft actualiza mobs', content: 'Nuevos mobs y biomas para explorar y construir.' },
 ])
 
-// URL de tu API
-const NEWS_API = 'http://localhost:3000/news'
+const article = {
+  title: "Ultimas Noticias en videojuegos",
+  author: "Tu Nombre",
+  datePublished: "2026-01-19",
+  image: "https://videogames-vue.vercel.app/assets/news-banner.jpg",
+  description: "Resumen de la noticia para SEO y snippet"
+}
 
 useHead({
-  title: 'Noticias de Videojuegos | Gaming Hub',
+  title: article.title,
   meta: [
-    {
-      name: 'description',
-      content: 'Últimas noticias de videojuegos, lanzamientos, DLCs y novedades del mundo gaming.',
-    },
-    {
-      property: 'og:title',
-      content: 'Noticias de Videojuegos | Gaming Hub',
-    },
-    {
-      property: 'og:description',
-      content: 'Mantente al día con las noticias más recientes del mundo gamer.',
-    },
-    {
-      property: 'og:type',
-      content: 'article'
-    },
-     {
-      property: 'og:image:width',
-      content: '1200'
-    },
-    {
-      property: 'og:image:height',
-      content: '630'
-    },
-    {
-      property: 'og:image',
-      content: '/og/news.png'
-    },
+    { name: 'description', content: article.description },
+    { property: 'og:title', content: article.title },
+    { property: 'og:description', content: article.description },
+    { property: 'og:type', content: 'article' },
+    { property: 'og:image', content: article.image }, //'/og/news.png' 
+    { property: 'og:image:width', content: '1200' },
+    { property: 'og:image:height', content: '630' },
   ],
+
+  script: [
+    {
+      type: 'application/ld+json',
+      children: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": article.title,
+        "author": { "@type": "Person", "name": article.author },
+        "datePublished": article.datePublished,
+        "image": article.image,
+        "publisher": {
+          "@type": "Organization",
+          "name": "Tu empresa",
+          "logo": { "@type": "ImageObject", "url": "https://videogames-vue.vercel.app/assets/logo.png" }
+        }
+      })
+    }
+  ]
 })
 
+// Simulación de fetch de API
+const NEWS_API = 'http://localhost:3000/news'
 onMounted(async () => {
   try {
     const res = await fetch(NEWS_API)
     if (!res.ok) throw new Error('Error al cargar noticias')
-    //news.value = await res.json()
     const data = (await res.json()) as NewsItem[]
     news.value = data
   } catch (err) {
     console.error(err)
   } finally {
-     loading.value = false}
-     
-    
-    setTimeout(() => {
-      loading.value = false
-    }, 800)
+    loading.value = false
+  }
 })
 </script>
 

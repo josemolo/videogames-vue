@@ -12,6 +12,8 @@
   import { createPinia } from "pinia";
   import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
   import { createHead } from '@vueuse/head'
+
+  import { useHead } from '@vueuse/head'
   
   import App from "./App.vue";
   import router from "./router/index";
