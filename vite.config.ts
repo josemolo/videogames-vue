@@ -9,4 +9,24 @@ export default defineConfig({
       '@': resolve(__dirname, 'src')
     }
   }
-})
+})  
+
+//  ViteSSG({
+//      entry: 'src/main.ts',
+//      outDir: 'dist',
+//      includedRoutes: [
+//        '/',
+//        '/news',
+//        '/consoles',
+//        '/contact',
+//        '/nintendo'
+//      ],
+//      script: 'async'
+//    })
+//  ],
+//  resolve: {
+//    alias: {
+//      '@': resolve(__dirname, 'src')
+//    }
+//  }
+//})
