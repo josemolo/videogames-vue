@@ -26,7 +26,38 @@ interface NewsItem {
   id: number
   title: string
   content: string
+  image?: string
+  author?: string
+  date?: string
 }
+
+const buildArticlesSchema = (items: NewsItem[]) => ({
+  "@context": "https://schema.org",
+  "@graph": items.map(item => ({
+    "@type": "Article",
+    "headline": item.title,
+    "description": item.content.slice(0, 160),
+    "image": item.image || "https://videogames-vue.vercel.app/assets/news-banner.jpg",
+    "datePublished": item.date || "2026-01-19",
+    "author": {
+      "@type": "Person",
+      "name": item.author || "Videogames Store"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Videogames Store",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://videogames-vue.vercel.app/assets/logo.png"
+      }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": `https://videogames-vue.vercel.app/news#${item.id}`
+    }
+  }))
+})
+
 
 const loading = ref(true)
 
@@ -43,6 +74,21 @@ const article = {
   image: "https://videogames-vue.vercel.app/assets/news-banner.jpg",
   description: "Resumen de la noticia para SEO y snippet"
 }
+
+// Simulación de fetch de API
+const NEWS_API = 'http://localhost:3000/news'
+onMounted(async () => {
+  try {
+    const res = await fetch(NEWS_API)
+    if (!res.ok) throw new Error('Error al cargar noticias')
+    const data = (await res.json()) as NewsItem[]
+    news.value = data
+  } catch (err) {
+    console.error(err)
+  } finally {
+    loading.value = false
+  }
+})
 
 useHead({
   title: article.title,
@@ -63,32 +109,22 @@ useHead({
         "@context": "https://schema.org",
         "@type": "Article",
         "headline": article.title,
-        "author": { "@type": "Person", "name": article.author },
+        "description": article.description,
         "datePublished": article.datePublished,
-        "image": article.image,
+        "author": { "@type": "Organization", "name": article.author },
         "publisher": {
           "@type": "Organization",
-          "name": "Tu empresa",
+          "name": "Videogames store",
           "logo": { "@type": "ImageObject", "url": "https://videogames-vue.vercel.app/assets/logo.png" }
+        },
+        "image": article.image,
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://videogames-vue.vercel.app/news"
         }
       })
     }
   ]
-})
-
-// Simulación de fetch de API
-const NEWS_API = 'http://localhost:3000/news'
-onMounted(async () => {
-  try {
-    const res = await fetch(NEWS_API)
-    if (!res.ok) throw new Error('Error al cargar noticias')
-    const data = (await res.json()) as NewsItem[]
-    news.value = data
-  } catch (err) {
-    console.error(err)
-  } finally {
-    loading.value = false
-  }
 })
 </script>
 
