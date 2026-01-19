@@ -23,11 +23,11 @@
     <button @click="$emit('buy')">Agregar</button>
     -->
 
-    <!--
+    
     <button @click="handleBuy">
       {{ added ? '✔ Agregado' : 'Agregar' }}
     </button>
-    -->
+    
 
     <button v-if="button" @click="$emit('buy')">{{ button }}</button>
     <slot></slot>
@@ -39,6 +39,10 @@
 
 import { ref } from 'vue'  //onMounted, onBeforeUnmount
 
+import { useCartStore } from '@/stores/cart'
+
+const cart = useCartStore()
+
 //let observer: IntersectionObserver | null = null
 
 const cardRef = ref(null)
@@ -47,6 +51,13 @@ const cardRef = ref(null)
 const added = ref(false)
 
 const handleBuy = () => {
+  cart.addToCart({
+    id: props.id,
+    title: props.title,
+    price: props.price,
+    image: props.image
+  })
+
   added.value = true
   emit('buy')
 
@@ -82,7 +93,11 @@ const handleBuy = () => {
 //  }
 //})
 
-defineProps({
+const props = defineProps({
+  id: {
+    type: Number,
+    required: true
+  },
   title: {
     type: String,
     required: true
@@ -110,6 +125,12 @@ defineProps({
 const emit = defineEmits<{
   (e: 'buy'): void
 }>()
+
+//cart.addToCart({
+ // id: 1,
+ // name: 'PlayStation 5',
+ // price: 499,
+//})
 </script>
 
 <style scoped>
