@@ -1,4 +1,4 @@
-import { createRouter as _createRouter, createWebHistory, type Router } from 'vue-router'
+import { createRouter as _createRouter, createWebHistory, type Router, type RouteRecordRaw } from 'vue-router'
 
 import Home from '../views/Home.vue'
 import News from '../views/News.vue'
@@ -10,14 +10,11 @@ import ConsoleDetail from '@/views/ConsoleDetail.vue'
 
 
 const routes = [
-  { path: '/', name: 'Home', component: Home },
-  { path: '/news', name: 'News', component: News
-    // si quieres que apunte a Home como en el ejemplo:
-    // component: Home
-  },
-  { path: '/consoles', name: 'Consoles', component: Consoles },
-  { path: '/contact', name: 'Contact', component: Contact },
-  { path: '/nintendo', name: 'Nintendo', component: Nintendo },
+  { path: '/', name: 'Home', component: () => import('../views/Home.vue') },
+  { path: '/news', name: 'News', component: () => import('../views/News.vue') },
+  { path: '/consoles', name: 'Consoles', component: () => import('../views/Consoles.vue') },
+  { path: '/contact', name: 'Contact', component:  () => import('../views/Contact.vue') },
+  { path: '/nintendo', name: 'Nintendo', component: () => import('../views/Nintendo.vue') },
   { path: '/console/:id', name: 'ConsoleDetail', component: () => import('../views/ConsoleDetail.vue'),   
   },
 ]
@@ -29,11 +26,53 @@ export function createRouter() {
   })
 }
 
-
-
-
 const router: Router = createRouter()
 export default router
+
+
+
+function canPreload(): boolean {
+  const connection = (navigator as any)?.connection
+
+  if (!connection) return true
+  if (connection.saveData) return false
+  if (['slow-2g', '2g'].includes(connection.effectiveType)) return false
+
+  return true
+}
+
+export function preloadRoute(name: string) {
+  if (!canPreload()) return
+
+  const route = routes.find(r => r.name === name)
+  if (!route) return
+
+  const component = route.component
+
+  // Solo ejecutamos si es lazy
+  if (typeof component === 'function') {
+    component()
+  }
+}
+
+
+
+
+//  Helper para preload inteligente
+//export function preloadRoute(name: string) {
+//  const route = routes.find(r => r.name === name)
+//
+//  if (!route) return
+//
+//  const component = route.component
+//
+  // Si el componente es lazy (import dinámico), lo ejecutamos
+//  if (typeof component === 'function') {
+//    component()
+//  }
+//}
+
+
 
 
 

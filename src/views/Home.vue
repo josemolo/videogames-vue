@@ -106,6 +106,10 @@
 
   import { useScrollAnimation } from '@/composables/useScrollAnimation'
 
+  import { useRouteMetrics } from '@/composables/useRouteMetrics'
+
+  useRouteMetrics()
+
   useHead({
     title: 'VortexGames | Consolas, Juegos y Accesorios Gamer',
     meta: [

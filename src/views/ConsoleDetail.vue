@@ -72,6 +72,7 @@ import Card from '@/components/Card.vue'
 import consolesList from '../data/consoles.json'
 import accessories from '../data/accessories.json'
 import { useHead } from '@vueuse/head'
+import { useRouteMetrics } from '@/composables/useRouteMetrics'
 
 interface ConsoleItem {
   id: string
@@ -133,6 +134,8 @@ useHead({
     }
   ]
 })
+
+useRouteMetrics()
 </script>
 
 <style scoped>

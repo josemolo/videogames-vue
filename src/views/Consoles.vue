@@ -5,7 +5,7 @@
 
       <!-- Fila superior -->
       <div class="row">
-        <div v-for="console in consoles.slice(0,3)" :key="console.id" class="console-card" @click="abrirConsola(console.name)">
+        <div v-for="console in consoles.slice(0,3)" :key="console.id" class="console-card" ref="cards" @click="abrirConsola(console.name)">
           <img :src="console.image" :alt="console.name" class="console-img"/>
           <h3>{{ console.name }}</h3>
           <p>{{ console.description }}</p>
@@ -14,7 +14,7 @@
 
       <!-- Fila central -->
       <div class="row">
-        <div v-for="console in consoles.slice(3,6)" :key="console.id" class="console-card" @click="abrirConsola(console.name)">
+        <div v-for="console in consoles.slice(3,6)" :key="console.id" class="console-card" ref="cards" @click="abrirConsola(console.name)">
           <img :src="console.image" :alt="console.name" class="console-img"/>
           <h3>{{ console.name }}</h3>
           <p>{{ console.description }}</p>
@@ -23,7 +23,7 @@
 
       <!-- Fila inferior -->
       <div class="row">
-        <div v-for="console in consoles.slice(6,9)" :key="console.id" class="console-card" @click="abrirConsola(console.name)">
+        <div v-for="console in consoles.slice(6,9)" :key="console.id" class="console-card" ref="cards" @click="abrirConsola(console.name)">
           <img :src="console.image" :alt="console.name" class="console-img"/>
           <h3>{{ console.name }}</h3>
           <p>{{ console.description }}</p>
@@ -34,11 +34,16 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
+import { useConsoleDetailPreload } from '@/composables/useConsoleDetailPreload'
 import { useHead } from '@vueuse/head'
 import { useRouter } from 'vue-router'
+import { useRouteMetrics } from '@/composables/useRouteMetrics'
 
 const router = useRouter()
+
+const cards = ref<HTMLElement[]>([])
+const { observe } = useConsoleDetailPreload()
 
 interface ConsoleItem {
   id: number
@@ -89,6 +94,12 @@ useHead({
     { property: 'og:image', content: '/og/consoles.png' }
   ]
 })
+
+onMounted(() => {
+  cards.value.forEach(card => observe(card))
+})
+
+useRouteMetrics()
 </script>
 
 <style scoped>

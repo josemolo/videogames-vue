@@ -17,11 +17,18 @@
   
   import App from "./App.vue";
   import router from "./router/index";
+  import { setupPredictivePreload } from '@/router/predictivePreload'
   import reveal from './directives/reveal'
+
+  import { setupRouteMetrics } from '@/router/metrics'
 
   //import '@/assets/styles/main.css'
 
   const app = createApp(App);
+
+  setupRouteMetrics(router)
+
+  setupPredictivePreload(router)
 
   const pinia = createPinia()
   pinia.use(piniaPluginPersistedstate)

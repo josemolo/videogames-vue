@@ -21,6 +21,8 @@ import { useHead } from '@vueuse/head'
 //import Card from '@/components/Card.vue'
 //import { newsList } from '@/data/news'
 
+import { useRouteMetrics } from '@/composables/useRouteMetrics'
+
 
 interface NewsItem {
   id: number
@@ -126,6 +128,8 @@ useHead({
     }
   ]
 })
+
+useRouteMetrics()
 </script>
 
 <style scoped>

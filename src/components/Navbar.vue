@@ -23,12 +23,18 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { useCartStore } from '../stores/cart'
+import { useNavbarPreload } from '@/composables/useNavbarPreload'
+
+const { preloadOnOpen } = useNavbarPreload() //useNavbarPreload() // 👈 ÚNICA LÍNEA NUEVA
 
 const cart = useCartStore()
-
 const isOpen = ref(false)
+
+watch(isOpen, (open) => {
+  if (open) preloadOnOpen()
+})
 
 const toggleMenu = () => {
   isOpen.value = !isOpen.value
