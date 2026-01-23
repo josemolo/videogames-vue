@@ -16,9 +16,11 @@
                 <Card
                     v-for="a in compatibleAccessories"
                     :key="a.id"
-                    :title="a.name"
-                    :description="a.price"
+                    :id="a.id"
+                    :title="a.name"                    
+                    :description="`$ ${a.price.toLocaleString()}`"
                     :image="a.image"
+                    button="Agregar"
                     class="glow"
                 >
                     <button class="primary glow">

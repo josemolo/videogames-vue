@@ -5,20 +5,22 @@ export function useRouteMetrics() {
   const route = useRoute()
 
   onMounted(() => {
-    performance.mark(`route:end:${route.name}`)
+    const routeName = String(route.name ?? 'unknown')
+
+    performance.mark(`route:end:${routeName}`)
 
     performance.measure(
-      `route:${route.name}`,
-      `route:start:${route.name}`,
-      `route:end:${route.name}`
+      `route:${routeName}`,
+      `route:start:${routeName}`,
+      `route:end:${routeName}`
     )
 
-    const entries = performance.getEntriesByName(`route:${route.name}`)
+    const entries = performance.getEntriesByName(`route:${routeName}`)
     const last = entries[entries.length - 1]
 
     if (last) {
       console.info(
-        `%c⏱ Ruta ${route.name}: ${last.duration.toFixed(1)} ms`,
+        `%c⏱ Ruta ${routeName}: ${last.duration.toFixed(1)} ms`,
         'color:#7f5cff;font-weight:bold'
       )
     }

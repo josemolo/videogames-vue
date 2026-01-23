@@ -3,31 +3,93 @@
     <div class="window consoles">
       <h1>Consolas y Artículos</h1>
 
-      <!-- Fila superior -->
+      <!-- ================= Fila superior ================= -->
       <div class="row">
-        <div v-for="console in consoles.slice(0,3)" :key="console.id" class="console-card" ref="cards" @click="abrirConsola(console.name)">
-          <img :src="console.image" :alt="console.name" class="console-img"/>
-          <h3>{{ console.name }}</h3>
-          <p>{{ console.description }}</p>
-        </div>
+        <!-- Skeleton -->
+        <template v-if="loading">
+          <div
+            v-for="n in 3"
+            :key="'skeleton-top-' + n"
+            class="console-card skeleton"
+          >
+            <div class="skeleton-img shimmer"></div>
+            <div class="skeleton-title shimmer"></div>
+            <div class="skeleton-text shimmer"></div>
+          </div>
+        </template>
+
+        <!-- Contenido real -->
+        <template v-else>
+          <div
+            v-for="console in consoles.slice(0, 3)"
+            :key="console.id"
+            class="console-card"
+            ref="cards"
+            @click="abrirConsola(console.name)"
+          >
+            <img :src="console.image" :alt="console.name" class="console-img blur-up" loading="lazy"  @load="onImageLoad"/>
+            <h3>{{ console.name }}</h3>
+            <p>{{ console.description }}</p>
+          </div>
+        </template>
       </div>
 
-      <!-- Fila central -->
+      <!-- ================= Fila central ================= -->
       <div class="row">
-        <div v-for="console in consoles.slice(3,6)" :key="console.id" class="console-card" ref="cards" @click="abrirConsola(console.name)">
-          <img :src="console.image" :alt="console.name" class="console-img"/>
-          <h3>{{ console.name }}</h3>
-          <p>{{ console.description }}</p>
-        </div>
+        <template v-if="loading">
+          <div
+            v-for="n in 3"
+            :key="'skeleton-mid-' + n"
+            class="console-card skeleton"
+          >
+            <div class="skeleton-img shimmer"></div>
+            <div class="skeleton-title shimmer"></div>
+            <div class="skeleton-text shimmer"></div>
+          </div>
+        </template>
+
+        <template v-else>
+          <div
+            v-for="console in consoles.slice(3, 6)"
+            :key="console.id"
+            class="console-card"
+            ref="cards"
+            @click="abrirConsola(console.name)"
+          >
+            <img :src="console.image" :alt="console.name" class="console-img" />
+            <h3>{{ console.name }}</h3>
+            <p>{{ console.description }}</p>
+          </div>
+        </template>
       </div>
 
-      <!-- Fila inferior -->
+      <!-- ================= Fila inferior ================= -->
       <div class="row">
-        <div v-for="console in consoles.slice(6,9)" :key="console.id" class="console-card" ref="cards" @click="abrirConsola(console.name)">
-          <img :src="console.image" :alt="console.name" class="console-img"/>
-          <h3>{{ console.name }}</h3>
-          <p>{{ console.description }}</p>
-        </div>
+        <template v-if="loading">
+          <div
+            v-for="n in 3"
+            :key="'skeleton-bottom-' + n"
+            class="console-card skeleton"
+          >
+            <div class="skeleton-img shimmer"></div>
+            <div class="skeleton-title shimmer"></div>
+            <div class="skeleton-text shimmer"></div>
+          </div>
+        </template>
+
+        <template v-else>
+          <div
+            v-for="console in consoles.slice(6, 9)"
+            :key="console.id"
+            class="console-card"
+            ref="cards"
+            @click="abrirConsola(console.name)"
+          >
+            <img :src="console.image" :alt="console.name" class="console-img" />
+            <h3>{{ console.name }}</h3>
+            <p>{{ console.description }}</p>
+          </div>
+        </template>
       </div>
     </div>
   </div>
@@ -40,8 +102,9 @@ import { useHead } from '@vueuse/head'
 import { useRouter } from 'vue-router'
 import { useRouteMetrics } from '@/composables/useRouteMetrics'
 
-const router = useRouter()
+const loading = ref(true)
 
+const router = useRouter()
 const cards = ref<HTMLElement[]>([])
 const { observe } = useConsoleDetailPreload()
 
@@ -78,6 +141,11 @@ function abrirConsola(name: string) {
   }
 }
 
+function onImageLoad(e: Event) {
+  const img = e.target as HTMLImageElement
+  img.classList.add('loaded')
+}
+
 useHead({
   title: 'Consolas | VortexGames',
   meta: [
@@ -97,6 +165,11 @@ useHead({
 
 onMounted(() => {
   cards.value.forEach(card => observe(card))
+
+  // Simula carga real (API / lazy)
+  setTimeout(() => {
+    loading.value = false
+  }, 600)
 })
 
 useRouteMetrics()
@@ -159,6 +232,8 @@ useRouteMetrics()
   flex-direction: column;
   align-items: center;
   cursor: pointer;
+  transform: translateY(20px) scale(0.96);
+  animation: cardFadeIn 0.6s ease-out forwards;
 }
 
 .console-card:hover {
@@ -206,6 +281,11 @@ useRouteMetrics()
   transition: transform 0.3s, box-shadow 0.3s;
 }
 
+/* Stagger automático */
+.console-card:nth-child(1) { animation-delay: 0.05s; }
+.console-card:nth-child(2) { animation-delay: 0.12s; }
+.console-card:nth-child(3) { animation-delay: 0.18s; }
+
 button.buy, button.back {
   padding: 10px 20px;
   border: 2px solid #00ffff;
@@ -233,5 +313,80 @@ h1, h2, h3 {
   text-shadow: 0 0 8px #00ffff, 0 0 15px #6d307a;
 }
 
+.skeleton {
+  pointer-events: none;
+  opacity: 1 !important;
+  transform: none !important;
+  animation: none !important;
+}
+
+.skeleton-img {
+  width: 120px;
+  height: 120px;
+  border-radius: 10px;
+  background: #1f1f3d;
+  margin-bottom: 15px;
+}
+
+.skeleton-title {
+  width: 70%;
+  height: 18px;
+  border-radius: 6px;
+  background: #1f1f3d;
+  margin-bottom: 10px;
+}
+
+.skeleton-text {
+  width: 90%;
+  height: 14px;
+  border-radius: 6px;
+  background: #1f1f3d;
+}
+
+.shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.shimmer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(191, 151, 234, 0.35),
+    transparent
+  );
+  animation: shimmer 1.2s infinite;
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes cardFadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.blur-up {
+  filter: blur(12px);
+  transform: scale(1.05);
+  transition:
+    filter 0.6s ease,
+    transform 0.6s ease;
+}
+
+.blur-up.loaded {
+  filter: blur(0);
+  transform: scale(1);
+}
 </style>
+
 

@@ -29,7 +29,7 @@
 <script setup>
 import { onMounted, onUnmounted, ref, nextTick } from 'vue'
 
-import { useRouter } from 'vue-router'
+//import { useRouter } from 'vue-router'
 
 
 defineProps({
@@ -44,15 +44,17 @@ defineProps({
 // URL pública del video, evita problemas con Git LFS
 /*const gamingBg = "https://https://drive.google.com/drive/folders/1oF-Yx7FGFQPmhbHHXrvZdq_uw4Aay6Ab?usp=drive_link -videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4"*/
 
-const router = useRouter()
-const goToShop = () => router.push('/consoles')
-const goToNews = () => router.push('/news')
+//const router = useRouter()
+//const goToShop = () => router.push('/consoles')
+//const goToNews = () => router.push('/news')
 
 // Video público
 const gamingBgUrl = "https://res.cloudinary.com/dakkfinnu/video/upload/v1767195871/gaming_g0o04l.mp4"
 
 const particleCanvas = ref(null)
-let animationId = null  
+let animationId = null
+let resizeHandler = null
+let visibilityHandler = null  
 
 const prefersReducedMotion = window.matchMedia(
   '(prefers-reduced-motion: reduce)'
@@ -69,7 +71,7 @@ onMounted(async() => {
   const ctx = canvas.getContext('2d')
   if (!ctx) return
 
-  const resize = () => {
+  resizeHandler = () => {
     const dpr = window.devicePixelRatio || 1
     canvas.width = window.innerWidth * dpr
     canvas.height = window.innerHeight * dpr
@@ -78,13 +80,13 @@ onMounted(async() => {
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
   }
 
-  resize()
-  window.addEventListener('resize', resize)
+  resizeHandler()
+  window.addEventListener('resize', resizeHandler)
 
   const isMobile = window.innerWidth < 768
   const particleCount = isMobile ? 18 : 40
 
-    const particles = Array.from({ length: particleCount }, () => ({
+  const particles = Array.from({ length: particleCount }, () => ({
     x: Math.random() * window.innerWidth,
     y: Math.random() * window.innerHeight,
     vx: (Math.random() - 0.5) * 0.8,
@@ -133,7 +135,7 @@ onMounted(async() => {
 
   animate()
 
-  const handleVisibility = () => {
+  visibilityHandler = () => {
     if (document.hidden) {
       cancelAnimationFrame(animationId)
     } else {
@@ -141,14 +143,14 @@ onMounted(async() => {
     }
   }
 
-  document.addEventListener('visibilitychange', handleVisibility)
-
-  onUnmounted(() => {
-    cancelAnimationFrame(animationId)
-    window.removeEventListener('resize', resize)
-    document.removeEventListener('visibilitychange', handleVisibility)
-  })
+  document.addEventListener('visibilitychange', visibilityHandler)
 })
+
+onUnmounted(() => {
+    if (animationId) cancelAnimationFrame(animationId)
+    if (resizeHandler) window.removeEventListener('resize', resizeHandler)
+    if (visibilityHandler) document.removeEventListener('visibilitychange', visibilityHandler)
+  })
 </script>
 
 <style scoped>

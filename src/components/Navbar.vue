@@ -10,9 +10,9 @@
     </button>
   </div>
   <nav :class="['nav', { open: isOpen }]">
-    <router-link to="/" class="nav-link cart-link">HOME
-       <span v-if="cart.count > 0" class="cart-badge">
-        {{ cart.count }}
+    <router-link to="/" class="nav-link cart-link" @click="closeMenu">HOME
+       <span v-if="cart.totalItems > 0" class="cart-badge">
+        {{ cart.totalItems }}
        </span>
     </router-link>
     <router-link to="/news" class="nav-link">NEWS</router-link>

@@ -1,12 +1,13 @@
 import { createRouter as _createRouter, createWebHistory, type Router, type RouteRecordRaw } from 'vue-router'
 
+/*
 import Home from '../views/Home.vue'
 import News from '../views/News.vue'
 import Consoles from '../views/Consoles.vue'
 import Contact from '../views/Contact.vue'
 import Nintendo from '../views/Nintendo.vue'
 import ConsoleDetail from '@/views/ConsoleDetail.vue'
-
+*/
 
 
 const routes = [

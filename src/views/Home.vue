@@ -2,7 +2,11 @@
     <canvas ref="canvasRef" class="particle-canvas"></canvas>
     <div class="home">
 
-    <Hero :video="gamingBg" />
+    <Hero 
+    :video="gamingBg" 
+    @shop="goToShop"
+    @news="goToNews"
+    />
 
       <!--
         :video="gamingBg"
@@ -16,6 +20,7 @@
     <Card
       v-for="game in games"
       :key="game.id"
+      :id="game.id"  
       :title="game.title"
       :description="game.description"
       :image="game.image"
@@ -29,6 +34,7 @@
           <Card
             v-for="p in featuredProducts"
             :key="p.id"
+            :id="p.id"
             :image="p.image"
             :title="p.name"
             :description="p.price"
@@ -48,6 +54,7 @@
           <Card
             v-for="n in newsList"
             :key="n.id"
+            :id="n.id"
             :image="n.image"
             :title="n.title"
             :description="n.description"
@@ -122,10 +129,15 @@
     ]
   })  
 
-  //useScrollAnimation('.card')
+  useScrollAnimation('.card')
 
   //useHead({ title:'VortexGames | Consolas, Juegos y Accesorios Gamer', meta:[{ name:'description', content:'Compra consolas, juegos y accesorios gamer con envíos rápidos y precios competitivos.' }] })
     
+  const router = useRouter()
+
+  const goToShop = () => router.push('/consoles')
+  const goToNews = () => router.push('/news')
+
 
   const games = ref(gamesData)
   const featuredProducts = ref(featuredProductsData)

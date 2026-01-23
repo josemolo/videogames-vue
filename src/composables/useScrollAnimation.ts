@@ -1,7 +1,7 @@
 import { onMounted, onUnmounted } from 'vue'
 
 export function useScrollAnimation(selector = '.card') {
-  let observer
+  let observer : IntersectionObserver | null = null
 
   onMounted(() => {
     const elements = document.querySelectorAll(selector)
@@ -11,22 +11,22 @@ export function useScrollAnimation(selector = '.card') {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             entry.target.classList.add('show')
-            observer.unobserve(entry.target)
+            observer?.unobserve(entry.target)
           }
         })
       },
       { threshold: 0.15 }
     )
 
-    elements.forEach(el => observer.observe(el))
+    elements.forEach(el => observer!.observe(el))
   })
 
   onUnmounted(() => {
-    observer && observer.disconnect()
+    observer?.disconnect()
   })
 }
 
 
-declare module '@/composables/useScrollAnimation' {
-  export function useScrollAnimation(): void
-}
+//declare module '@/composables/useScrollAnimation' {
+//  export function useScrollAnimation(): void
+//}
