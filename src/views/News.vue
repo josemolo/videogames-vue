@@ -1,33 +1,44 @@
 <template>
   <LazySection>
     <div class="window news" v-reveal>
-      <h1  class="neon-text pulse">Noticias de Videojuegos</h1>
+      <h1 class="neon-text pulse">Noticias de Videojuegos</h1>
       <NewsSkeleton v-if="loading" />      
-      <ul>
+      <ul v-else>
         <li v-for="newsItem in news" :key="newsItem.id" class="news-item">
+          <img
+            :src="newsItem.image"
+            :alt="newsItem.title"
+            class="news-image"
+          />
           <h3 class="neon-text">{{ newsItem.title }}</h3>
-          <p>{{ newsItem.content }}</p>
+          <p>{{ newsItem.description }}</p>
+
+          <small class="news-date">{{ newsItem.date || '' }}</small>
         </li>
       </ul>
     </div>
   </LazySection>
 </template>
 
+
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import LazySection from '@/components/utils/LazySection.vue'
 import NewsSkeleton from '@/components/skeletons/NewsSkeleton.vue'
 import { useHead } from '@vueuse/head'
+//import newsData from '@/data/news.json'
 //import Card from '@/components/Card.vue'
 //import { newsList } from '@/data/news'
 
 import { useRouteMetrics } from '@/composables/useRouteMetrics'
-
+//import type { NewsItem } from '@/types/news'
+import { fetchNews } from '@/api/news'
 
 interface NewsItem {
   id: number
   title: string
-  content: string
+  //content: string
+  description: string
   image?: string
   author?: string
   date?: string
@@ -38,12 +49,12 @@ const buildArticlesSchema = (items: NewsItem[]) => ({
   "@graph": items.map(item => ({
     "@type": "Article",
     "headline": item.title,
-    "description": item.content.slice(0, 160),
-    "image": item.image || "https://videogames-vue.vercel.app/assets/news-banner.jpg",
-    "datePublished": item.date || "2026-01-19",
+    "description": item.description.slice(0, 160),
+    "image": item.image || defaultImage, //"https://videogames-vue.vercel.app/assets/news-banner.jpg",
+    "datePublished": item.date || article.datePublished, //"2026-01-19",
     "author": {
-      "@type": "Person",
-      "name": item.author || "Videogames Store"
+      "@type": "Organization",
+      "name": item.author || article.author
     },
     "publisher": {
       "@type": "Organization",
@@ -61,13 +72,15 @@ const buildArticlesSchema = (items: NewsItem[]) => ({
 })
 
 
+const news = ref<NewsItem[]>([
+  //{ id: 1, title: 'Nuevo DLC de Zelda', content: 'Explora nuevas tierras y aventuras épicas en Hyrule.' },
+  //{ id: 2, title: 'Mario Kart 9 anunciado', content: 'Prepárate para nuevas pistas, personajes y modos online.' },
+  //{ id: 3, title: 'Minecraft actualiza mobs', content: 'Nuevos mobs y biomas para explorar y construir.' },
+])
+
 const loading = ref(true)
 
-const news = ref<NewsItem[]>([
-  { id: 1, title: 'Nuevo DLC de Zelda', content: 'Explora nuevas tierras y aventuras épicas en Hyrule.' },
-  { id: 2, title: 'Mario Kart 9 anunciado', content: 'Prepárate para nuevas pistas, personajes y modos online.' },
-  { id: 3, title: 'Minecraft actualiza mobs', content: 'Nuevos mobs y biomas para explorar y construir.' },
-])
+const defaultImage = 'https://videogames-vue.vercel.app/assets/news-banner.jpg'
 
 const article = {
   title: "Ultimas Noticias en videojuegos",
@@ -77,22 +90,59 @@ const article = {
   description: "Resumen de la noticia para SEO y snippet"
 }
 
+const articlesSchema = computed(() => ({
+  '@context': 'https://schema.org',
+  '@graph': news.value.map(item => ({
+    '@type': 'Article',
+    headline: item.title,
+    description: item.description.slice(0, 160),
+    image: item.image || defaultImage,
+    datePublished: item.date || article.datePublished,
+    author: {
+      '@type': 'Organization',
+      name: item.author || article.author
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: article.author,
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://videogames-vue.vercel.app/assets/logo.png'
+      }
+    },
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': `https://videogames-vue.vercel.app/news#${item.id}`
+    }
+  }))
+}))
+
+// ref para almacenar el schema dinámico
+//const schemaArticles = ref({})
+
+//watch(news, (value) => {
+//  if (!value.length) return
+//  schemaArticles.value = buildArticlesSchema(value)
+//})
+
+
 // Simulación de fetch de API
-const NEWS_API = 'http://localhost:3000/news'
+// const NEWS_API = 'http://localhost:3000/news'
 onMounted(async () => {
   try {
-    const res = await fetch(NEWS_API)
-    if (!res.ok) throw new Error('Error al cargar noticias')
-    const data = (await res.json()) as NewsItem[]
-    news.value = data
+    // Simulación de fetch API
+    news.value = await fetchNews()
   } catch (err) {
-    console.error(err)
+    console.error('Error cargando noticias:', err)
   } finally {
     loading.value = false
   }
+
+     // Simulación de carga real (UX profesional)
+   // await new Promise(resolve => setTimeout(resolve, 600))
 })
 
-useHead({
+useHead(() => ({
   title: article.title,
   meta: [
     { name: 'description', content: article.description },
@@ -116,7 +166,7 @@ useHead({
         "author": { "@type": "Organization", "name": article.author },
         "publisher": {
           "@type": "Organization",
-          "name": "Videogames store",
+          "name": article.author,
           "logo": { "@type": "ImageObject", "url": "https://videogames-vue.vercel.app/assets/logo.png" }
         },
         "image": article.image,
@@ -125,9 +175,13 @@ useHead({
           "@id": "https://videogames-vue.vercel.app/news"
         }
       })
+    },
+    {
+      type: 'application/ld+json',
+      children: JSON.stringify(articlesSchema.value)
     }
   ]
-})
+}))
 
 useRouteMetrics()
 </script>
@@ -150,6 +204,12 @@ useRouteMetrics()
   color: #bf97ea;
   text-shadow: 0 0 10px #bf97ea, 0 0 20px #6d307a;
   margin-bottom: 20px;
+}
+
+.news-image {
+  max-width: 100%;
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
 }
 
 .news-item {
@@ -175,6 +235,14 @@ useRouteMetrics()
 .news-item p {
   font-size: 0.9rem;
   color: #ccc;
+}
+
+.news-item {
+  margin-bottom: 1.5rem;
+}
+.news-date {
+  color: #aaa;
+  font-size: 0.85rem;
 }
 
 .neon-text {
