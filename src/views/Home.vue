@@ -8,6 +8,7 @@
     @news="goToNews"
     />
 
+    <HomeCarousel />
       <!--
         :video="gamingBg"
         @shop="goToShop"
@@ -24,6 +25,8 @@
       :title="game.title"
       :description="game.description"
       :image="game.image"
+      variant="game"
+      @view="$router.push(`/game/${game.id}`)"
     />
   </SectionGrid>
 
@@ -38,9 +41,10 @@
             :image="p.image"
             :title="p.name"
             :description="p.price"
-            button="Ver producto"
+            :price="Number(p.price)"
+            variant="product"
           >
-            <router-link :to="`/console/${p.id}`" class="product-button primary">Ver producto</router-link>
+            <!--<router-link :to="`/console/${p.id}`" class="product-button primary">Ver producto</router-link>-->
           </Card>
           
 
@@ -58,6 +62,8 @@
             :image="n.image"
             :title="n.title"
             :description="n.description"
+            variant="news"
+            @view="$router.push(`/news/${n.id}`)"
           />
         </div>
       </section>
@@ -95,6 +101,7 @@
 
 
   <script setup lang="ts">
+  import HomeCarousel from '@/components/HomeCarousel.vue'
 
   import { ref, onMounted, onBeforeUnmount, nextTick } from 'vue'
   import { useRouter } from 'vue-router'
@@ -139,7 +146,27 @@
   const goToNews = () => router.push('/news')
 
 
-  const games = ref(gamesData)
+  const games = ref([ 
+    { 
+      id: 1, 
+      title: "Screamer",
+      description: "Juego de broma aparentemente inofensivo.",
+      image: "/images/games/screamergame.jpg"
+    },
+    { 
+      id: 2, 
+      title: "Grand Theft Auto lV",
+      description: "Vive los desafios de una ciudad virtual.",
+      image: "/images/games/gtaciudad.jpg"
+    },
+    { 
+      id: 1, 
+      title: "Crimson Desert",
+      description: "Un mundo abierto lleno de exploración",
+      image: "/images/games/crimsondesert.jpg"
+    }
+]);
+
   const featuredProducts = ref(featuredProductsData)
   const newsList = ref(newsListData)
 
@@ -213,7 +240,7 @@
   .primary:hover{transform:translateY(-4px);box-shadow:0 0 50px rgba(127,92,255,0.9)}
   .secondary{background:transparent;color:#b8a7e6;border:2px solid #b8a7e6}
   .secondary:hover{background:rgba(184,167,230,0.15)}
-  .particle-canvas{position:absolute;inset:0;z-index:-1;pointer-events:none}
+  .particle-canvas{position:fixed;inset:0;z-index:-3;pointer-events:none}
 
   /* SECCIONES */
   section{padding:4rem 2rem;text-align:center;color:#fff}

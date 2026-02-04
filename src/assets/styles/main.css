@@ -1,3 +1,12 @@
+html, body, #app {
+  margin: 0;
+  padding: 0;
+  background-color: #0b0b0f;
+  color: rgb(10, 9, 9);
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
 .reveal {
   opacity: 0;
   transform: translateY(40px);

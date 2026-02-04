@@ -2,25 +2,25 @@
   {
     "id": 1,
     "name": "PlayStation 5",
-    "price": "499",
-    "image": "https://picsum.photos/250/150"
+    "price": "550",
+    "image": "/images/products/ps5.jpg"
   },
   {
     "id": 2,
     "name": "Xbox Series X",
-    "price": "499",
-    "image": "https://picsum.photos/250/150"
+    "price": "615",
+    "image": "images/products/xboxx.jpg"
   },
   {
     "id": 3,
     "name": "Nintendo Switch",
-    "price": "299",
-    "image": "https://picsum.photos/250/150"
+    "price": "380",
+    "image": "images/products/swift.jpg"
   },
   {
     "id": 4,
-    "name": "PC Gamer",
-    "price": "999",
-    "image": "https://picsum.photos/250/150"
+    "name": "Oculus Quest",
+    "price": "445",
+    "image": "images/products/oculus.jpg"
   }
 ]

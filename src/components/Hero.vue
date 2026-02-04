@@ -49,7 +49,7 @@ defineProps({
 //const goToNews = () => router.push('/news')
 
 // Video público
-const gamingBgUrl = "https://res.cloudinary.com/dakkfinnu/video/upload/v1767195871/gaming_g0o04l.mp4"
+//const gamingBgUrl = "https://res.cloudinary.com/dakkfinnu/video/upload/v1767195871/gaming_g0o04l.mp4"
 
 const particleCanvas = ref(null)
 let animationId = null
@@ -164,8 +164,9 @@ onUnmounted(() => {
   align-items: center;
   text-align: center;
   font-family: 'Orbitron', sans-serif;
-  color: #9f0e0e9c;
-}
+  /*color: #9f0e0e9c;*/
+  z-index: 1;
+} 
 
 .hero-video {
   position: absolute;
@@ -174,7 +175,7 @@ onUnmounted(() => {
   height: 100%;
   object-fit: cover;
   filter: brightness(0.2) contrast(1.1);
-  z-index: -3;
+  z-index: -2;
 }
 
 .hero-overlay {
@@ -209,23 +210,50 @@ onUnmounted(() => {
     0 0 5px #7f5cff,
     0 0 10px #7f5cff,
     0 0 20px #503ec2,
-    0 0 40px #503ec2,
-    0 0 60px #7f5cff,
-    0 0 80px #503ec2;
+    0 0 40px #503ec2;
+    /*0 0 60px #7f5cff,
+    0 0 80px #503ec2;*/
   animation: flicker 2s infinite alternate;
 }
 
-@keyframes flicker {
-  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; }
-  20%, 24%, 55% { opacity: 0.7; }
+/* TÍTULO PRINCIPAL */
+.hero-content h1.neon-text {
+  font-size: clamp(3.8rem, 8vw, 5.5rem);
+  font-weight: 900;
+  letter-spacing: 4px;
+  margin-bottom: 0.5rem;
 }
 
+/* SUBTÍTULO */
+.subtitle {
+  font-size: 1.2rem;
+  opacity: 0.9;
+}
+
+/*@keyframes flicker {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; }
+  20%, 24%, 55% { opacity: 0.7; }
+}*/
+
 .hero-actions {
-  margin-top: 2rem;
+  margin-top: 2.2rem;
   display: flex;
-  gap: 1.2rem;
+  gap: 1.4rem;
   justify-content: center;
   flex-wrap: wrap;
+}
+
+
+.hero-actions a {
+  padding: 0.9rem 2.4rem;
+  font-size: 1.05rem;
+  border-radius: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
 }
 
 .hero-actions button {
@@ -238,13 +266,13 @@ onUnmounted(() => {
 }
 
 .primary {
-  position: relative;
+  /*position: relative;
   padding: 0.9rem 2.4rem;
   font-size: 1.05rem;
   border-radius: 14px;
   border: none;
   cursor: pointer;
-  font-weight: 600;
+  font-weight: 600;*/
   color: white;
 
   background: linear-gradient(45deg, #7f5cff, #503ec2);
@@ -261,7 +289,7 @@ onUnmounted(() => {
   box-shadow: 0 0 35px rgba(127,92,255,0.7), 0 0 70px rgba(80,62,194,0.4);
 }
 
-.primary:active {
+/*.primary:active {
   transform: translateY(1px) scale(0.98);
   box-shadow:
     0 0 15px rgba(127,92,255,0.6);
@@ -284,19 +312,33 @@ onUnmounted(() => {
 
 .primary:hover::after {
   opacity: 1;
-}
+}*/
 
 
 
 .secondary {
-  background: transparent;
-  color: #b8a7e6;
-  border: 2px solid #b8a7e6;
-  text-shadow: 0 0 5px #b8a7e6;
+  /*background: transparent;
+  border: 2px solid #b8a7e6;*/
+  color: white;
+  background: linear-gradient(45deg, #ff4fd8, #ff2f92);
+  box-shadow: 0 0 20px rgba(255,79,216,0.45);
 }
 
 .secondary:hover {
-  background: rgba(184, 167, 230, 0.15);
+  /*background: rgba(184, 167, 230, 0.15);*/
+  transform: translateY(-4px) scale(1.02);
+  box-shadow:
+    0 0 35px rgba(255,79,216,0.7),
+    0 0 70px rgba(255,47,146,0.4);
+}
+
+.glow {
+  /*box-shadow: 0 0 15px rgba(127,92,255,0.8), 0 0 30px rgba(127,92,255,0.6);*/
+  transition: all 0.3s ease;
+}
+.glow:hover {
+  transform: translateY(-4px);
+  /*box-shadow: 0 0 35px rgba(127,92,255,1), 0 0 60px rgba(127,92,255,0.8);*/
 }
 
 .particle-canvas {
@@ -311,17 +353,13 @@ onUnmounted(() => {
   to { opacity: 1; transform: translateY(0); }
 }
 
-@media (max-width: 600px) {
-  .hero-actions { flex-direction: column; }
-  .hero-content h1 { font-size: 3rem; }
+@keyframes flicker {
+  0%, 100% { opacity: 1; } /*transform: translateY(30px);*/
+  50% { opacity: 0.85; } /*transform: translateY(0);*/
 }
 
-.glow {
-  box-shadow: 0 0 15px rgba(127,92,255,0.8), 0 0 30px rgba(127,92,255,0.6);
-  transition: all 0.3s ease;
-}
-.glow:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 0 35px rgba(127,92,255,1), 0 0 60px rgba(127,92,255,0.8);
+@media (max-width: 600px) {
+  .hero-actions { flex-direction: column; }
+  /*.hero-content h1 { font-size: 3rem; }*/
 }
 </style>

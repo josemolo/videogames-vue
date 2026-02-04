@@ -16,16 +16,49 @@
     <!--
     <p class="card-price">${{ price.toFixed(2) }}</p>
     -->
-    <p class="card-price" v-if="price !== undefined">{{ price }}</p>
+    <p class="card-price" v-if="price !== undefined">${{ price }}</p>
     <p class="card-price" v-else>Precio no disponible</p>
 
     <!--
     <button @click="$emit('buy')">Agregar</button>
     -->
 
-    
+    <!--
     <button @click="handleBuy">
-      {{ added ? '✔ Agregado' : 'Agregar' }}
+      {{ added ? '✔ Agregado' : 'Ver' }}
+    </button>
+    -->
+
+        <!-- BOTÓN: PRODUCTOS -->
+    <button
+      v-if="variant === 'product'"
+      @click="handleBuy"
+    >
+      {{ added ? '✔ Agregado' : 'Ver producto' }}
+    </button>
+
+    <!-- BOTÓN: JUEGOS -->
+    <button
+      v-else-if="variant === 'game'"
+      @click="$emit('view')"
+    >
+      Ver juego
+    </button>
+
+    <!-- BOTÓN: NOTICIAS -->
+    <button
+      v-else-if="variant === 'news'"
+      @click="$emit('view')"
+    >
+      Leer noticia
+    </button>
+
+    <!-- fallback por si no se pasa nada -->
+    <button
+      v-else
+      @click="$emit('view')"
+    >
+      Ver
     </button>
     
 
@@ -94,6 +127,10 @@ const handleBuy = () => {
 //})
 
 const props = defineProps({
+  variant: {
+  type: String as () => 'product' | 'game' | 'news',
+  default: 'product'
+  },
   id: {
     type: Number,
     required: true
@@ -124,6 +161,7 @@ const props = defineProps({
 
 const emit = defineEmits<{
   (e: 'buy'): void
+  (e: 'view'): void
 }>()
 
 //cart.addToCart({

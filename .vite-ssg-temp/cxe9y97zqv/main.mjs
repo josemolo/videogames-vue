@@ -343,7 +343,7 @@ var games_default = [
 		"id": 1,
 		"title": "Cyber Adventure",
 		"description": "Un juego de acción futurista.",
-		"image": "https://picsum.photos/300/180"
+		"image": "https://cdnpro.eraspace.com/media/wysiwyg/artikel/Tahun_2023/Desember/Game_GTA_6_2.jpg" 
 	},
 	{
 		"id": 2,

@@ -35,6 +35,11 @@ useHead({
 </script>
 
 <style>
+#app {
+  background-color: #0b0b0f;
+  min-height: 100vh;
+}
+
 /* Opcional: reset básico */
 body {
   margin: 0;

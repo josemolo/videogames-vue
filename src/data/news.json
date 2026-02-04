@@ -2,22 +2,22 @@
   {
     "id": 1,
     "title": "Nuevo lanzamiento",
-    "description": "El juego X salió hoy",
-    "image": "https://picsum.photos/250/150",
+    "description": "Marvel 1943: Rise of Hydra",
+    "image": "/images/news/marvelgame.jpg",
     "date": "2026-01-19"
   },
   {
     "id": 2,
     "title": "Evento gamer",
-    "description": "Torneo este fin de semana",
-    "image": "https://picsum.photos/250/150",
+    "description": "GDC Festival of Gaming",
+    "image": "/images/news/gdcfestival.jpg",
     "date": "2026-01-18"
   },
   {
     "id": 3,
-    "title": "Oferta especial",
-    "description": "20% en consolas",
-    "image": "https://picsum.photos/250/150",
+    "title": "Realidad Futurista",
+    "description": "Juegos en realidad virtual (VR)",
+    "image": "/images/news/virtual.jpg",
     "date": "2026-01-17"
   }
 ]
