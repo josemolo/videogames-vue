@@ -25,6 +25,7 @@
       :title="game.title"
       :description="game.description"
       :image="game.image"
+      :price="game.price"
       variant="game"
       @view="$router.push(`/game/${game.id}`)"
     />
@@ -90,7 +91,7 @@
 
       <!-- FOOTER -->
       <footer class="footer">
-        <div>© 2025 VortexGames</div>
+        <div>© 2025 LucyCell</div>
         <div class="social">
           <a v-for="s in socials" :key="s" href="#">{{ s }}</a>
         </div>
@@ -151,19 +152,22 @@
       id: 1, 
       title: "Screamer",
       description: "Juego de broma aparentemente inofensivo.",
-      image: "/images/games/screamergame.jpg"
+      image: "/images/games/screamergame.jpg",
+      price: 59.99
     },
     { 
       id: 2, 
       title: "Grand Theft Auto lV",
       description: "Vive los desafios de una ciudad virtual.",
-      image: "/images/games/gtaciudad.jpg"
+      image: "/images/games/gtaciudad.jpg",
+      price: 89.99
     },
     { 
       id: 1, 
       title: "Crimson Desert",
       description: "Un mundo abierto lleno de exploración",
-      image: "/images/games/crimsondesert.jpg"
+      image: "/images/games/crimsondesert.jpg",
+      price: 69.99
     }
 ]);
 
@@ -186,7 +190,7 @@
     { name:'ProGamer', text:'Gran variedad y precios inmejorables.' }
   ]
 
-  const socials = ['Twitch','YouTube','Discord']
+  const socials = ['Whatsapp','Instagram','Facebook']
 
 
   let stopParticles: (() => void) | null = null

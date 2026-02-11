@@ -2,16 +2,22 @@
   {
     "id": "nintendo",
     "name": "Nintendo Switch",
-    "subtitle": "Consola híbrida",
+    "subtitle": "Consola Híbrida",
     "image": "/images/switch.png",
-    "description": "Juega donde quieras con los mejores exclusivos de Nintendo.",
+    "description": "",
     "features": [
       "🎮 Modo portátil y TV",
       "🧩 Joy-Con desmontables",
       "🕹️ Multijugador local y online",
       "📦 Juegos exclusivos"
     ],
-    "price": 6999,
+    "accessories": [
+      { "name": "Pro Controller", "image": "/images/pro.png" },
+      { "name": "Dock Station", "image": "/images/dock.png" },
+      { "name": "Joy-Con Set", "image": "/images/joycon.png" },
+      { "name": "Carrying Case", "image": "/images/case.png" }
+    ],
+    "price": 699,
     "stock": 5
   }
 ]

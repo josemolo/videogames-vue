@@ -2,29 +2,25 @@
   {
     "id": 1,
     "consoleId": "nintendo",
-    "name": "Control DualSense",
-    "price": "$69",
+    "name": "Nintendo Switch Pro Controller",
+    "price": 69,
+    "stock": 5,
     "image": "https://picsum.photos/300/200?1"
   },
   {
     "id": 2,
-    "consoleId": "nintendo",
-    "name": "Audífonos Gamer PS5",
-    "price": "$89",
+    "consoleId": "nintendo",  
+    "name": "Dock Nintendo Switch",
+    "price": 89,
+    "stock": 5,
     "image": "https://picsum.photos/300/200?2"
   },
   {
     "id": 3,
     "consoleId": "nintendo",
-    "name": "Control Xbox Series",
-    "price": "$65",
+    "name": "Joy-Con Controllers",
+    "price": 65,
+    "stock": 5,
     "image": "https://picsum.photos/300/200?3"
-  },
-  {
-    "id": 4,
-    "consoleId": "nintendo",
-    "name": "Joy-Con Extra",
-    "price": "$79",
-    "image": "https://picsum.photos/300/200?4"
   }
 ]

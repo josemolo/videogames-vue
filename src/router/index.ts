@@ -1,5 +1,6 @@
-import { createRouter as _createRouter, createWebHistory, type Router, type RouteRecordRaw } from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
 
+import { useUserStore } from '@/stores/user'
 /*
 import Home from '../views/Home.vue'
 import News from '../views/News.vue'
@@ -9,28 +10,40 @@ import Nintendo from '../views/Nintendo.vue'
 import ConsoleDetail from '@/views/ConsoleDetail.vue'
 */
 
-
 const routes = [
   { path: '/', name: 'Home', component: () => import('../views/Home.vue') },
   { path: '/news', name: 'News', component: () => import('../views/News.vue') },
   { path: '/consoles', name: 'Consoles', component: () => import('../views/Consoles.vue') },
   { path: '/contact', name: 'Contact', component:  () => import('../views/Contact.vue') },
   { path: '/nintendo', name: 'Nintendo', component: () => import('../views/Nintendo.vue') },
-  { path: '/console/:id', name: 'ConsoleDetail', component: () => import('../views/ConsoleDetail.vue'),   
-  },
+  { path: '/console/:id', name: 'ConsoleDetail', component: () => import('../views/ConsoleDetail.vue') },
+
+  // 🔐 AUTH
+  { path: '/login', component: () => import('@/views/Login.vue') },
+  { path: '/verify', component: () => import('@/views/Verify.vue') },
+  { path: '/verify-required', component: () => import('@/views/VerifyRequired.vue') },
+
+  {
+    path: '/checkout',
+    component: () => import('@/views/Checkout.vue'),
+    meta: { requiresVerified: true }
+  }
 ]
 
-export function createRouter() {
-  return _createRouter({
-    history: createWebHistory (),
-    routes,
-  })
-}
+const router = createRouter ({
+  history: createWebHistory(),
+  routes,
+})
 
-const router: Router = createRouter()
+router.beforeEach((to) => {
+  const user = useUserStore()
+
+  if (to.meta.requiresVerified && !user.isVerified) {
+    return '/verify-required'
+  }
+})
+
 export default router
-
-
 
 function canPreload(): boolean {
   const connection = (navigator as any)?.connection

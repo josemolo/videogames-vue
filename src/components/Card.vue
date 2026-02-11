@@ -29,20 +29,13 @@
     </button>
     -->
 
-        <!-- BOTÓN: PRODUCTOS -->
-    <button
-      v-if="variant === 'product'"
+     <!-- PRODUCTO / JUEGO -->
+   <button
+      v-if="variant === 'product' || variant === 'game'"
+      :disabled="stock === 0"
       @click="handleBuy"
     >
-      {{ added ? '✔ Agregado' : 'Ver producto' }}
-    </button>
-
-    <!-- BOTÓN: JUEGOS -->
-    <button
-      v-else-if="variant === 'game'"
-      @click="$emit('view')"
-    >
-      Ver juego
+      {{ added ? '✔ Agregado' : 'Agregar al carrito' }}
     </button>
 
     <!-- BOTÓN: NOTICIAS -->
@@ -71,24 +64,61 @@
 <script setup lang="ts">
 
 import { ref } from 'vue'  //onMounted, onBeforeUnmount
+import { useRouter } from 'vue-router'
 
+import { useUserStore } from '@/stores/user'
 import { useCartStore } from '@/stores/cart'
 
+const router = useRouter()
+const user = useUserStore()
+
+/* =====================
+   PROPS
+===================== */
+const props = defineProps<{
+  id: number
+  title: string
+  description: string
+  image: string
+  price?: number
+  variant: 'product' | 'game' | 'news'
+  stock?: number
+  button?: string
+}>()
+
+/* =====================
+   EMITS
+===================== */
+const emit = defineEmits<{
+  (e: 'buy'): void
+  (e: 'view'): void
+}>()
+
+/* =====================
+   STATE
+===================== */
 const cart = useCartStore()
-
-//let observer: IntersectionObserver | null = null
-
-const cardRef = ref(null)
-
-
 const added = ref(false)
+const cardRef = ref<HTMLElement | null>(null)
 
+/* =====================
+   ACTIONS
+===================== */
 const handleBuy = () => {
-  cart.addToCart({
+  if (!user.isVerified) {
+    router.push('/login')
+    return
+  }
+
+  cart.addItem({ 
     id: props.id,
+    name: props.title,
     title: props.title,
-    price: props.price,
-    image: props.image
+    price: props.price ?? 0,
+    image: props.image,
+    quantity: 1,
+    type: props.variant === 'game' ? 'game' : 'accessory',
+    stock: props.stock ?? 0
   })
 
   added.value = true
@@ -125,44 +155,6 @@ const handleBuy = () => {
 //    observer.disconnect()
 //  }
 //})
-
-const props = defineProps({
-  variant: {
-  type: String as () => 'product' | 'game' | 'news',
-  default: 'product'
-  },
-  id: {
-    type: Number,
-    required: true
-  },
-  title: {
-    type: String,
-    required: true
-  },
-  description: {
-    type: String,
-    required: true
-  },
-  image: {
-    type: String,
-    required: true
-  },
-  price: {
-    type: Number,
-    default: 0 
-  },
-  /*
-  desc: String,
-  img: String,
-  button: String
-  */
-  button: { type: String, default: '' }
-})
-
-const emit = defineEmits<{
-  (e: 'buy'): void
-  (e: 'view'): void
-}>()
 
 //cart.addToCart({
  // id: 1,

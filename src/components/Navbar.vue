@@ -1,167 +1,167 @@
 <template>
-<header class="header">
-  <div class="top-bar">
-    <h1 class="logo">VORTEXGAMES</h1>
+  <header class="header">
+    <!-- Logo y carrito -->
+    <div class="top-row">
+      <h1 class="logo">LUCYCELL</h1>
 
-    <button class="hamburger" @click="toggleMenu">
-        <span></span>
-        <span></span>
-        <span></span>
-    </button>
-  </div>
-  <nav :class="['nav', { open: isOpen }]">
-    <router-link to="/" class="nav-link cart-link" @click="closeMenu">HOME
-       <span v-if="cart.totalItems > 0" class="cart-badge">
-        {{ cart.totalItems }}
-       </span>
-    </router-link>
-    <router-link to="/news" class="nav-link">NEWS</router-link>
-    <router-link to="/consoles" class="nav-link">CONSOLES</router-link>
-    <router-link to="/contact" class="nav-link">CONTACTS</router-link>
-  </nav>
-</header>
+      <!-- Dropdown de usuario -->
+      <div class="user-dropdown">
+        <button @click="toggleUserMenu" class="user-button">
+          👤 {{ userStore.isLoggedIn ? userStore.user?.username : '' }}
+        </button>
+
+        <ul v-if="userMenuOpen" class="dropdown-menu">
+          <li v-if="!userStore.isLoggedIn" @click="openLogin">Iniciar sesión</li>
+          <li v-if="!userStore.isLoggedIn" @click="openLogin">Crear cuenta nueva</li>
+          <li v-if="!userStore.isLoggedIn" @click="userStore.forgotUsername">Olvidé mi usuario</li>
+          <li v-if="!userStore.isLoggedIn" @click="userStore.forgotPassword">Olvidé mi contraseña</li>
+          <li v-if="userStore.isLoggedIn" @click="logout">Cerrar sesión</li>
+        </ul>
+      </div>
+    </div>
+    <!-- FILA 2: Menú izquierda / Carrito derecha -->
+    <div class="bottom-row">
+      <div class="menu-hamburger">
+        <button class="hamburger" @click="toggleMenu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <nav :class="['nav', { open: isOpen }]">
+          <router-link to="/" class="nav-link" @click="closeMenu">HOME</router-link>
+          <router-link to="/news" class="nav-link" @click="closeMenu">NEWS</router-link>
+          <router-link to="/consoles" class="nav-link" @click="closeMenu">STORE</router-link>
+          <router-link to="/contact" class="nav-link" @click="closeMenu">CONTACTS</router-link>
+        </nav>
+      </div>
+      <button class="cart-button" @click="openCartPopup">
+        🛒 <span v-if="cart.totalItems > 0">{{ cart.totalItems }}</span>
+      </button>
+    </div>
+
+      <!-- MODALES -->
+    <LoginModal ref="loginModalRef" />
+
+    <!-- Componente del carrito -->
+    <CartPopup ref="cartPopupRef" />
+  </header>
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue'
-import { useCartStore } from '../stores/cart'
-import { useNavbarPreload } from '@/composables/useNavbarPreload'
-
-const { preloadOnOpen } = useNavbarPreload() //useNavbarPreload() // 👈 ÚNICA LÍNEA NUEVA
+import { ref } from 'vue'
+import LoginModal from '@/components/LoginModal.vue'
+import CartPopup from '@/components/CartPopup.vue'
+import { useCartStore } from '@/stores/cart'
+import { useUserStore } from '@/stores/user'
+import { onMounted } from 'vue'
 
 const cart = useCartStore()
+const userStore = useUserStore()
+
 const isOpen = ref(false)
+const userMenuOpen = ref(false)
 
-watch(isOpen, (open) => {
-  if (open) preloadOnOpen()
+const loginModalRef = ref<InstanceType<typeof LoginModal> | null>(null)
+const cartPopupRef = ref<InstanceType<typeof CartPopup> | null>(null)
+
+const toggleMenu = () => isOpen.value = !isOpen.value 
+const closeMenu = () => isOpen.value = false 
+const toggleUserMenu = () => userMenuOpen.value = !userMenuOpen.value 
+
+// 🔐 Abrir login global
+const openLogin = () => { 
+  userStore.openLoginModal() 
+  userMenuOpen.value = false 
+}
+
+//{ loginModalRef.value?.open(); userMenuOpen.value = false }
+
+// Mostrar carrito (único nombre de función)
+const openCartPopup = () => {
+  if (!userStore.isLoggedIn) {
+    userStore.openLoginModal()
+    return
+  }
+  cartPopupRef.value?.openCart()
+}
+
+const openCreateAccount = () => { loginModalRef.value?.open(); userMenuOpen.value = false }
+
+const logout = () => { 
+  userStore.logout() 
+  userMenuOpen.value = false 
+}
+
+onMounted(() => {
+  userStore.setLoginModalRef(loginModalRef)
 })
-
-const toggleMenu = () => {
-  isOpen.value = !isOpen.value
-}
-
-const closeMenu = () => {
-  isOpen.value = false
-}
 </script>
 
+
 <style scoped>
+.user-dropdown {
+  position: relative;
+  margin-right: 10px;
+}
+
+.user-button {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: #1f1f3d;
+  border: 1px solid #4349a3;
+  list-style: none;
+  padding: 5px 0;
+  margin: 0;
+  width: 200px;
+  z-index: 50;
+}
+
+.dropdown-menu li {
+  padding: 8px 12px;
+  cursor: pointer;
+  font-family: 'Orbitron', sans-serif;
+  color: #cfcfcf;
+}
+
+.dropdown-menu li:hover {
+  background: #511d71;
+  color: white;
+}
+
+
 
 .header {
-  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 10px 20px;
   background: linear-gradient(90deg, #0a0a23, #1f1f3d);
   color: white;
-  box-shadow: 0 0 15px #59111b  ; /* sombra neón alrededor */
+  box-shadow: 0 0 15px #59111b;
 }
 
-.nav {
+/* FILA 1: logo izquierda, usuario derecha */
+.top-row {
   display: flex;
-  gap: 25px;
-  margin-top: 10px;
-}
-
-.nav a {
-  color: #997ea6;
-  font-weight: 700;
-  font-family: 'Orbitron', sans-serif;
-  text-decoration: none; /* quitar subrayado */
-  position: relative;
-  transition: color 0.3s ease;
-}
-
-.logo {
-  color: #866ca2;
-  font-family: 'Orbitron', sans-serif; /* agrega esta fuente en tu index.html */
-  font-weight: 900;
-  font-size: 1.8rem;
-  text-shadow:
-    0 0 5px #866ca2,
-    0 0 10px #866ca2,
-    0 0 20px #866ca2;
-  cursor: pointer;
-  transition: color 0.3s ease;
-}
-
-.nav a:hover {
-  color: #511d71;
-  text-shadow:
-    0 0 5px #511d71,
-    0 0 10px #511d71,
-    0 0 20px #511d71;
-}
-
-.nav a::after {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 2px;
-  bottom: -5px;
-  left: 0;
-  background: #511d71;
-  box-shadow:
-    0 0 5px #511d71,
-    0 0 10px #511d71,
-    0 0 15px #511d71;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.nav a:hover::after {
-  opacity: 1;
-}
-
-.navbar {
-  display: flex;
-  justify-content: space-between; /* Mantiene la separación con los links */
+  justify-content: space-between;
   align-items: center;
-  padding: 0.8rem 2rem;
-  background-color: #1e1e2f;
-  color: white;
 }
 
-.navbar .logo {
-  font-weight: bold;
-  font-size: 2rem;
-  margin-left: 0; /* Esto lo pega a la esquina izquierda */
-}
-
-.navbar ul {
-  list-style: none;
+/* FILA 2: menú izquierda, carrito derecha */
+.bottom-row {
   display: flex;
-  gap: 1.5rem;
-  margin: 0;
-  padding: 0;
-}
-
-.navbar a {
-  color: white;
-  text-decoration: none;
-  font-weight: 500;
-}
-
-.navbar a:hover {
-  color: #59111b;
-}
-
-.logo:hover {
-  color: #59111b;
-  text-shadow:
-    0 0 10px #59111b,
-    0 0 20px #59111b,
-    0 0 30px #59111b;
-}
-
-h2 {
-  font-size: 3.5rem;
-  font-weight: 800;
-  letter-spacing: 3px;
-  color: #c585f6;
-  text-transform: uppercase;
-  text-shadow: 0 0 10px rgba(0, 229, 255, 0.6);
-}
-
-h2 {
-  font-size: clamp(2rem, 6vw, 4rem);
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 5px;
 }
 
 .top-bar {
@@ -170,40 +170,33 @@ h2 {
   align-items: center;
 }
 
-.hamburger span {
-  display: block;
-  width: 25px;
-  height: 3px;
-  margin: 5px;
-  background: #4349a3;
-  border-radius: 2px;
-  transition: background 0.3s ease;
-}
-.hamburger:hover span {
-  background: #8475d8;
+.logo {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 900;
+  font-size: 1.8rem;
+  background: linear-gradient(
+    90deg,
+    #7f5cff,
+    #00ffe0,
+    #7f5cff
+  );
+  background-size: 200%;
+  background-clip: text;              /* 👈 estándar */
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  animation: glow 4s linear infinite;
+  cursor: pointer;
 }
 
-.nav-link {
+/* Botón carrito */
+.cart-button {
   position: relative;
-}
-
-.nav-link::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: -6px;
-  width: 0%;
-  height: 2px;
-  background: var(--neon-primary);
-  transition: width 0.3s ease;
-}
-
-.nav-link:hover::after {
-  width: 100%;
-}
-
-.cart-link {
-  position: relative;
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
 }
 
 .cart-badge {
@@ -219,4 +212,98 @@ h2 {
   box-shadow: 0 0 10px rgba(127,92,255,0.8);
 }
 
+.hamburger {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Botón hamburguesa */
+.hamburger-container {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 10px;
+}
+
+.hamburger span {
+  display: block;
+  width: 26px;
+  height: 3px;
+  margin: 5px 0;
+  background: #7f5cff; /* color base */
+  border-radius: 5px;
+  transition: 
+    background 0.3s ease,
+    background-color 0.3s ease,
+    box-shadow 0.3s ease,
+    transform 0.3s ease;
+  box-shadow: 0 0 6px rgba(127, 92, 255, 0.6);
+}
+.hamburger:hover span {
+  background: #00ffe0;
+  box-shadow: 
+    0 0 8px rgba(0,255,224,0.8),
+    0 0 16px rgba(0,255,224,0.6);
+}
+
+/* Menú desplegable */
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 10px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.nav.open {
+  max-height: 500px; /* suficiente para mostrar todos los links */
+}
+
+.nav-link {
+  color: #7f5cff;
+  font-weight: 600;
+  font-family: 'Orbitron', sans-serif;
+  text-decoration: none;
+  transition:
+    color 0.3s ease,
+    text-shadow 0.3s ease;
+  position: relative;
+  font-size: 1.2rem;
+  letter-spacing: 1.5px;
+}
+
+.nav-link:hover {
+  color: #00ffe0;
+  text-shadow:
+    0 0 8px rgba(0,255,224,0.8),
+    0 0 16px rgba(0,255,224,0.6);
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0%;
+  height: 2px;
+  background: #511d71;
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+@keyframes glow {
+  0% { background-position: 0% }
+  100% { background-position: 200% }
+}
 </style>
+
+

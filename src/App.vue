@@ -10,10 +10,25 @@
       <!--<router-view />--> 
       <!--</transition>-->
     </router-view>    
+     <!-- 🔐 LOGIN MODAL GLOBAL -->
+    <!--
+    <div
+      v-if="user.showLoginModal"
+      class="modal-overlay"
+      @click.self="user.closeLoginModal()"
+    >
+      <div class="modal-box">
+        <Login />
+      </div>
+      
+    </div>
+    -->
   </div>
 </template>
 
 <script setup lang="ts">
+import { useUserStore } from '@/stores/user'
+import Login from '@/views/Login.vue'
 
 import Navbar from './components/Navbar.vue'
 
@@ -22,6 +37,8 @@ import Navbar from './components/Navbar.vue'
 import { useHead } from '@vueuse/head'
 
 //const route = useRoute()
+
+const user = useUserStore()
 
 useHead({
   meta: [
@@ -40,6 +57,32 @@ useHead({
   min-height: 100vh;
 }
 
+/*
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(6px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 3000;
+  animation: fadeIn 0.25s ease;
+}
+
+.modal-box {
+  background: #1c1c2f;
+  padding: 35px;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 420px;
+  box-shadow:
+    0 0 25px rgba(0,255,255,0.5),
+    0 0 50px rgba(127,92,255,0.6);
+  animation: modalPop 0.25s ease;
+}
+*/
+
 /* Opcional: reset básico */
 body {
   margin: 0;
@@ -53,30 +96,6 @@ body {
 
 .fade-slide-leave-active { animation: pageOut 0.5s ease forwards;
   transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-}
-
-@keyframes pageIn {
-  from {
-    opacity: 0;
-    transform: translateY(30px) scale(0.97);
-    filter: blur(8px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-    filter: blur(0);
-  }
-}
-
-@keyframes pageOut {
-  from {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  to {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
 }
 
 .fade-slide-enter-from {
@@ -104,4 +123,48 @@ body {
   box-shadow: 0 0 25px #00ffff, 0 0 50px #6d307a;
   transition: 0.4s;
 }
+
+@keyframes pageIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.97);
+    filter: blur(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes pageOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+}
+
+/* Animaciones suaves */
+@keyframes modalPop {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+
+
 </style>

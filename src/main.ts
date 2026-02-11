@@ -1,57 +1,69 @@
-  /*
-  import { createApp } from 'vue'
-  import App from './App.vue'
-  import router from './router'
+import { createApp } from 'vue'
+import { createPinia } from 'pinia'
+import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
+import { createHead } from '@vueuse/head'
 
-  import './assets/style.css'
+import App from './App.vue'
+import router from './router'
+import { setupPredictivePreload } from '@/router/predictivePreload'
+import { setupRouteMetrics } from '@/router/metrics'
+import reveal from './directives/reveal'
 
-  createApp(App).use(router).mount('#app')
-  */
+import { useUserStore } from '@/stores/user'  
+import { useCartStore } from '@/stores/cart'
 
-  import { createApp } from "vue";
-  import { createPinia } from "pinia";
-  import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
-  import { createHead } from '@vueuse/head'
+/* =====================
+   SETUP ROUTER HELPERS
+===================== */
+setupRouteMetrics(router)
+setupPredictivePreload(router)
 
-  //import { useHead } from '@vueuse/head'
-  
-  import App from "./App.vue";
-  import router from "./router/index";
-  import { setupPredictivePreload } from '@/router/predictivePreload'
-  import reveal from './directives/reveal'
+/* =====================
+   CREATE APP & PINIA
+===================== */
+const app = createApp(App)
 
-  import { setupRouteMetrics } from '@/router/metrics'
+const pinia = createPinia()
+pinia.use(piniaPluginPersistedstate)
 
-  //import '@/assets/styles/main.css'
+const head = createHead()
 
-  const app = createApp(App);
+/* =====================
+   USE PLUGINS (ORDEN IMPORTANTE)
+===================== */
+app
+  .use(pinia)        // 👈 1️⃣ PRIMERO PINIA
+  .use(router)       // 👈 2️⃣ ROUTER
+  .use(head)         // 👈 3️⃣ HEAD
+  .directive('reveal', reveal)
+  .mount('#app')
 
-  setupRouteMetrics(router)
+/* =====================
+   CART LOCALSTORAGE
+   (AHORA SÍ ES SEGURO)
+===================== */
+const cart = useCartStore()
 
-  setupPredictivePreload(router)
+const userStore = useUserStore()
+const cartStore = useCartStore()
 
-  const pinia = createPinia()
-  pinia.use(piniaPluginPersistedstate)
+// 🔐 Controlar carrito según sesión
+if (userStore.isLoggedIn) {
+  cartStore.loadFromStorage()
+} else {
+  cartStore.clearCart()
+}
 
-  const head = createHead()
-  
-  app
-  .use(pinia) 
-  .use(router)                  // 👈 3️⃣ usar router
-  .use(head)                    // 👈 4️⃣ usar head
-  .directive('reveal', reveal)  // 👈 5️⃣ directiva
-  .mount('#app') 
-  
-  //createApp(App)
-  //  .use(router)  
-  //  .use(head)
-  //  .directive('reveal', reveal)
-  //  .mount('#app')
+cartStore.$subscribe((_mutation, state) => {
+  if (userStore.isLoggedIn) {
+    localStorage.setItem('vortex_cart', JSON.stringify(state.items))
+  }
+})
 
-  //app.use(createPinia());
-  //app.use(pinia);
-  //app.use(router);
-  //app.directive('reveal', reveal)
+cart.loadFromStorage()
 
-  //app.mount("#app");
+cart.$subscribe((_mutation, state) => {
+  localStorage.setItem('vortex_cart', JSON.stringify(state.items))
+})
+
 
