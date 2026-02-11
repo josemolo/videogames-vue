@@ -51,7 +51,7 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
 import { useHead } from '@vueuse/head'
-import consoles from '@/data/console.json'
+import consoles from '@/data/consoles.json'
 
 const router = useRouter()
 
