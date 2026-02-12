@@ -177,7 +177,7 @@ useRouteMetrics()
 
 <style scoped>
 .full-window {
-  width: 100vw;
+  width: 100%;
   min-height: calc(100vh - 60px); /* ajustado para navbar */
   display: flex;
   justify-content: center;
@@ -185,6 +185,7 @@ useRouteMetrics()
   background: #0a0a1f;
   padding: 20px;
   box-sizing: border-box;
+  overflow-x: hidden;
 }
 
 .window {
@@ -212,9 +213,10 @@ useRouteMetrics()
 
 .row {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   gap: 30px;
   margin-bottom: 30px;
+  flex-wrap: wrap;
 }
 
 .console-card {
@@ -222,15 +224,21 @@ useRouteMetrics()
   border: 2px solid #6d307a;
   border-radius: 15px;
   padding: 20px;
-  flex: 1;
-  max-width: 30%;
+
+  flex: 1 1 280px;
+  max-width: 350px;
+  width: 100%;
+
   min-height: 250px;
   text-align: center;
+
   box-shadow: 0 0 15px #bf97ea, 0 0 30px #6d307a;
   transition: 0.3s;
+
   display: flex;
   flex-direction: column;
   align-items: center;
+
   cursor: pointer;
   transform: translateY(20px) scale(0.96);
   animation: cardFadeIn 0.6s ease-out forwards;
@@ -362,6 +370,19 @@ h1, h2, h3 {
   animation: shimmer 1.2s infinite;
 }
 
+.blur-up {
+  filter: blur(12px);
+  transform: scale(1.05);
+  transition:
+    filter 0.6s ease,
+    transform 0.6s ease;
+}
+
+.blur-up.loaded {
+  filter: blur(0);
+  transform: scale(1);
+}
+
 @keyframes shimmer {
   100% {
     transform: translateX(100%);
@@ -375,18 +396,16 @@ h1, h2, h3 {
   }
 }
 
-.blur-up {
-  filter: blur(12px);
-  transform: scale(1.05);
-  transition:
-    filter 0.6s ease,
-    transform 0.6s ease;
+@media (max-width: 900px) {
+  .window {
+    padding: 20px 15px;
+  }
+
+  .row {
+    gap: 20px;
+  }
 }
 
-.blur-up.loaded {
-  filter: blur(0);
-  transform: scale(1);
-}
 </style>
 
 
