@@ -879,6 +879,12 @@ useRouteMetrics()
 
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
+
+  justify-content: center;
+}
+
+.games-row > * {
+  scroll-snap-align: start;
 }
 
 .games-row::-webkit-scrollbar {
@@ -1106,6 +1112,28 @@ useRouteMetrics()
   .game-card {
     min-width: 200px;
     max-width: 200px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .games-row {
+    overflow-x: visible;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    justify-content: center;
+    /*flex-wrap: wrap;*/
+    gap: 30px;
+    padding: 30px 0;
+  }
+
+  .game-card {
+    min-width: unset;
+    max-width: 100%;
+  }
+
+  .accessories,
+  .games {
+    max-width: 1200px;
   }
 }
 
