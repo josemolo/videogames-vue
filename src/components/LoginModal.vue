@@ -13,8 +13,8 @@
         <input type="email" v-model="email" required />
       </div>
       <div class="input-group">
+        <label>Contraseña:</label>
         <div class="password-wrapper">
-          <label>Contraseña:</label>
           <input 
             :type="showPassword ? 'text' : 'password'" 
             v-model="password" 
@@ -135,18 +135,19 @@ button:hover {
 
 .password-wrapper {
   position: relative;
-  display: flex;
-  align-items: center;
+  width: 100%;
 }
 
 .password-wrapper input {
   width: 100%;
-  padding-right: 35px;
+  padding-right: 40px;
 }
 
 .toggle-password {
   position: absolute;
-  right: 10px;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
   cursor: pointer;
   font-size: 0.9rem;
   user-select: none;

@@ -84,8 +84,11 @@ useHead({
 */
 
 /* Opcional: reset básico */
-body {
+html, body {
   margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  max-width: 100%;
   font-family: Arial, sans-serif;
 }
 
@@ -94,7 +97,8 @@ body {
   animation: pageIn 0.8s ease forwards;
 }
 
-.fade-slide-leave-active { animation: pageOut 0.5s ease forwards;
+.fade-slide-leave-active { 
+  animation: pageOut 0.5s ease forwards;
   transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
@@ -168,7 +172,13 @@ body {
 
 @media (max-width: 900px) {
   .content {
-    gap: 30px;
+    flex-direction: column;
+    gap: 20px;
+    padding: 0 10px; /* algo de padding para no pegarse a los bordes */
   }
+}
+
+* {
+  box-sizing: border-box;
 }
 </style>

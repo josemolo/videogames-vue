@@ -534,13 +534,17 @@ useRouteMetrics()
 
 .console-detail {
   background: linear-gradient(135deg, #1c1c2f 0%, #0a0a1f 100%);
-  padding: 40px;
+  padding: 40px 20px;
   border-radius: 20px;
   box-shadow: 0 0 30px #bf97ea, 0 0 60px #6d307a;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 30px;
+
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .console-subtitle {
@@ -584,12 +588,11 @@ useRouteMetrics()
 .content {
   display: flex;
   flex-direction: row;
-  align-items: center;
-  gap: 200px;
+  align-items: stretch;
+  gap: 40px;
   flex-wrap: wrap;
   justify-content: center;
-  max-width: 1200px;
-  margin: 0 auto;
+  width: 100%;
 }
 
 .image-section {
@@ -598,7 +601,9 @@ useRouteMetrics()
   align-items: center;
   text-align: center;
   gap: 20px;
-  flex: 1;
+  flex: 1 1 350px;
+  max-width: 500px;
+  
   background: rgba(20,20,40,0.9);
   border-radius: 20px;
   padding: 30px;
@@ -608,7 +613,9 @@ useRouteMetrics()
 }
 
 .console-img {
-  width: 320px;
+  width: 100%;
+  max-width: 320px;
+  height: auto;
   border-radius: 20px;
   box-shadow: 0 0 25px #00ffff, 0 0 40px #6d307a;
   transition: transform 0.4s ease, box-shadow 0.4s ease;
@@ -626,13 +633,17 @@ useRouteMetrics()
 }
 
 .info-section {
+  flex: 1 1 350px;
+  max-width: 600px;
   width: 100%;
-  max-width: 700px;
+  
+  /*
   margin: 0 auto;
+  flex: 1;
+  */
   background: rgba(28, 28, 47, 0.8);
   padding: 30px;
   border-radius: 20px;
-  flex: 1;
   box-shadow: 0 0 20px rgba(127, 92, 255, 0.4);
   /*
   backdrop-filter: blur(10px);
@@ -1133,14 +1144,31 @@ useRouteMetrics()
 @media (max-width: 900px) {
   .content {
     flex-direction: column;
-    align-items: center;
-  }
-  .hero-header {
-    padding: 60px 16px 40px;
+    gap: 25px; /* reducir bastante para móvil */
+    padding: 0 10px; /* algo de padding para no pegarse a los bordes */
+    /*align-items: center;*/
   }
 
+  .console-detail {
+    padding: 30px 15px;
+  }
+
+  .hero-header {
+    padding: 50px 15px 35px;
+  }
+
+  /*
   .hero-subtitle {
     font-size: 1.1rem;
+  }
+  */
+  .price-stock {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .buttons {
+    flex-direction: column;
   }
 }
 

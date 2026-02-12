@@ -2,10 +2,14 @@ html, body, #app {
   margin: 0;
   padding: 0;
   background-color: #0b0b0f;
-  color: rgb(10, 9, 9);
+  /*color: rgb(10, 9, 9);*/
   overflow-x: hidden;
   min-height: 100vh;
   max-width: 100%;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 .reveal {
@@ -17,32 +21,6 @@ html, body, #app {
 .reveal-visible {
   opacity: 1;
   transform: translateY(0);
-}
-
-/* ===== STAGGER BASE ===== */
-.reveal-visible .card {
-  animation: cardReveal 0.6s ease forwards;
-  opacity: 0;
-}
-
-/* Delay automático por posición */
-.reveal-visible .card:nth-child(1) { animation-delay: 0.05s; }
-.reveal-visible .card:nth-child(2) { animation-delay: 0.12s; }
-.reveal-visible .card:nth-child(3) { animation-delay: 0.18s; }
-.reveal-visible .card:nth-child(4) { animation-delay: 0.24s; }
-.reveal-visible .card:nth-child(5) { animation-delay: 0.3s; }
-.reveal-visible .card:nth-child(6) { animation-delay: 0.36s; }
-
-/* Animación */
-@keyframes cardReveal {
-  from {
-    opacity: 0;
-    transform: translateY(20px) scale(0.97);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
 }
 
 
@@ -79,8 +57,4 @@ html, body, #app {
 section {
   content-visibility: auto;
   contain-intrinsic-size: 1000px;
-}
-
-* {
-  box-sizing: border-box;
 }
