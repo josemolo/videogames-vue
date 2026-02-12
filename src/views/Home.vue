@@ -283,7 +283,13 @@
   @keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
 
   /* RESPONSIVE */
-  @media(max-width:600px){
-    .hero-actions{flex-direction:column}
+  @media(max-width:900px){
+    .hero-actions{
+      flex-direction:column
+    }
+    .content {
+    gap: 30px;
+  }
+
   }
   </style>

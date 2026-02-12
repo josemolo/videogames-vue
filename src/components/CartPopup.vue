@@ -61,7 +61,7 @@ const checkoutWhatsApp = () => {
   cart.items.forEach(item => {
     message += `- ${item.name} x ${item.quantity} ($${item.price * item.quantity})\n`
   })
-  
+
   message += `\nTotal: $${cart.totalPrice}`
   const encodedMessage = encodeURIComponent(message)
   const phone = '521234567890' // reemplaza con tu número
@@ -106,12 +106,12 @@ defineExpose({ openCart })
 .cart-items {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 60px;
 }
 
 .cart-item {
   display: flex;
-  gap: 10px;
+  gap: 60px;
   background: #2b2b4d;
   padding: 5px;
   border-radius: 5px;

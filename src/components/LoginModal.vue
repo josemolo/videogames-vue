@@ -13,8 +13,18 @@
         <input type="email" v-model="email" required />
       </div>
       <div class="input-group">
-        <label>Contraseña:</label>
-        <input type="password" v-model="password" required />
+        <div class="password-wrapper">
+          <label>Contraseña:</label>
+          <input 
+            :type="showPassword ? 'text' : 'password'" 
+            v-model="password" 
+            required 
+          />
+          <span class="toggle-password" @click="showPassword = !showPassword">
+            {{ showPassword ? '🙈' : '👁️' }}
+          </span>
+
+        </div>  
       </div>
 
       <button type="submit">{{ isRegistering ? 'Registrar' : 'Iniciar sesión' }}</button>
@@ -38,6 +48,7 @@ const isRegistering = ref(false)
 const username = ref('')
 const email = ref('')
 const password = ref('')
+const showPassword = ref(false)
 
 function toggleForm() {
   isRegistering.value = !isRegistering.value
@@ -120,6 +131,30 @@ button:hover {
 }
 .toggle:hover {
   color: white;
+}
+
+.password-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-wrapper input {
+  width: 100%;
+  padding-right: 35px;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 10px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  user-select: none;
+  opacity: 0.7;
+}
+
+.toggle-password:hover {
+  opacity: 1;
 }
 </style>
 

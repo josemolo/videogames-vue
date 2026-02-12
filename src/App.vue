@@ -166,5 +166,9 @@ body {
 }
 
 
-
+@media (max-width: 900px) {
+  .content {
+    gap: 30px;
+  }
+}
 </style>

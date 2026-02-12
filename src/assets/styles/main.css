@@ -5,6 +5,7 @@ html, body, #app {
   color: rgb(10, 9, 9);
   overflow-x: hidden;
   min-height: 100vh;
+  max-width: 100%;
 }
 
 .reveal {
@@ -78,4 +79,8 @@ html, body, #app {
 section {
   content-visibility: auto;
   contain-intrinsic-size: 1000px;
+}
+
+* {
+  box-sizing: border-box;
 }

@@ -30,6 +30,11 @@ body {
   min-height: 100vh;
 }
 
+html, body {
+  max-width: 100px;
+  overflow-x: hidden;
+}
+
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
@@ -77,3 +82,8 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+* {
+  box-sizing: border-box;
+}
+
