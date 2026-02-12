@@ -397,39 +397,43 @@ h1, h2, h3 {
 }
 
 @media (max-width: 600px) {
+  .full-window {
+    padding: 10px;
+  }  
+
   .window {
-    padding: 20px 10px;
+    padding: 15px 10px;
   }
 
   .row {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 15px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
   }
 
    .console-card {
     width: 100%;
     max-width: 100%;
     flex: unset;
-    padding: 15px;
-    min-height: 200px;
+    padding: 12px;
+    min-height: 190px;
     
     /*aspect-ratio: 1 / 1.2;
     justify-content: center;*/
   }
 
   .console-img {
-    width: 90px;
+    width: 80px;
     /*margin-bottom: 8px;*/
   }
 
   .console-card h3 {
-    font-size: 1rem;
+    font-size: 0.95rem;
     /*margin-bottom: 6px;*/
   }
 
   .console-card p {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     /*line-height: 1.2;*/
   }
 }
