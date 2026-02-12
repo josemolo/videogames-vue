@@ -398,38 +398,39 @@ h1, h2, h3 {
 
 @media (max-width: 600px) {
   .window {
-    padding: 20px 15px;
+    padding: 20px 10px;
   }
 
   .row {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
+    gap: 15px;
   }
 
    .console-card {
-    padding: 12px;
-    min-height: auto;
-    flex: unset;
+    width: 100%;
     max-width: 100%;
+    flex: unset;
+    padding: 15px;
+    min-height: 200px;
     
-    aspect-ratio: 1 / 1.2;
-    justify-content: center;
+    /*aspect-ratio: 1 / 1.2;
+    justify-content: center;*/
   }
 
   .console-img {
-    width: 70px;
-    margin-bottom: 8px;
+    width: 90px;
+    /*margin-bottom: 8px;*/
   }
 
   .console-card h3 {
-    font-size: 0.8rem;
-    margin-bottom: 6px;
+    font-size: 1rem;
+    /*margin-bottom: 6px;*/
   }
 
   .console-card p {
-    font-size: 0.7rem;
-    line-height: 1.2;
+    font-size: 0.85rem;
+    /*line-height: 1.2;*/
   }
 }
 
