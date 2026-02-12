@@ -396,13 +396,40 @@ h1, h2, h3 {
   }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 600px) {
   .window {
     padding: 20px 15px;
   }
 
   .row {
-    gap: 20px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+
+   .console-card {
+    padding: 12px;
+    min-height: auto;
+    flex: unset;
+    max-width: 100%;
+    
+    aspect-ratio: 1 / 1.2;
+    justify-content: center;
+  }
+
+  .console-img {
+    width: 70px;
+    margin-bottom: 8px;
+  }
+
+  .console-card h3 {
+    font-size: 0.8rem;
+    margin-bottom: 6px;
+  }
+
+  .console-card p {
+    font-size: 0.7rem;
+    line-height: 1.2;
   }
 }
 
