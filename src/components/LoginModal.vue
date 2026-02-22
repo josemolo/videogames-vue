@@ -4,11 +4,11 @@
     <h2 v-else>Crear cuenta nueva</h2>
 
     <form @submit.prevent="submit">
-      <div class="input-group">
+      <div class="input-group" v-if="isRegistering">
         <label>Usuario:</label>
         <input v-model="username" required />
       </div>
-      <div class="input-group" v-if="isRegistering">
+      <div class="input-group">
         <label>Email:</label>
         <input type="email" v-model="email" required />
       </div>
@@ -54,36 +54,50 @@ function toggleForm() {
   isRegistering.value = !isRegistering.value
 }
 
-function submit() {
+async function submit() {
   let success = false
 
-  if (isRegistering.value) {
-    userStore.createAccount(username.value, email.value, password.value)
-    success = true
-  } else {
-    success = userStore.login(username.value, password.value)
-    if (!success) {
-      alert('Usuario o contraseña incorrectos')
-      return
+  try {
+    if (isRegistering.value) {
+      success = await userStore.register(email.value, password.value, username.value)
+    } else {
+      success = await userStore.login(email.value, password.value)
+      if (!success) {
+        alert('Usuario o contraseña incorrectos')
+        return
+      }
     }
-  }
 
-   // 🔥 Ejecutar acción pendiente si existe
-  if (userStore.pendingAction) {
-    userStore.pendingAction()
-    userStore.pendingAction = null
-  }
+    if (!success) return
 
-  modalRef.value?.close()
-  // limpiar campos
-  username.value = ''
-  email.value = ''
-  password.value = ''
+    // 🔥 Ejecutar acción pendiente si existe
+    if (userStore.pendingAction) {
+      userStore.pendingAction()
+      userStore.pendingAction = null
+    }
+
+    close()
+
+    /*modalRef.value?.close()*/
+    // limpiar campos
+    username.value = ''
+    email.value = ''
+    password.value = ''
+
+  } catch (error: any) {
+    console.error(error)
+    alert(error.message)
+  }
 }
 
 function open() {
   modalRef.value?.open()
 }
+
+function close() {
+  modalRef.value?.close()
+}
+
 
 /**
  * ✅ ESTO ES LO QUE FALTABA

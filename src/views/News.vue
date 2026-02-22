@@ -61,12 +61,12 @@ const buildArticlesSchema = (items: NewsItem[]) => ({
       "name": "Videogames Store",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://videogames-vue.vercel.app/assets/logo.png"
+        "url": "https://lucycell.vercel.app/assets/logo.png"
       }
     },
     "mainEntityOfPage": {
       "@type": "WebPage",
-      "@id": `https://videogames-vue.vercel.app/news#${item.id}`
+      "@id": `https://lucycell.vercel.app/news#${item.id}`
     }
   }))
 })
@@ -80,13 +80,13 @@ const news = ref<NewsItem[]>([
 
 const loading = ref(true)
 
-const defaultImage = 'https://videogames-vue.vercel.app/assets/news-banner.jpg'
+const defaultImage = 'https://lucycell.vercel.app/assets/news-banner.jpg'
 
 const article = {
   title: "Ultimas Noticias en videojuegos",
   author: "Tu Nombre",
   datePublished: "2026-01-19",
-  image: "https://videogames-vue.vercel.app/assets/news-banner.jpg",
+  image: "https://lucycell.vercel.app/assets/news-banner.jpg",
   description: "Resumen de la noticia para SEO y snippet"
 }
 
@@ -107,12 +107,12 @@ const articlesSchema = computed(() => ({
       name: article.author,
       logo: {
         '@type': 'ImageObject',
-        url: 'https://videogames-vue.vercel.app/assets/logo.png'
-      }
+        url: 'https://lucycell.vercel.app/assets/logo.png'
+      } 
     },
     mainEntityOfPage: {
       '@type': 'WebPage',
-      '@id': `https://videogames-vue.vercel.app/news#${item.id}`
+      '@id': `https://lucycell.vercel.app/news#${item.id}`
     }
   }))
 }))
@@ -167,12 +167,12 @@ useHead(() => ({
         "publisher": {
           "@type": "Organization",
           "name": article.author,
-          "logo": { "@type": "ImageObject", "url": "https://videogames-vue.vercel.app/assets/logo.png" }
+          "logo": { "@type": "ImageObject", "url": "https://lucycell.vercel.app/assets/logo.png" }
         },
         "image": article.image,
         "mainEntityOfPage": {
           "@type": "WebPage",
-          "@id": "https://videogames-vue.vercel.app/news"
+          "@id": "https://lucycell.vercel.app/news"
         }
       })
     },

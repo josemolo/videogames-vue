@@ -17,24 +17,28 @@
       -->
 
       <!-- SECCIONES SIMPLES -->
-  <SectionGrid v-if="games && games.length" title="Juegos Destacados">
-    <Card
-      v-for="game in games"
-      :key="game.id"
-      :id="game.id"  
-      :title="game.title"
-      :description="game.description"
-      :image="game.image"
-      :price="game.price"
-      variant="game"
-      @view="$router.push(`/game/${game.id}`)"
-    />
-  </SectionGrid>
+      <section v-if="games && games.length" class="featured-games" v-reveal>
+        <h2>Juegos Destacados</h2>
+        <div class="carousel-row">
+          <Card
+            v-for="game in games"
+            :key="game.id"
+            :id="game.id"  
+            :title="game.title"
+            :description="game.description"
+            :image="game.image"
+            :price="game.price"
+            variant="game"
+            
+            @buy="handleAddToCart(game)"
+          />
+        </div>  
+      </section>
 
       <!-- PRODUCTOS -->
       <section class="products" v-reveal>
         <h2>Productos Destacados</h2>
-        <div class="product-grid">
+        <div class="carousel-row">
           <Card
             v-for="p in featuredProducts"
             :key="p.id"
@@ -44,6 +48,7 @@
             :description="p.price"
             :price="Number(p.price)"
             variant="product"
+            @buy="handleAddToCart(p)"
           >
             <!--<router-link :to="`/console/${p.id}`" class="product-button primary">Ver producto</router-link>-->
           </Card>
@@ -55,7 +60,7 @@
       <!-- NOTICIAS -->
       <section class="news" v-reveal>
         <h2>Últimas Noticias</h2>
-        <div class="news-grid">
+        <div class="carousel-row">
           <Card
             v-for="n in newsList"
             :key="n.id"
@@ -64,7 +69,7 @@
             :title="n.title"
             :description="n.description"
             variant="news"
-            @view="$router.push(`/news/${n.id}`)"
+            @view="goToNews"
           />
         </div>
       </section>
@@ -83,17 +88,34 @@
       <!-- NEWSLETTER -->
       <section class="newsletter" v-reveal>
         <h2>Suscríbete y recibe ofertas</h2>
-        <div class="newsletter-form">
-          <input type="email" placeholder="Tu correo" />
-          <button class="primary">Suscribirse</button>
-        </div>
+        <form class="newsletter-form" @submit.prevent="handleSubscribe">
+          <input 
+            type="email" 
+            placeholder="Tu correo" 
+            v-model="email" 
+            required 
+          />
+          <button class="newsletter-btn" type="submit" :disabled="loading" >
+            <span v-if="!loading">Suscribirme</span>
+            <span v-else class="spinner"></span>
+          </button>
+        </form>
       </section>
 
       <!-- FOOTER -->
       <footer class="footer">
         <div>© 2025 LucyCell</div>
         <div class="social">
-          <a v-for="s in socials" :key="s" href="#">{{ s }}</a>
+          <a 
+            v-for="s in socials" 
+            :key="s.name" 
+            :href="s.url"
+            target="_blank"
+            rel="noopener noreferrer"
+            @click="trackSocialClick(s.name)"
+          >
+            {{ s.name }}
+          </a>
         </div>
       </footer>
 
@@ -102,6 +124,7 @@
 
 
   <script setup lang="ts">
+  //import { inject } from 'vue'
   import HomeCarousel from '@/components/HomeCarousel.vue'
 
   import { ref, onMounted, onBeforeUnmount, nextTick } from 'vue'
@@ -123,13 +146,18 @@
 
   import { useRouteMetrics } from '@/composables/useRouteMetrics'
 
+  import { useUserStore } from '@/stores/user'
+  import { useCartStore } from '@/stores/cart'
+
+  import { supabase } from '@/lib/supabase'
+
   useRouteMetrics()
 
   useHead({
-    title: 'VortexGames | Consolas, Juegos y Accesorios Gamer',
+    title: 'LucyCell | Consolas, Juegos y Accesorios Gamer',
     meta: [
       { name: 'description', content: 'Bienvenido a Gaming Hub, tu portal de videojuegos.' },
-      { property: 'og:title', content: 'VortexGames | Consolas y Juegos' },
+      { property: 'og:title', content: 'LucyCell | Consolas y Juegos' },
       { property: 'og:description', name: 'description', content: 'Compra consolas, juegos y accesorios gamer con envíos rápidos y precios competitivos.' },
       { property: 'og:image', content: 'https://res.cloudinary.com/usuario/image/upload/banner.jpg'},
       { property: 'og:type', content: 'website' },
@@ -141,10 +169,16 @@
 
   //useHead({ title:'VortexGames | Consolas, Juegos y Accesorios Gamer', meta:[{ name:'description', content:'Compra consolas, juegos y accesorios gamer con envíos rápidos y precios competitivos.' }] })
     
+  const userStore = useUserStore()
+  const cartStore = useCartStore()
+
   const router = useRouter()
 
   const goToShop = () => router.push('/consoles')
   const goToNews = () => router.push('/news')
+
+  const email = ref('')
+  const loading = ref(false)
 
 
   const games = ref([ 
@@ -163,13 +197,13 @@
       price: 89.99
     },
     { 
-      id: 1, 
+      id: 3, 
       title: "Crimson Desert",
       description: "Un mundo abierto lleno de exploración",
       image: "/images/games/crimsondesert.jpg",
       price: 69.99
     }
-]);
+  ]);
 
   const featuredProducts = ref(featuredProductsData)
   const newsList = ref(newsListData)
@@ -190,8 +224,83 @@
     { name:'ProGamer', text:'Gran variedad y precios inmejorables.' }
   ]
 
-  const socials = ['Whatsapp','Instagram','Facebook']
+  const socials = [
+    {
+      name: 'Whatsapp',
+      url: 'https://wa.me/50687469019'
+    },
+    {
+      name: 'Instagram',
+      url: 'https://www.instagram.com/lucycell_kd'
+    },
+    {
+      name: 'Facebook',
+      url: 'https://www.facebook.com/lucycell.reparaciones'
+    }
+  ]
 
+  //const openLoginModal = inject('openLoginModal') as () => void
+
+  declare global {
+    interface Window {
+      gtag: (...args: any[]) => void
+    }
+  }
+
+  async function handleSubscribe() {
+    try {
+      loading.value = true
+
+      const { error } = await supabase
+        .from('leadslucycell')
+        .upsert(
+          [{ email: email.value }],
+          { onConflict: 'email' }
+        )
+
+
+      if (error) throw error
+
+      alert('¡Gracias por suscribirte!')
+      email.value = ''
+
+    } catch (error) {
+      console.error('Error insertando lead:', error)
+      alert('Ocurrió un error.')
+    } finally {
+      loading.value = false
+     }
+  }
+
+  function trackSocialClick(platform: string) {
+    if (window.gtag) {
+      window.gtag('event', 'social_click', {
+        event_category: 'engagement',
+        event_label: platform,
+        page_location: window.location.href
+      })
+    }
+  }
+
+  function handleAddToCart(item: any) {
+    const action = () => {
+      cartStore.addItem({
+        id: item.id,
+        name: item.title ?? item.name,
+        title: item.title ?? item.name,
+        price: Number(item.price) ?? 0,
+        image: item.image ?? '',
+        stock: item.stock ?? 10,
+        type: item.consoleId ? 'game' : 'product'
+      })
+    }
+
+    if (!userStore.isLoggedIn) {
+      userStore.openLoginModal(action)
+    } else {
+      action()
+    }
+  }
 
   let stopParticles: (() => void) | null = null
 
@@ -231,6 +340,53 @@
   *{margin:0;padding:0;box-sizing:border-box}
 
   /* HERO */
+  .carousel-row {
+    display: flex;
+    gap: 16px;
+    /*overflow-x: auto;*/
+    padding-bottom: 10px;
+    padding: 10px 5px 20px;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+
+    justify-content: center; /*CENTRAR EN DESKTOP*/
+  }
+
+  .carousel-row::-webkit-scrollbar {
+    height: 8px;
+  }
+
+  .carousel-row::-webkit-scrollbar-thumb {
+    background: #7f5cff;
+    border-radius: 10px;
+  }
+
+  .carousel-row :deep(.card) {
+    flex: 0 0 200px; /* antes seguro estaba 280 o más */
+    max-width: 200px;
+    transform: scale(0.95);
+  }
+
+  .carousel-row :deep(img) {
+    width: 100%;
+    height: 190px;
+    object-fit: cover;
+    border-radius: 10px;
+    transition: transform 0.4s ease;
+  }
+
+  .carousel-row :deep(.card:hover img) {
+    transform: scale(1.05);
+  }
+
+  .carousel-row > * {
+    flex: 0 0 auto;
+    scroll-snap-align: center;
+    min-width: 250px;
+  }
+
+ 
+
   .hero{position:relative;height:100vh;display:flex;justify-content:center;align-items:center;text-align:center;color:#fff;overflow:hidden;}
   .hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(0.2) contrast(1.1);z-index:-3}
   .hero-overlay{position:absolute;inset:0;background:rgba(0,0,0,0.7);z-index:-2}
@@ -247,7 +403,13 @@
   .particle-canvas{position:fixed;inset:0;z-index:-3;pointer-events:none}
 
   /* SECCIONES */
-  section{padding:4rem 2rem;text-align:center;color:#fff}
+  section {
+    padding:4rem 2rem;
+    text-align:center;
+    color:#fff;
+    max-width: 1400px;  /* 🔥 centra contenido */
+    margin: 0 auto;
+  }
   section h2{font-size:clamp(2rem,5vw,2.5rem);margin-bottom:2rem;color:#7f5cff;text-shadow:0 0 10px #7f5cff;}
 
   /* GRIDS */
@@ -273,14 +435,64 @@
   /* NEWSLETTER */
   .newsletter-form{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;margin-top:1rem}
   .newsletter input{padding:0.8rem 1.2rem;border-radius:8px;border:none;min-width:220px}
+  .newsletter-btn {
+    padding: 0.9rem 2.2rem;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1rem;
+    color: #fff;
+    background: linear-gradient(45deg, #7f5cff, #503ec2);
+    box-shadow: 0 0 20px rgba(127, 92, 255, 0.5);
+    transition: all 0.3s ease;
+    position: relative;
+    min-width: 160px;
+  }
+
+  .newsletter-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 35px rgba(127, 92, 255, 0.9);
+  }
+
+  .newsletter-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+
+  /* Spinner */
+  .spinner {
+    width: 18px;
+    height: 18px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-top: 3px solid white;
+    border-radius: 50%;
+    display: inline-block;
+    animation: spin 0.8s linear infinite;
+  }
 
   /* FOOTER */
   .footer{padding:2rem;text-align:center;background:#000;color:#fff;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap}
-  .footer .social a{margin:0 1rem;color:#7f5cff;text-decoration:none;transition:0.3s}
-  .footer .social a:hover{text-shadow:0 0 10px #7f5cff}
+  .footer .social a {
+    margin:0 1rem;
+    color:#7f5cff;
+    text-decoration:none;
+    transition: all 0.3s ease;
+  }
+
+  .footer .social a:hover {
+    color: #fff;
+    transform: translateY(-3px);
+    text-shadow:0 0 12px #7f5cff}
 
   /* ANIMACIONES */
   @keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+
+  @keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
 
   /* RESPONSIVE */
   @media(max-width:900px){
@@ -288,8 +500,19 @@
       flex-direction:column
     }
     .content {
-    gap: 30px;
+      gap: 30px;
+    }
+
+    .carousel-row > * {
+      min-width: 220px;
+    }
+
   }
 
+  /* Solo permitir scroll cuando sea necesario */
+  @media (min-width: 1024px) {
+    .carousel-row {
+      overflow-x: visible;
+    }
   }
   </style>

@@ -12,7 +12,7 @@ Este proyecto forma parte de mi portafolio profesional y está preparado para se
 ---
 
 ## 🚀 Demo
-🔗 https://videogames-vue.vercel.app
+🔗 https://lucycell.vercel.app 
 
 ---
 

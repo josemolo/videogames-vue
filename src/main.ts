@@ -12,6 +12,8 @@ import reveal from './directives/reveal'
 import { useUserStore } from '@/stores/user'  
 import { useCartStore } from '@/stores/cart'
 
+import { useAuth } from './composables/useAuth'
+
 /* =====================
    SETUP ROUTER HELPERS
 ===================== */
@@ -27,6 +29,8 @@ const pinia = createPinia()
 pinia.use(piniaPluginPersistedstate)
 
 const head = createHead()
+
+
 
 /* =====================
    USE PLUGINS (ORDEN IMPORTANTE)
@@ -45,7 +49,13 @@ app
 const cart = useCartStore()
 
 const userStore = useUserStore()
+await userStore.checkUser()
 const cartStore = useCartStore()
+
+const { getUser } = useAuth()
+getUser()
+
+userStore.checkUser
 
 // 🔐 Controlar carrito según sesión
 if (userStore.isLoggedIn) {

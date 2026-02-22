@@ -8,6 +8,7 @@ const reveal: Directive = {
       ([entry]) => {
         if (!entry) return  // previene warning de TS
         if (entry.isIntersecting) {
+          el.classList.remove('reveal-hidden')
           el.classList.add('reveal-visible')
           observer.disconnect()
         }

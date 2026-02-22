@@ -1,6 +1,6 @@
 <template>
   <div class="full-window">
-    <div class="window console-detail">
+    <div class="console-detail">
       
       <!-- TÍTULO -->
       <!---<h1>{{ selectedConsole?.name }}</h1>-->
@@ -54,7 +54,7 @@
 
           <div class="price-stock">
             <div class="price-main">
-              <span class="currency">$</span>
+              <span class="currency">₡</span>
               <span class="amount">
                 {{ selectedConsole.price.toLocaleString() }}
               </span>
@@ -144,7 +144,7 @@
 
             <div class="game-footer">
               <span class="game-price">
-                $ {{ a.price.toLocaleString() }}
+                ₡ {{ a.price.toLocaleString() }}
               </span>
               <span 
                 class="game-stock"
@@ -206,7 +206,7 @@
 
               <div class="game-footer">
                 <span class="game-price">
-                  $ {{ game.price.toLocaleString() }}
+                  ₡ {{ game.price.toLocaleString() }}
                 </span>
                 <span 
                   class="game-stock"
@@ -310,11 +310,6 @@ function requireLogin(action?: () => void) {
     return false
   }
 
-  if (!user.isVerified) {
-    router.push('/verify-required')
-    return false
-  }
-
   return true
 }
 
@@ -323,14 +318,13 @@ function addConsoleToCart() {
 
   const action = () => {
     cart.addItem({
-      id: Number(selectedConsole.value!.id),
+      id: selectedConsole.value!.id,
       name: selectedConsole.value!.name,
       title: selectedConsole.value!.name,
       price: selectedConsole.value!.price ?? 0,
       image: selectedConsole.value!.image,
       stock: selectedConsole.value!.stock ?? 0,
       type: 'console',
-      quantity: 1
     })
   }
 
@@ -344,14 +338,13 @@ function addGameToCart(game: GameItem) {
 
   const action = () => {
     cart.addItem({
-      id: Number(game.id),
+      id: game.id.toString(),
       name: game.name,
       title: game.name,
       price: game.price ?? 0,
       image: game.image,
       stock: game.stock ?? 0,
       type: 'game',
-      quantity: 1 // ✅ necesario
     })
   
 
@@ -369,14 +362,13 @@ function addAccessoryToCart(accessory: AccessoryItem) {
 
   const action = () => {
     cart.addItem({
-      id: Number(accessory.id),
+      id: accessory.id.toString(),
       name: accessory.name,
       title: accessory.name,
       price: accessory.price ?? 0,
       image: accessory.image,
       stock: accessory.stock ?? 0,
       type: 'accessory',
-      quantity: 1
     })
 
     addedAccessoryId.value = accessory.id
@@ -429,6 +421,11 @@ useRouteMetrics()
 </script>
 
 <style scoped>
+.full-window {
+  min-height: 100vh;
+  padding: 20px;
+  box-sizing: border-box;
+}
 
 .add-cart {
   width: 100%;
@@ -470,8 +467,8 @@ useRouteMetrics()
 .hero-header {
   position: relative;
   width: 100%;
-  padding: 80px 20px 60px;
-  margin-bottom: 40px;
+  padding: 50px 20px 40px;
+  margin-bottom: 30px;
   text-align: center;
 
   background:
@@ -534,7 +531,7 @@ useRouteMetrics()
 
 .console-detail {
   background: linear-gradient(135deg, #1c1c2f 0%, #0a0a1f 100%);
-  padding: 40px 20px;
+  padding: 30px;
   border-radius: 20px;
   box-shadow: 0 0 30px #bf97ea, 0 0 60px #6d307a;
   display: flex;
@@ -1088,11 +1085,11 @@ useRouteMetrics()
   }
 
   .console-detail {
-    padding: 30px 15px;
+    padding: 20px 15px;
   }
 
   .hero-header {
-    padding: 50px 15px 35px;
+    padding: 35px 15px 25px;
   }
 
   /*

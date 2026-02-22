@@ -5,7 +5,7 @@
     <section class="hero">
       <div class="hero-content"></div>
         <h1>{{ console.name }}</h1>
-        <img :src="console.image" :alt="console.name" class="hero-image" />
+        <img :src="getImage(console.image)" :alt="console.name" class="hero-image" />
         <p class="subtitle">{{ console.subtitle }}</p>
 
         <button class="cta" @click="consultar">
@@ -64,6 +64,10 @@ function volver() {
 
 function consultar() {
   alert('Consulta de disponibilidad')
+}
+
+function getImage(path: string) {
+  return new URL(path, import.meta.url).href
 }
 
 // Tomamos Nintendo desde el JSON

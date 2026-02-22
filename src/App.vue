@@ -10,6 +10,7 @@
       <!--<router-view />--> 
       <!--</transition>-->
     </router-view>    
+    <LoginModal ref="loginModalRef" />
      <!-- 🔐 LOGIN MODAL GLOBAL -->
     <!--
     <div
@@ -27,6 +28,8 @@
 </template>
 
 <script setup lang="ts">
+import { provide, ref, onMounted } from 'vue'
+import LoginModal from './components/LoginModal.vue'
 import { useUserStore } from '@/stores/user'
 import Login from '@/views/Login.vue'
 
@@ -36,9 +39,24 @@ import Navbar from './components/Navbar.vue'
 
 import { useHead } from '@vueuse/head'
 
+import { useAuth } from './composables/useAuth'
+
 //const route = useRoute()
 
+const loginModalRef = ref()
 const user = useUserStore()
+
+const { getUser } = useAuth()
+
+getUser()
+
+provide('openLoginModal', () => {
+  loginModalRef.value?.open()
+})
+
+onMounted(() => {
+  user.setLoginModalRef(loginModalRef.value)
+})
 
 useHead({
   meta: [

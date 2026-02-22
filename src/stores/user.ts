@@ -1,131 +1,134 @@
 import { defineStore } from 'pinia'
+import { supabase } from '@/lib/supabase'
 import { useCartStore } from './cart'
-
-
-
-export interface User {
-  username: string
-  email?: string
-  isVerified?: boolean
-}
 
 export const useUserStore = defineStore('user', {
   state: () => ({
-    user: null as User | null,
+    user: null as any,
     isLoggedIn: false,
     isVerified: false,
-    
-    showLoginModal: false, // 👈 NUEVO
-    pendingAction: null as null | (() => void), // 👈 opcional (pro)
+    showLoginModal: false,
+    pendingAction: null as (() => void) | null,
     loginModalRef: null as any
   }),
-
-   getters: {
-    userisVerified: (state) => !!state.user?.isVerified,
-  },
 
   actions: {
     setLoginModalRef(ref: any) {
       this.loginModalRef = ref
     },
 
-    login(username: string, password: string) {
-      // 🔐 demo simple (luego se puede conectar a backend)
-      const saved = localStorage.getItem('vortex_user')
+    
+    markVerified() {
+      this.isVerified = true
+    },
 
-      if (!saved) return false
+    async register(email: string, password: string, username: string) {
+      try {      
+        const { data, error } = await supabase.auth.signUp({
+            email,
+            password
+        })
 
-      const parsed = JSON.parse(saved)
-
-      if (
-        parsed.username === username &&
-        parsed.password === password
-      ) {
-        this.user = {
-          username: parsed.username,
-          email: parsed.email,
-          isVerified: true // 🔐 aún no verificado
+        if (error) throw error
+        if (!data.user) throw new Error('No se pudo crear el usuario') 
+            
+        const { error: profileError } = await supabase
+            .from('profiles')
+            .insert({
+                id: data.user.id,
+                username: username
+            })
+        
+        if (profileError) {
+            console.error('Error creando profile:', profileError.message)
         }
-        this.isLoggedIn = true
-        this.isVerified = true
-        this.showLoginModal = false 
 
-        // 🔥 ejecutar acción pendiente
+        this.user = data.user
+        this.isLoggedIn = true
+        this.isVerified = !!data.user.email_confirmed_at
+        /*this.showLoginModal = false*/
+
+        alert('Cuenta creada. Revisa tu correo para confirmar tu email.')
+        return true
+
+      } catch (error: any) {
+        alert(error.message)
+        return false
+      }
+    },  
+
+    async login(email: string, password: string) {
+      try {
+        const { data, error } = await supabase.auth.signInWithPassword({
+            email,
+            password
+        })
+
+        if (error) throw error 
+
+        if (!data.user) return false
+        
+        this.user = data.user
+        this.isLoggedIn = true
+        this.isVerified = !!data.user.email_confirmed_at    
+        this.showLoginModal = false
+
         if (this.pendingAction) {
             this.pendingAction()
             this.pendingAction = null
         }
 
-        alert(`¡Bienvenido de nuevo, ${username}!`)
         return true
-      }
-
-      return false
-    },
-
-    openLoginModal(action?: () => void) {
-        if (action) {
-            this.pendingAction = action
-        }
         
-        if (this.loginModalRef) {
-            this.loginModalRef.open()
-        }
-        this.showLoginModal = true
+      } catch (error: any) {
+        alert(error.message)
+        return false
+      }
+    },  
+
+    async checkUser() {
+      const { data } = await supabase.auth.getUser()
+
+      if (data.user) {
+        this.user = data.user
+        this.isLoggedIn = true
+        this.isVerified = !!data.user.email_confirmed_at
+      }
     },
 
-    closeLoginModal() {
-        if (this.loginModalRef) {
-            this.loginModalRef.close()
-        }
+    async logout() {
+      await supabase.auth.signOut()
 
-        this.pendingAction = null
-    },
-
-    createAccount(username: string, email: string, password: string) {
-      localStorage.setItem(
-        'vortex_user',
-         JSON.stringify({ username, email, password })
-      
-      )
-
-      this.user = { username, email, isVerified: true }
-      this.isLoggedIn = true
-      this.isVerified = true
-      this.showLoginModal = false
-
-      alert(`¡Cuenta Creada! Bienvenido ${username}.`)
-      //AQUI LUEDO PODRIAS ENVIAR UN CORREO REAL    
-    },
-
-    logout() {
       this.user = null
       this.isLoggedIn = false
       this.isVerified = false
-      this.showLoginModal = false
       this.pendingAction = null
 
-       // 🧹 limpiar carrito al cerrar sesión
       const cart = useCartStore()
       cart.clearCart()
     },
 
-    markVerified() {
-        this.isVerified = true
-        if (this.user) {
-            this.user.isVerified = true
-      }
+
+
+    openLoginModal(action?: () => void) {
+      if (action) this.pendingAction = action
+      if (this.loginModalRef) this.loginModalRef.open()
+      this.showLoginModal = true
     },
-    
+
+    async forgotPassword(email: string) {
+        const { error } = await supabase.auth.resetPasswordForEmail(email)
+
+        if (error) {
+            alert(error.message)
+        } else {
+            alert('Correo de recuperación enviado.')
+        }
+    },
 
     forgotUsername() {
-      alert('Contacta soporte para recuperar tu usuario')
-    },
-
-    forgotPassword() {
-      alert('Contacta soporte para recuperar tu contraseña')
+        alert('Por favor contacta soporte para recuperar tu')
     }
-  },
-
-  persist: true
+  }
 })
+

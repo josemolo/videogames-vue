@@ -3,24 +3,24 @@
     "id": 1,
     "name": "PlayStation 5",
     "price": "550",
-    "image": "/images/products/ps5.jpg"
+    "image": "/images/products/ps5.png"
   },
   {
     "id": 2,
     "name": "Xbox Series X",
     "price": "615",
-    "image": "images/products/xboxx.jpg"
+    "image": "/images/products/xboxx.png"
   },
   {
     "id": 3,
     "name": "Nintendo Switch",
     "price": "380",
-    "image": "images/products/swift.jpg"
+    "image": "/images/products/switch.png"
   },
   {
     "id": 4,
     "name": "Oculus Quest",
     "price": "445",
-    "image": "images/products/oculus.jpg"
+    "image": "/images/products/oculus.png"
   }
 ]

@@ -16,8 +16,8 @@
     <!--
     <p class="card-price">${{ price.toFixed(2) }}</p>
     -->
-    <p class="card-price" v-if="price !== undefined">${{ price }}</p>
-    <p class="card-price" v-else>Precio no disponible</p>
+    <p class="card-price" v-if="price !== undefined">₡{{ price }}</p>
+    <p class="card-price" v-else></p>
 
     <!--
     <button @click="$emit('buy')">Agregar</button>
@@ -55,8 +55,7 @@
     </button>
     
 
-    <button v-if="button" @click="$emit('buy')">{{ button }}</button>
-    <slot></slot>
+    <!--<button v-if="button" @click="$emit('add-to-cart')">{{ button }}</button>-->
   
   </article>
 </template>
@@ -64,13 +63,13 @@
 <script setup lang="ts">
 
 import { ref } from 'vue'  //onMounted, onBeforeUnmount
-import { useRouter } from 'vue-router'
+//import { useRouter } from 'vue-router'
 
-import { useUserStore } from '@/stores/user'
-import { useCartStore } from '@/stores/cart'
+//import { useUserStore } from '@/stores/user'
+//import { useCartStore } from '@/stores/cart'
 
-const router = useRouter()
-const user = useUserStore()
+//const router = useRouter()
+//const user = useUserStore()
 
 /* =====================
    PROPS
@@ -83,7 +82,7 @@ const props = defineProps<{
   price?: number
   variant: 'product' | 'game' | 'news'
   stock?: number
-  button?: string
+  /*button?: string*/
 }>()
 
 /* =====================
@@ -97,33 +96,17 @@ const emit = defineEmits<{
 /* =====================
    STATE
 ===================== */
-const cart = useCartStore()
+//const cart = useCartStore()
 const added = ref(false)
-const cardRef = ref<HTMLElement | null>(null)
+//const cardRef = ref<HTMLElement | null>(null)
 
 /* =====================
    ACTIONS
 ===================== */
 const handleBuy = () => {
-  if (!user.isVerified) {
-    router.push('/login')
-    return
-  }
-
-  cart.addItem({ 
-    id: props.id,
-    name: props.title,
-    title: props.title,
-    price: props.price ?? 0,
-    image: props.image,
-    quantity: 1,
-    type: props.variant === 'game' ? 'game' : 'accessory',
-    stock: props.stock ?? 0
-  })
-
-  added.value = true
   emit('buy')
 
+  added.value = true
   setTimeout(() => {
     added.value = false
   }, 800)
@@ -171,20 +154,34 @@ const handleBuy = () => {
   color: white;
   text-align: center;
   position: relative;
+  z-index: 1;
   overflow: hidden;
-  transition: 
-    all 0.6s ease,
-    transform 0.6s ease,
+  transition: all 0.6s ease;
+    /*transform 0.6s ease,
     box-shadow 0.5s ease,
     opacity 0.6s ease;
   opacity: 0;
   transform: translateY(20px) scale(0.97);
-  will-change: transform, opacity;
+  will-change: transform, opacity;*/
 }
 
 .card.reveal-visible {
   opacity: 1;
   transform: translateY(0) scale(1);
+}
+
+/* Estado inicial */
+.reveal-hidden {
+  opacity: 0;
+  transform: translateY(20px) scale(0.97);
+  /*pointer-events: none;    🔥 bloquea mientras está oculto */
+}
+
+/* Estado visible */
+.reveal-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  /*pointer-events: auto;   /* 🔥 vuelve a permitir clicks */
 }
 
 /*animation: fadeInUp 0.6s ease forwards;*/
@@ -195,18 +192,6 @@ const handleBuy = () => {
   transform: translateY(0) scale(1);
 }
 */
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
 
 .card:hover {
   transform: translateY(-10px) scale(1.02);
@@ -225,6 +210,7 @@ const handleBuy = () => {
   );
   opacity: 0;
   transition: opacity 0.4s ease;
+  pointer-events: none;   /* 🔥 ESTA ES LA CLAVE */
 }
 
 .card:hover::before {
@@ -275,7 +261,7 @@ button {
   color: white;
   border-radius: 10px;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  /*transition: background-color 0.3s ease, transform 0.2s ease;*/
 }
 
 button:hover {
@@ -296,6 +282,20 @@ button:active {
   color: white;
   border-radius: 10px;
   cursor: pointer;
+  pointer-events: auto;
+  position: relative;
+  z-index: 2;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes cardEnter {

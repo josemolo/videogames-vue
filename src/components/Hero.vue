@@ -183,6 +183,7 @@ onUnmounted(() => {
   inset: 0;
   background: rgba(0,0,0,0.7);
   z-index: -2;
+  pointer-events: none;
 }
 
 .hero-content {

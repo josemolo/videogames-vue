@@ -19,12 +19,15 @@
         <span></span><span></span><span></span><span></span><span></span>
       </div>
 
-      <form class="register-form" @submit="handleRegister">
+      <form class="register-form" @submit.prevent="handleRegister">
         <input v-model="username" type="text" placeholder="User name" />
         <input v-model="email" type="email" placeholder="Email" />
         <input v-model="password" type="password" placeholder="Password" />
         <input v-model="confirmPassword" type="password" placeholder="Confirm Password" />
-        <button type="submit">Register</button>
+        <button>
+          <span v-if="!loading">Registrar</span>
+          <span v-else class="spinner"></span>
+        </button>
       </form>
 
       <!-- Barras de energía animadas -->
@@ -47,59 +50,21 @@
   </div>
 </template>
 
-<script setup lang="ts">
-import { ref, onMounted } from 'vue'
+<<script setup lang="ts">
+import { ref } from 'vue'
 import { useRouter } from 'vue-router'
+import { useUserStore } from '@/stores/user'
 
 const router = useRouter()
+const userStore = useUserStore()
 
 const username = ref('')
 const email = ref('')
 const password = ref('')
 const confirmPassword = ref('')
+const loading = ref(false)
 
-const particlesGlobal = ref<HTMLElement[]>([])
-const particlesContainer = ref<HTMLElement[]>([])
-
-onMounted(() => {
-  particlesGlobal.value = Array.from(
-    document.querySelectorAll('.particles-global span')
-  ) as HTMLElement[]
-
-  particlesContainer.value = Array.from(
-    document.querySelectorAll('.particles-container span')
-  ) as HTMLElement[]
-
-  // Movimiento de partículas global
-  window.addEventListener('mousemove', (e) => {
-    const mouseX = e.clientX
-    const mouseY = e.clientY
-
-    particlesGlobal.value.forEach((p, index) => {
-      const speed = 0.04 + index * 0.01
-      const rect = p.getBoundingClientRect()
-      const dx = mouseX - (rect.left + rect.width / 2)
-      const dy = mouseY - (rect.top + rect.height / 2)
-      p.style.transform = `translate(${-dx * speed}px, ${-dy * speed}px)`
-    })
-  })
-
-  // Partículas internas al escribir
-  const inputs = document.querySelectorAll('.register-form input')
-  inputs.forEach(input => {
-    input.addEventListener('input', () => {
-      particlesContainer.value.forEach((p) => {
-        const offsetX = (Math.random() - 0.5) * 20
-        const offsetY = (Math.random() - 0.5) * 20
-        const scale = 0.5 + Math.random() * 1
-        p.style.transform = `translate(${offsetX}px, ${offsetY}px) scale(${scale})`
-        setTimeout(() => { p.style.transform = '' }, 300)
-      })
-    })
-  })
-})
-
-const handleRegister = (e: Event) => {
+async function handleRegister(e: Event) {
   e.preventDefault()
 
   if (!username.value || !email.value || !password.value || !confirmPassword.value) {
@@ -112,10 +77,25 @@ const handleRegister = (e: Event) => {
     return
   }
 
-  alert('Usuario creado exitosamente!')
-  router.push('/library')
+  try {
+    loading.value = true
+
+    const success = await userStore.register(
+      email.value,
+      password.value,
+      username.value
+    )
+
+    if (success) {
+      router.push('/')
+    }
+
+  } finally {
+    loading.value = false
+  }
 }
 </script>
+
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
