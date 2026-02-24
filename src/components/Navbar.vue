@@ -425,6 +425,8 @@ onBeforeUnmount(() => {
 
   z-index: 200;
  
+
+  white-space: nowrap;
 }
 
 .nav.open {
@@ -499,16 +501,21 @@ onBeforeUnmount(() => {
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 768px) {
+  .header {
+    overflow: hidden;
+  }
+
   .nav {
-    position: fixed;
+    /*position: fixed;*/
     top: 70px; /* altura header */
     left: 0;
 
     width: 100%;
-    max-width: 100vw;
+    max-width: calc(100vw - 120px);
+    overflow: hidden;
 
-    flex-direction: column;
+    /*flex-direction: column;*/
     gap: 18px;
 
     padding: 12px 20px;
