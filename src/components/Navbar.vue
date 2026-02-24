@@ -194,19 +194,17 @@ onBeforeUnmount(() => {
 
  /* 🔥 CONTROL MÓVIL SIN CAMBIAR DISEÑO */
  @media (max-width: 480px) {
-  /*
-    .header {
+  
+  .header {
       overflow-x: hidden;
     }
 
-    .nav {
-      max-width: calc(100vw - 120px);
-      overflow: hidden;
-    }
-  */
+  
    .nav {
     gap: 18px;
     padding: 12px 18px;
+    max-width: calc(100vw - 120px);
+    overflow: hidden;
   }
 
   .nav-link {
