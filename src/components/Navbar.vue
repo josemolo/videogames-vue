@@ -139,6 +139,9 @@ onBeforeUnmount(() => {
 
 
 <style>
+ body {
+    overflow-x: hidden;
+  }
  .user-dropdown { position: relative; } 
  .user-button { display: flex; align-items: center; gap: 2px; padding: 8px 14px; border-radius: 30px; border: 1px solid rgba(127, 92, 255, 0.4); background: rgba(31, 31, 61, 0.6); backdrop-filter: blur(10px); cursor: pointer; transition: all 0.3s ease; } 
  /* Icono circular */ 
@@ -189,5 +192,29 @@ onBeforeUnmount(() => {
  @keyframes glow { 0% { background-position: 0% } 100% { background-position: 200% } } /* Animación suave */ 
  @keyframes pulseGreen { 0% { box-shadow: 0 0 8px rgba(0,255,157,0.6), 0 0 16px rgba(0,255,157,0.3); } 50% { box-shadow: 0 0 16px rgba(0,255,157,1), 0 0 32px rgba(0,255,157,0.6); } 100% { box-shadow: 0 0 8px rgba(0,255,157,0.6), 0 0 16px rgba(0,255,157,0.3); } }
 
+ @media (min-width: 768px) {
+    .nav {
+    position: fixed;
+    top: 70px; /* altura header */
+    left: 0;
 
+    width: 100%;
+    max-width: 100vw;
+
+    flex-direction: column;
+    gap: 20px;
+
+    padding: 20px;
+
+    transform: scaleY(0);
+    transform-origin: top;
+
+    border-radius: 0;
+    z-index: 999;
+  }
+
+  .nav.open {
+    transform: scaleY(1);
+  }
+  }
 </style>
