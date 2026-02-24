@@ -201,14 +201,14 @@ onBeforeUnmount(() => {
 
   
    .nav {
-    gap: 18px;
-    padding: 12px 18px;
+    gap: 14px;
+    padding: 10px 14px;
     max-width: calc(100vw - 120px);
     overflow: hidden;
   }
 
   .nav-link {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
   }
  }
 
