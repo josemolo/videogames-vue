@@ -499,7 +499,7 @@ onBeforeUnmount(() => {
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 480px) {
   .nav {
     position: fixed;
     top: 70px; /* altura header */
@@ -509,9 +509,9 @@ onBeforeUnmount(() => {
     max-width: 100vw;
 
     flex-direction: column;
-    gap: 20px;
+    gap: 18px;
 
-    padding: 20px;
+    padding: 12px 20px;
 
     transform: scaleY(0);
     transform-origin: top;
@@ -522,6 +522,10 @@ onBeforeUnmount(() => {
 
   .nav.open {
     transform: scaleY(1);
+  }
+
+  .nav-link {
+    font-size: 0.85rem;
   }
 }
 </style>
