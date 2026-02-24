@@ -193,8 +193,8 @@ onBeforeUnmount(() => {
  @keyframes pulseGreen { 0% { box-shadow: 0 0 8px rgba(0,255,157,0.6), 0 0 16px rgba(0,255,157,0.3); } 50% { box-shadow: 0 0 16px rgba(0,255,157,1), 0 0 32px rgba(0,255,157,0.6); } 100% { box-shadow: 0 0 8px rgba(0,255,157,0.6), 0 0 16px rgba(0,255,157,0.3); } }
 
  /* 🔥 CONTROL MÓVIL SIN CAMBIAR DISEÑO */
- @media (max-width: 768px) {
-
+ @media (max-width: 480px) {
+  /*
     .header {
       overflow-x: hidden;
     }
@@ -203,7 +203,15 @@ onBeforeUnmount(() => {
       max-width: calc(100vw - 120px);
       overflow: hidden;
     }
+  */
+   .nav {
+    gap: 18px;
+    padding: 12px 18px;
+  }
 
+  .nav-link {
+    font-size: 0.85rem;
+  }
  }
 
  /*@media (min-width: 768px) {
