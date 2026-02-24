@@ -177,7 +177,7 @@ onBeforeUnmount(() => {
  .hamburger.active span { background: #00ffe0; box-shadow: 0 0 8px rgba(0,255,224,0.9), 0 0 16px rgba(0,255,224,0.6); transform: scaleX(0.85); } 
  .menu-hamburger { position: relative; display: flex; align-items: center; margin-top: 6px; /* 👈 baja ligeramente el botón */ } 
  /* Menú desplegable */ 
- .nav { position: absolute; left: 45px; top: 50%; transform: translateY(-50%) scaleX(0); transform-origin: left; display: flex; flex-direction: row; gap: 30px; padding: 14px 28px; background: rgba(31, 31, 61, 0.95); border: 1px solid #4349a3; border-radius: 14px; backdrop-filter: blur(12px); transition: transform 0.4s cubic-bezier(0.77, 0, 0.18, 1); } 
+ .nav { position: absolute; left: 45px; top: 50%; transform: translateY(-50%) scaleX(0); transform-origin: left; display: flex; flex-direction: row; gap: 30px; padding: 14px 28px; background: rgba(31, 31, 61, 0.95); border: 1px solid #4349a3; border-radius: 14px; backdrop-filter: blur(12px); transition: transform 0.4s cubic-bezier(0.77, 0, 0.18, 1); white-space: nowrap; /* 🔥 CLAVE */ } 
  .nav.open { transform: translateY(-50%) scaleX(1); /* suficiente para mostrar todos los links */ } 
  /* Animación escalonada */ 
  .nav-link { opacity: 0; transform: translateX(-10px); transition: all 0.3s ease; color: #7f5cff; font-family: 'Orbitron', sans-serif; text-decoration: none; letter-spacing: 1px; } 
@@ -191,6 +191,20 @@ onBeforeUnmount(() => {
  .nav-link:hover::after { width: 100%; } 
  @keyframes glow { 0% { background-position: 0% } 100% { background-position: 200% } } /* Animación suave */ 
  @keyframes pulseGreen { 0% { box-shadow: 0 0 8px rgba(0,255,157,0.6), 0 0 16px rgba(0,255,157,0.3); } 50% { box-shadow: 0 0 16px rgba(0,255,157,1), 0 0 32px rgba(0,255,157,0.6); } 100% { box-shadow: 0 0 8px rgba(0,255,157,0.6), 0 0 16px rgba(0,255,157,0.3); } }
+
+ /* 🔥 CONTROL MÓVIL SIN CAMBIAR DISEÑO */
+ @media (max-width: 768px) {
+
+    .header {
+      overflow-x: hidden;
+    }
+
+    .nav {
+      max-width: calc(100vw - 120px);
+      overflow: hidden;
+    }
+
+ }
 
  @media (min-width: 768px) {
     .nav {
