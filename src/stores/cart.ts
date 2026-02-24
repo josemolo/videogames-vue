@@ -27,7 +27,7 @@ export const useCartStore = defineStore('cart', {
       if (item.stock <= 0) return
 
   // Buscar si ya existe el producto
-      const existingItem = this.items.find(i => i.id === item.id)
+      const existingItem = this.items.find(i => i.id === item.id && i.type === item.type)
 
       if (existingItem) {
         if (existingItem.quantity < existingItem.stock) {

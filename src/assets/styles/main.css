@@ -44,6 +44,19 @@ html, body, #app {
 .reveal-visible .card:nth-child(5) { animation-delay: 0.3s; }
 .reveal-visible .card:nth-child(6) { animation-delay: 0.36s; }
 
+.card {
+  opacity: 0;
+}
+
+section {
+  content-visibility: auto;
+  contain-intrinsic-size: 1000px;
+}
+
+
+
+
+
 /* Animación */
 @keyframes cardReveal {
   from {
@@ -56,11 +69,12 @@ html, body, #app {
   }
 }
 
-.card {
-  opacity: 0;
+@keyframes pulseAdd {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+  100% { transform: scale(1); }
 }
 
-section {
-  content-visibility: auto;
-  contain-intrinsic-size: 1000px;
-}
+
+
+

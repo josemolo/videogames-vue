@@ -5,7 +5,7 @@
     <section class="hero">
       <div class="hero-content"></div>
         <h1>{{ console.name }}</h1>
-        <img :src="getImage(console.image)" :alt="console.name" class="hero-image" />
+        <img :src="console.image" :alt="console.name" class="hero-image" />
         <p class="subtitle">{{ console.subtitle }}</p>
 
         <button class="cta" @click="consultar">

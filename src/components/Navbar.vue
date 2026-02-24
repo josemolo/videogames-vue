@@ -490,6 +490,32 @@ onBeforeUnmount(() => {
       0 0 16px rgba(0,255,157,0.3);
   }
 }
+
+@media (max-width: 768px) {
+  .nav {
+    position: fixed;
+    top: 70px; /* altura header */
+    left: 0;
+
+    width: 100%;
+    max-width: 100vw;
+
+    flex-direction: column;
+    gap: 20px;
+
+    padding: 20px;
+
+    transform: scaleY(0);
+    transform-origin: top;
+
+    border-radius: 0;
+    z-index: 999;
+  }
+
+  .nav.open {
+    transform: scaleY(1);
+  }
+}
 </style>
 
 

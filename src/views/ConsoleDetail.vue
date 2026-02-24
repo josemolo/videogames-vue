@@ -93,10 +93,12 @@
              <!-- 🟢 BOTÓN AGREGAR CONSOLA -->
             <button
               class="add-cart"
+              :class="{ added: addedConsole }"
               :disabled="selectedConsole.stock === 0"
               @click="addConsoleToCart"
             >
-              Agregar al carrito
+              <span v-if="addedConsole">Agregado ✓</span>
+              <span v-else>Agregar al carrito</span>
             </button>
 
 
@@ -287,6 +289,8 @@ const consoleId = route.params.id as string
 const cart = useCartStore()
 const user = useUserStore()
 
+const addedConsole = ref(false)
+
 const addedGameId = ref<number | null>(null)
 const addedAccessoryId = ref<number | null>(null)
 
@@ -326,6 +330,9 @@ function addConsoleToCart() {
       stock: selectedConsole.value!.stock ?? 0,
       type: 'console',
     })
+
+    addedConsole.value = true
+    setTimeout(() => (addedConsole.value = false), 1200)
   }
 
   if (!requireLogin(action)) return
@@ -429,8 +436,8 @@ useRouteMetrics()
 
 .add-cart {
   width: 100%;
-  margin-top: 10px;
-  padding: 8px;
+  margin-top: 0px;
+  padding: 10px;
   border-radius: 12px;
   background: linear-gradient(135deg, #00ffff, #7f5cff);
   color: #000;
@@ -751,6 +758,7 @@ useRouteMetrics()
   color: #ff6b6b;
   box-shadow: 0 0 12px rgba(255,107,107,0.5);
 }
+
 
 .features-list {
   list-style: none;

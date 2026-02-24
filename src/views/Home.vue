@@ -17,7 +17,7 @@
       -->
 
       <!-- SECCIONES SIMPLES -->
-      <section v-if="games && games.length" class="featured-games" v-reveal>
+      <section class="featured-games"> <!--v-if="games && games.length"--> <!--v-reveal-->
         <h2>Juegos Destacados</h2>
         <div class="carousel-row">
           <Card
@@ -29,7 +29,7 @@
             :image="game.image"
             :price="game.price"
             variant="game"
-            
+            :added="addedGameId === game.id"
             @buy="handleAddToCart(game)"
           />
         </div>  
@@ -42,12 +42,13 @@
           <Card
             v-for="p in featuredProducts"
             :key="p.id"
-            :id="p.id"
+            :id="Number(p.id)"
             :image="p.image"
             :title="p.name"
             :description="p.price"
             :price="Number(p.price)"
             variant="product"
+            :added="addedProductId === Number(p.id)"
             @buy="handleAddToCart(p)"
           >
             <!--<router-link :to="`/console/${p.id}`" class="product-button primary">Ver producto</router-link>-->
@@ -177,6 +178,9 @@
   const goToShop = () => router.push('/consoles')
   const goToNews = () => router.push('/news')
 
+  const addedGameId = ref<number | null>(null)
+  const addedProductId = ref<number | null>(null)
+
   const email = ref('')
   const loading = ref(false)
 
@@ -187,21 +191,21 @@
       title: "Screamer",
       description: "Juego de broma aparentemente inofensivo.",
       image: "/images/games/screamergame.jpg",
-      price: 59.99
+      price: 59
     },
     { 
       id: 2, 
       title: "Grand Theft Auto lV",
       description: "Vive los desafios de una ciudad virtual.",
       image: "/images/games/gtaciudad.jpg",
-      price: 89.99
+      price: 89
     },
     { 
       id: 3, 
       title: "Crimson Desert",
       description: "Un mundo abierto lleno de exploración",
       image: "/images/games/crimsondesert.jpg",
-      price: 69.99
+      price: 69
     }
   ]);
 
@@ -272,6 +276,7 @@
      }
   }
 
+
   function trackSocialClick(platform: string) {
     if (window.gtag) {
       window.gtag('event', 'social_click', {
@@ -284,16 +289,28 @@
 
   function handleAddToCart(item: any) {
     const action = () => {
+      const isGame = !!item.title
+
       cartStore.addItem({
-        id: item.id,
+        id: item.id.toString(),
         name: item.title ?? item.name,
         title: item.title ?? item.name,
         price: Number(item.price) ?? 0,
         image: item.image ?? '',
         stock: item.stock ?? 10,
-        type: item.consoleId ? 'game' : 'product'
+        type: isGame ? 'game' : 'product'
       })
+
+       // 🔥 Activar animación correcta
+    if (isGame) {
+      addedGameId.value = item.id
+      setTimeout(() => (addedGameId.value = null), 1200)
+    } else {
+      addedProductId.value = item.id
+      setTimeout(() => (addedProductId.value = null), 1200)
     }
+    }
+
 
     if (!userStore.isLoggedIn) {
       userStore.openLoginModal(action)
@@ -343,13 +360,15 @@
   .carousel-row {
     display: flex;
     gap: 16px;
-    /*overflow-x: auto;*/
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;  /* 🔥 iPhone smooth */
     padding-bottom: 10px;
     padding: 10px 5px 20px;
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
 
-    justify-content: center; /*CENTRAR EN DESKTOP*/
+    /*justify-content: center; CENTRAR EN DESKTOP*/
   }
 
   .carousel-row::-webkit-scrollbar {
@@ -381,8 +400,8 @@
 
   .carousel-row > * {
     flex: 0 0 auto;
-    scroll-snap-align: center;
-    min-width: 250px;
+    scroll-snap-align: stark;
+    min-width: 440px;
   }
 
  
@@ -483,7 +502,12 @@
   .footer .social a:hover {
     color: #fff;
     transform: translateY(-3px);
-    text-shadow:0 0 12px #7f5cff}
+    text-shadow:0 0 12px #7f5cff
+  }
+
+  .home {
+    overflow-x: hidden;
+  }
 
   /* ANIMACIONES */
   @keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
@@ -513,6 +537,7 @@
   @media (min-width: 1024px) {
     .carousel-row {
       overflow-x: visible;
+      justify-content: center;
     }
   }
   </style>

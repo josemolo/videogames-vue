@@ -33,9 +33,9 @@ const hoverIndex = ref(null)
 
 
 const games = [
-  { id:1, title:'Cyber Quest', platform:'PS5', price:59.99, image:'https://via.placeholder.com/300x400' },
-  { id:2, title:'Neon Racer', platform:'PC', price:39.99, image:'https://via.placeholder.com/300x400' },
-  { id:3, title:'Shadow Arena', platform:'Xbox', price:49.99, image:'https://via.placeholder.com/300x400' }
+  { id:1, title:'Cyber Quest', platform:'PS5', price:59, image:'https://via.placeholder.com/300x400' },
+  { id:2, title:'Neon Racer', platform:'PC', price:39, image:'https://via.placeholder.com/300x400' },
+  { id:3, title:'Shadow Arena', platform:'Xbox', price:49, image:'https://via.placeholder.com/300x400' }
 ]
 
 

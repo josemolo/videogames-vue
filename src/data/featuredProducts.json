@@ -1,24 +1,24 @@
 [
   {
-    "id": 1,
+    "id": "product-1",
     "name": "PlayStation 5",
     "price": "550",
     "image": "/images/products/ps5.png"
   },
   {
-    "id": 2,
+    "id": "product-2",
     "name": "Xbox Series X",
     "price": "615",
     "image": "/images/products/xboxx.png"
   },
   {
-    "id": 3,
+    "id": "product-3",
     "name": "Nintendo Switch",
     "price": "380",
     "image": "/images/products/switch.png"
   },
   {
-    "id": 4,
+    "id": "product-4",
     "name": "Oculus Quest",
     "price": "445",
     "image": "/images/products/oculus.png"

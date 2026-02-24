@@ -32,10 +32,13 @@
      <!-- PRODUCTO / JUEGO -->
    <button
       v-if="variant === 'product' || variant === 'game'"
+      class="add-cart"
+      :class="{ added: props.added }"
       :disabled="stock === 0"
       @click="handleBuy"
     >
-      {{ added ? '✔ Agregado' : 'Agregar al carrito' }}
+      <span v-if="props.added">✔ Agregado</span>
+      <span v-else>Agregar al carrito</span>
     </button>
 
     <!-- BOTÓN: NOTICIAS -->
@@ -82,6 +85,7 @@ const props = defineProps<{
   price?: number
   variant: 'product' | 'game' | 'news'
   stock?: number
+  added?: boolean
   /*button?: string*/
 }>()
 
@@ -97,7 +101,7 @@ const emit = defineEmits<{
    STATE
 ===================== */
 //const cart = useCartStore()
-const added = ref(false)
+/*const added = ref(false)*/
 //const cardRef = ref<HTMLElement | null>(null)
 
 /* =====================
@@ -106,10 +110,10 @@ const added = ref(false)
 const handleBuy = () => {
   emit('buy')
 
-  added.value = true
+  /*added.value = true
   setTimeout(() => {
     added.value = false
-  }, 800)
+  }, 800)*/
 }
 
 //
@@ -278,13 +282,25 @@ button:active {
   margin-top: 1rem;
   padding: 0.6rem 1.4rem;
   border: none;
-  background: linear-gradient(45deg,#7f5cff,#503ec2);
+  background: linear-gradient(45deg,#7f5cff,#00ffff);
   color: white;
   border-radius: 10px;
   cursor: pointer;
   pointer-events: auto;
   position: relative;
   z-index: 2;
+}
+
+.add-cart.added {
+  background: linear-gradient(45deg,#7cff7c,#00ffcc);
+  box-shadow:
+    0 0 15px rgba(124,255,124,0.9),
+    0 0 30px rgba(0,255,204,0.9);
+  animation: pulseAdd 0.6s ease;
+}
+
+.add-cart.added:hover {
+  background: linear-gradient(45deg,#7cff7c,#00ffcc);
 }
 
 @keyframes fadeInUp {
