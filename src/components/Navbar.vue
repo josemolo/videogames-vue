@@ -206,10 +206,10 @@ onBeforeUnmount(() => {
 
  }
 
- @media (min-width: 768px) {
+ /*@media (min-width: 768px) {
     .nav {
     position: fixed;
-    top: 70px; /* altura header */
+    top: 70px;  altura header 
     left: 0;
 
     width: 100%;
@@ -227,8 +227,8 @@ onBeforeUnmount(() => {
     z-index: 999;
   }
 
-  .nav.open {
-    transform: scaleY(1);
+    .nav.open {
+      transform: scaleY(1);
   }
-  }
+  }*/
 </style>
