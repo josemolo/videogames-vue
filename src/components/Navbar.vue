@@ -258,6 +258,8 @@ onBeforeUnmount(() => {
   background: linear-gradient(90deg, #0a0a23, #1f1f3d);
   color: white;
   box-shadow: 0 0 15px #59111b;
+  position: relative;
+  overflow-x: hidden;
 }
 
 /* FILA 1: logo izquierda, usuario derecha */
@@ -394,6 +396,7 @@ onBeforeUnmount(() => {
   display: flex;
   align-items: center;
   margin-top: 6px; /* 👈 baja ligeramente el botón */
+  overflow: visible;
 }
 
 /* Menú desplegable */
@@ -416,6 +419,11 @@ onBeforeUnmount(() => {
   backdrop-filter: blur(12px);
   
   transition: transform 0.4s cubic-bezier(0.77, 0, 0.18, 1);
+
+  max-width: calc(100vw - 80px);
+  white-space: nowrap;
+
+  z-index: 200;
  
 }
 
