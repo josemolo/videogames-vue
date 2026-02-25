@@ -1,0 +1,5 @@
+[
+  { "id": 1, "title": "Control PS5", "price": 59.99, "image": "/images/articles/ps5-controller.jpg" },
+  { "id": 2, "title": "Audífonos Gamer RGB", "price": 79.99, "image": "/images/articles/headset.jpg" },
+  { "id": 3, "title": "Silla Gamer Pro", "price": 199.99, "image": "/images/articles/chair.jpg" }
+]

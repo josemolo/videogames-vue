@@ -1,7 +1,7 @@
 <template>
   <div class="full-window">
     <div class="window consoles">
-      <h1>Consolas / Artículos / Juegos</h1>
+      <h1>Consolas / Juegos / Artículos</h1>
 
       <!-- ================= Fila superior ================= -->
       <div class="row">

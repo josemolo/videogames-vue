@@ -5,4 +5,6 @@ export interface NewsItem {
   image?: string
   author?: string
   date?: string
+  content?: string
+  showInHome?: boolean
 }

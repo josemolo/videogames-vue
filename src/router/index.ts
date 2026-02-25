@@ -13,7 +13,7 @@ import ConsoleDetail from '@/views/ConsoleDetail.vue'
 const routes = [
   { path: '/', name: 'Home', component: () => import('../views/Home.vue') },
   { path: '/news', name: 'News', component: () => import('../views/News.vue') },
-  { path: '/consoles', name: 'Consoles', component: () => import('../views/Consoles.vue') },
+  { path: '/consoles', name: 'Consoles', component: () => import('../views/Shop.vue') },
   { path: '/contact', name: 'Contact', component:  () => import('../views/Contact.vue') },
   { path: '/nintendo', name: 'Nintendo', component: () => import('../views/Nintendo.vue') },
   { path: '/console/:id', name: 'ConsoleDetail', component: () => import('../views/ConsoleDetail.vue') },
@@ -27,6 +27,23 @@ const routes = [
     path: '/checkout',
     component: () => import('@/views/Checkout.vue'),
     meta: { requiresVerified: true }
+  },
+
+  {
+    path: '/tienda',
+    component: () => import('@/views/Shop.vue')
+  },
+  {
+    path: '/tienda/consolas',
+    component: () => import('@/views/ShopConsoles.vue')
+  },
+  {
+    path: '/tienda/juegos',
+    component: () => import('@/views/ShopGames.vue')
+  },
+  {
+    path: '/tienda/articulos',
+    component: () => import('@/views/ShopArticles.vue')
   }
 ]
 

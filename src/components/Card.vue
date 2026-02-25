@@ -1,5 +1,5 @@
 <template>
-  <article ref="cardRef" class="card" v-reveal>
+  <article ref="cardRef" class="card" :class="variant" v-reveal>
     <img
       class="card-image"
       :src="image"
@@ -80,7 +80,7 @@ import { ref } from 'vue'  //onMounted, onBeforeUnmount
 const props = defineProps<{
   id: number
   title: string
-  description: string
+  description?: string
   image: string
   price?: number
   variant: 'product' | 'game' | 'news'
@@ -152,6 +152,8 @@ const handleBuy = () => {
 
 <style scoped>
 .card {
+  display: flex;
+  flex-direction: column;
   background: #111;
   border-radius: 14px;
   padding: 1rem;
@@ -279,7 +281,7 @@ button:active {
 }
 
 .card button {
-  margin-top: 1rem;
+  margin-top: auto;
   padding: 0.6rem 1.4rem;
   border: none;
   background: linear-gradient(45deg,#7f5cff,#00ffff);
@@ -302,6 +304,12 @@ button:active {
 .add-cart.added:hover {
   background: linear-gradient(45deg,#7cff7c,#00ffcc);
 }
+
+.product .card-price {
+  margin-top: 0rem;
+}
+
+
 
 @keyframes fadeInUp {
   from {
@@ -334,7 +342,7 @@ button:active {
 
 .card-price {
   font-weight: bold;
-  margin-top: 0.5rem;
+  /*margin-top: auto;*/
   color: #7f5cff;
 }
 

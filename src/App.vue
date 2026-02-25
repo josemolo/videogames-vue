@@ -2,13 +2,13 @@
   <div id="app">
     <Navbar />
 
-    <router-view v-slot="{ Component }">
+    <router-view v-slot="{ Component }" :key="$route.fullPath">
 
       <!-- Animación de transición -->
-      <!--<transition name="fade-slide" mode="out-in">-->
+      <transition name="page" mode="out-in">
          <component :is="Component" />
       <!--<router-view />--> 
-      <!--</transition>-->
+      </transition>
     </router-view>    
     <LoginModal ref="loginModalRef" />
      <!-- 🔐 LOGIN MODAL GLOBAL -->
@@ -145,6 +145,23 @@ html, body {
   box-shadow: 0 0 25px #00ffff, 0 0 50px #6d307a;
   transition: 0.4s;
 }
+
+
+.page-enter-active,
+.page-leave-active {
+  transition: all 0.4s ease;
+}
+
+.page-enter-from {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.page-leave-to {
+  opacity: 0;
+  transform: translateY(-30px);
+}
+
 
 @keyframes pageIn {
   from {

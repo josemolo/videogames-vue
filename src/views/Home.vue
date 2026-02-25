@@ -1,126 +1,127 @@
   <template>  
-    <canvas ref="canvasRef" class="particle-canvas"></canvas>
-    <div class="home">
+    <div class="home-wrapper">
+      <canvas ref="canvasRef" class="particle-canvas"></canvas>
+      <div class="home">
 
-    <Hero 
-    :video="gamingBg" 
-    @shop="goToShop"
-    @news="goToNews"
-    />
+      <Hero 
+      :video="gamingBg" 
+      @shop="goToShop"
+      @news="goToNews"
+      />
 
-    <HomeCarousel />
-      <!--
-        :video="gamingBg"
-        @shop="goToShop"
-        @news="goToNews"
-        :refCanvas="canvasRef" 
-      -->
+      <HomeCarousel />
+        <!--
+          :video="gamingBg"
+          @shop="goToShop"
+          @news="goToNews"
+          :refCanvas="canvasRef" 
+        -->
 
-      <!-- SECCIONES SIMPLES -->
-      <section class="featured-games"> <!--v-if="games && games.length"--> <!--v-reveal-->
-        <h2>Juegos Destacados</h2>
-        <div class="carousel-row">
-          <Card
-            v-for="game in games"
-            :key="game.id"
-            :id="game.id"  
-            :title="game.title"
-            :description="game.description"
-            :image="game.image"
-            :price="game.price"
-            variant="game"
-            :added="addedGameId === game.id"
-            @buy="handleAddToCart(game)"
-          />
-        </div>  
-      </section>
+        <!-- SECCIONES SIMPLES -->
+        <section class="featured-games"> <!--v-if="games && games.length"--> <!--v-reveal-->
+          <h2>Juegos Destacados</h2>
+          <div class="carousel-row">
+            <Card
+              v-for="game in games"
+              :key="game.id"
+              :id="game.id"  
+              :title="game.title"
+              :description="game.description"
+              :image="game.image"
+              :price="game.price"
+              variant="game"
+              :added="addedGameId === game.id"
+              @buy="handleAddToCart(game)"
+            />
+          </div>  
+        </section>
 
-      <!-- PRODUCTOS -->
-      <section class="products" v-reveal>
-        <h2>Productos Destacados</h2>
-        <div class="carousel-row">
-          <Card
-            v-for="p in featuredProducts"
-            :key="p.id"
-            :id="Number(p.id)"
-            :image="p.image"
-            :title="p.name"
-            :description="p.price"
-            :price="Number(p.price)"
-            variant="product"
-            :added="addedProductId === Number(p.id)"
-            @buy="handleAddToCart(p)"
-          >
-            <!--<router-link :to="`/console/${p.id}`" class="product-button primary">Ver producto</router-link>-->
-          </Card>
-          
+        <!-- PRODUCTOS -->
+        <section class="products" v-reveal>
+          <h2>Productos Destacados</h2>
+          <div class="carousel-row">
+            <Card
+              v-for="p in featuredProducts"
+              :key="p.id"
+              :id="Number(p.id)"
+              :image="p.image"
+              :title="p.name"
+              :price="Number(p.price)"
+              variant="product"
+              :added="addedProductId === Number(p.id)"
+              @buy="handleAddToCart(p)"
+            ><!--:description="p.price"-->
+              <!--<router-link :to="`/console/${p.id}`" class="product-button primary">Ver producto</router-link>-->
+            </Card>
+            
 
-        </div>
-      </section>
-
-      <!-- NOTICIAS -->
-      <section class="news" v-reveal>
-        <h2>Últimas Noticias</h2>
-        <div class="carousel-row">
-          <Card
-            v-for="n in newsList"
-            :key="n.id"
-            :id="n.id"
-            :image="n.image"
-            :title="n.title"
-            :description="n.description"
-            variant="news"
-            @view="goToNews"
-          />
-        </div>
-      </section>
-
-      <!-- TESTIMONIOS -->
-      <section class="testimonials" v-reveal>
-        <h2>Lo que dicen nuestros gamers</h2>
-        <div class="testimonial-grid">
-          <div v-for="t in testimonials" :key="t.name" class="testimonial-card">
-            <p>"{{ t.text }}"</p>
-            <span>- {{ t.name }}</span>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <!-- NEWSLETTER -->
-      <section class="newsletter" v-reveal>
-        <h2>Suscríbete y recibe ofertas</h2>
-        <form class="newsletter-form" @submit.prevent="handleSubscribe">
-          <input 
-            type="email" 
-            placeholder="Tu correo" 
-            v-model="email" 
-            required 
-          />
-          <button class="newsletter-btn" type="submit" :disabled="loading" >
-            <span v-if="!loading">Suscribirme</span>
-            <span v-else class="spinner"></span>
-          </button>
-        </form>
-      </section>
+        <!-- NOTICIAS -->
+        <section class="news" v-reveal>
+          <h2>Últimas Noticias</h2>
+          <div class="carousel-row">
+            <Card
+              v-for="n in newsList"
+              :key="n.id"
+              :id="n.id"
+              :image= String(n.image)
+              :title="n.title"
+              :description="n.description"
+              variant="news"
+              @view="goToNews"
+            />
+          </div>
+        </section>
 
-      <!-- FOOTER -->
-      <footer class="footer">
-        <div>© 2025 LucyCell</div>
-        <div class="social">
-          <a 
-            v-for="s in socials" 
-            :key="s.name" 
-            :href="s.url"
-            target="_blank"
-            rel="noopener noreferrer"
-            @click="trackSocialClick(s.name)"
-          >
-            {{ s.name }}
-          </a>
-        </div>
-      </footer>
+        <!-- TESTIMONIOS -->
+        <section class="testimonials" v-reveal>
+          <h2>Lo que dicen nuestros clientes</h2>
+          <div class="testimonial-grid">
+            <div v-for="t in testimonials" :key="t.name" class="testimonial-card">
+              <p>"{{ t.text }}"</p>
+              <span>- {{ t.name }}</span>
+            </div>
+          </div>
+        </section>
 
-    </div>
+        <!-- NEWSLETTER -->
+        <section class="newsletter" v-reveal>
+          <h2>Suscríbete y recibe ofertas</h2>
+          <form class="newsletter-form" @submit.prevent="handleSubscribe">
+            <input 
+              type="email" 
+              placeholder="Tu correo" 
+              v-model="email" 
+              required 
+            />
+            <button class="newsletter-btn" type="submit" :disabled="loading" >
+              <span v-if="!loading">Suscribirme</span>
+              <span v-else class="spinner"></span>
+            </button>
+          </form>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="footer">
+          <div>© 2026 LucyCell</div>
+          <div class="social">
+            <a 
+              v-for="s in socials" 
+              :key="s.name" 
+              :href="s.url"
+              target="_blank"
+              rel="noopener noreferrer"
+              @click="trackSocialClick(s.name)"
+            >
+              {{ s.name }}
+            </a>
+          </div>
+        </footer>
+
+      </div>
+    </div>  
   </template>
 
 
@@ -151,6 +152,11 @@
   import { useCartStore } from '@/stores/cart'
 
   import { supabase } from '@/lib/supabase'
+
+
+  import rawNewsData from '@/data/news.json'
+
+  import type { NewsItem } from '@/types/news'
 
   useRouteMetrics()
 
@@ -189,28 +195,33 @@
     { 
       id: 1, 
       title: "Screamer",
-      description: "Juego de broma aparentemente inofensivo.",
+      description: "Juego aparentemente inofensivo",
       image: "/images/games/screamergame.jpg",
-      price: 59
+      price: 30000
     },
     { 
       id: 2, 
       title: "Grand Theft Auto lV",
-      description: "Vive los desafios de una ciudad virtual.",
+      description: "Vive desafios de una ciudad virtual",
       image: "/images/games/gtaciudad.jpg",
-      price: 89
+      price: 80000
     },
     { 
       id: 3, 
       title: "Crimson Desert",
       description: "Un mundo abierto lleno de exploración",
       image: "/images/games/crimsondesert.jpg",
-      price: 69
+      price: 38000
     }
   ]);
 
+  const newsData: NewsItem[] = rawNewsData as NewsItem[]
+
   const featuredProducts = ref(featuredProductsData)
-  const newsList = ref(newsListData)
+  const newsList = ref<NewsItem[]>([])
+  onMounted(() => {
+    newsList.value = newsData.filter(n => n.showInHome === true)
+  })
 
   const gamingBg = "https://res.cloudinary.com/dakkfinnu/video/upload/v1767195871/gaming_g0o04l.mp4";
 
@@ -333,6 +344,9 @@
     if (stopParticles) stopParticles()
   })
 
+
+
+  
   //useParticles(canvasRef)
 
   console.log('games:', games)
@@ -364,7 +378,7 @@
     overflow-y: hidden;
     -webkit-overflow-scrolling: touch;  /* 🔥 iPhone smooth */
     padding-bottom: 10px;
-    padding: 10px 5px 20px;
+    padding: 70px 5px 50px;
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
 
@@ -383,7 +397,7 @@
   .carousel-row :deep(.card) {
     flex: 0 0 200px; /* antes seguro estaba 280 o más */
     max-width: 200px;
-    transform: scale(0.95);
+    /*transform: scale(0.95);*/
   }
 
   .carousel-row :deep(img) {
@@ -400,8 +414,8 @@
 
   .carousel-row > * {
     flex: 0 0 auto;
-    scroll-snap-align: stark;
-    min-width: 440px;
+    scroll-snap-align: start;
+    min-width: 280px;
   }
 
  

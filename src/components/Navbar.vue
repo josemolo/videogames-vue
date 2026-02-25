@@ -36,10 +36,10 @@
           <span></span>
         </button>
         <nav :class="['nav', { open: isOpen }]">
-          <router-link to="/" class="nav-link" @click="closeMenu">HOME</router-link>
-          <router-link to="/news" class="nav-link" @click="closeMenu">NEWS</router-link>
-          <router-link to="/consoles" class="nav-link" @click="closeMenu">STORE</router-link>
-          <router-link to="/contact" class="nav-link" @click="closeMenu">CONTACTS</router-link>
+          <router-link to="/" class="nav-link" @click="closeMenu">INICIO</router-link>
+          <router-link to="/news" class="nav-link" @click="closeMenu">NOTICIAS</router-link>
+          <router-link to="/tienda" class="nav-link" @click="closeMenu">TIENDA</router-link>
+          <router-link to="/contact" class="nav-link" @click="closeMenu">TALLER</router-link>
         </nav>
       </div>
       <button class="cart-icon" @click.stop="openCartPopup">

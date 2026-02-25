@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "title": "Spider-Man 2",
+    "platform": "PS5",
+    "price": 69.99,
+    "image": "/images/games/spiderman2.jpg"
+  },
+  {
+    "id": 2,
+    "title": "Halo Infinite",
+    "platform": "Xbox",
+    "price": 59.99,
+    "image": "/images/games/halo.jpg"
+  },
+  {
+    "id": 3,
+    "title": "Zelda Tears of the Kingdom",
+    "platform": "Nintendo",
+    "price": 59.99,
+    "image": "/images/games/zelda.jpg"
+  },
+  {
+    "id": 4,
+    "title": "Cyberpunk 2077",
+    "platform": "PC",
+    "price": 49.99,
+    "image": "/images/games/cyberpunk.jpg"
+  }
+]
