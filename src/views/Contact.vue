@@ -1,373 +1,371 @@
 <template>
-  <div class="register-page">
-    <!-- Fondo animado -->
-    <div class="background-lights"></div>
+  <div class="taller-page">
 
-    <!-- Partículas fuera del cuadro -->
-    <div class="particles-global">
-      <span></span><span></span><span></span><span></span><span></span>
-      <span></span><span></span><span></span><span></span><span></span>
-    </div>
+    <!-- CANVAS PARTICLES -->
+    <canvas ref="canvasRef" class="bg-canvas"></canvas>
 
-    <!-- Contenedor de formulario estilo interfaz -->
-    <div class="register-container">
-      <h1>LOGIN</h1>
+    <!-- HERO -->
+    <section class="taller-hero reveal">
+      <h1>LUCYCELL TECH CENTER</h1>
+      <p>Centro técnico especializado en reparación avanzada de dispositivos electrónicos</p>
+    </section>
 
-      <!-- Partículas dentro del contenedor -->
-      <div class="particles-container">
-        <span></span><span></span><span></span><span></span><span></span>
-        <span></span><span></span><span></span><span></span><span></span>
+    <!-- MÉTRICAS -->
+    <section class="metrics reveal">
+      <div class="metric">
+        <h3>{{ repairsCount }}</h3>
+        <span>Reparaciones realizadas</span>
+      </div>
+      <div class="metric">
+        <h3>{{ satisfaction }}%</h3>
+        <span>Satisfacción de clientes</span>
+      </div>
+      <div class="metric">
+        <h3>{{ hours }}</h3>
+        <span>Tiempo promedio (hrs)</span>
+      </div>
+    </section>
+
+    <!-- CERTIFICACIONES -->
+    <section class="certifications reveal">
+      <h2>Estándares & Garantía</h2>
+      <div class="cert-grid">
+        <div class="cert">Componentes certificados</div>
+        <div class="cert">Técnicos especializados</div>
+        <div class="cert">Garantía escrita</div>
+        <div class="cert">Diagnóstico profesional</div>
+      </div>
+    </section>
+
+    <!-- GRID PRINCIPAL -->
+    <section class="taller-content">
+
+      <div class="glass reveal">
+        <h2>Servicios Especializados</h2><br>
+        <ul>
+          <li>Micro soldadura avanzada</li><br> 
+          <li>Cambio de pantalla OLED / AMOLED</li><br>
+          <li>Reemplazo de batería premium</li><br>
+          <li>Reparación de consolas</li><br>
+          <li>Recuperación de sistema</li>
+        </ul>
       </div>
 
-      <!-- Formulario con redirección -->
-      <form class="register-form" @submit.prevent="redirectToLibrary">
-        <input type="text" placeholder="User name" />
-        <input type="email" placeholder="Email" />
-        <input type="password" placeholder="Password" />
-        <input type="password" placeholder="Confirm Password" />
-        <button type="submit">Register</button>
-      </form>
+      <div class="glass reveal">
+        <h2>Solicitar Evaluación Técnica</h2>
 
-      <!-- Barras de energía animadas inferiores -->
-      <div class="energy-bars bottom">
-        <div class="bar bar1"></div>
-        <div class="bar bar2"></div>
-        <div class="bar bar3"></div>
+        <form @submit.prevent="sendToWhatsApp" class="taller-form">
+          <input v-model="name" type="text" placeholder="Nombre completo" required />
+          <input v-model="phone" type="text" placeholder="Teléfono" required />
+          <input v-model="device" type="text" placeholder="Dispositivo" required />
+          <textarea v-model="problem" placeholder="Describe el problema..." required></textarea>
+          <button type="submit">Contactar por WhatsApp</button>
+        </form>
       </div>
 
-      <!-- Barras de energía animadas laterales -->
-      <div class="energy-bars left">
-        <div class="bar bar1"></div>
-        <div class="bar bar2"></div>
-        <div class="bar bar3"></div>
-      </div>
-      <div class="energy-bars right">
-        <div class="bar bar1"></div>
-        <div class="bar bar2"></div>
-        <div class="bar bar3"></div>
-      </div>
-    </div>
+    </section>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onBeforeUnmount } from 'vue'
 import { useHead } from '@vueuse/head'
 
-const particlesGlobal = ref<HTMLElement[]>([])
-const particlesContainer = ref<HTMLElement[]>([])
+const name = ref('')
+const phone = ref('')
+const device = ref('')
+const problem = ref('')
+
+/* ===== MÉTRICAS ANIMADAS ===== */
+const repairsCount = ref(0)
+const satisfaction = ref(0)
+const hours = ref(0)
+
+function animateCounter(target: number, refVar: any, duration = 2000) {
+  const start = 0
+  const increment = target / (duration / 16)
+  let current = start
+
+  const timer = setInterval(() => {
+    current += increment
+    if (current >= target) {
+      refVar.value = target
+      clearInterval(timer)
+    } else {
+      refVar.value = Math.floor(current)
+    }
+  }, 16)
+}
+
+/* ===== SCROLL REVEAL ===== */
+function setupReveal() {
+  const reveals = document.querySelectorAll('.reveal')
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('active')
+
+        if (entry.target.classList.contains('metrics')) {
+          animateCounter(1200, repairsCount)
+          animateCounter(98, satisfaction)
+          animateCounter(36, hours)
+        }
+      }
+    })
+  }, { threshold: 0.2 })
+
+  reveals.forEach(el => observer.observe(el))
+}
+
+/* ===== PARTICLES CANVAS ===== */
+const canvasRef = ref<HTMLCanvasElement | null>(null)
+const navbarHeight = 80  // Ajusta si cambia la altura del navbar
+
+let animationId: number | null = null
+const particles: any[] = []
+
+function createParticles(canvasWidth: number, canvasHeight: number) {
+  particles.length = 0 // limpiar array
+  for (let i = 0; i < 80; i++) {
+    particles.push({
+      x: Math.random() * canvasWidth,
+      y: Math.random() * canvasHeight,
+      radius: Math.random() * 2,
+      speedX: (Math.random() - 0.5) * 0.5,
+      speedY: (Math.random() - 0.5) * 0.5
+    })
+  }
+}
+
+function setupCanvasSize() {
+  if (!canvasRef.value) return
+  const canvas = canvasRef.value
+  canvas.width = window.innerWidth
+  canvas.height = window.innerHeight - navbarHeight
+  canvas.style.top = `${navbarHeight}px`
+}
+
+function animate() {
+  if (!canvasRef.value) return
+  const canvas = canvasRef.value
+  const ctx = canvas.getContext('2d')
+  if (!ctx) return
+
+  ctx.clearRect(0, 0, canvas.width, canvas.height)
+
+  particles.forEach(p => {
+    p.x += p.speedX
+    p.y += p.speedY
+
+    if (p.x < 0 || p.x > canvas.width) p.speedX *= -1
+    if (p.y < 0 || p.y > canvas.height) p.speedY *= -1
+
+    ctx.beginPath()
+    ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2)
+    ctx.fillStyle = 'rgba(0,255,255,0.5)'
+    ctx.fill()
+  })
+
+  animationId = requestAnimationFrame(animate)
+}
+
+function setupParticles() {
+  setupCanvasSize()
+  createParticles(window.innerWidth, window.innerHeight - navbarHeight)
+  animate()
+}
+
+function onResize() {
+  setupCanvasSize()
+  createParticles(window.innerWidth, window.innerHeight - navbarHeight)
+}
 
 onMounted(() => {
-  particlesGlobal.value = Array.from(
-    document.querySelectorAll('.particles-global span')
-  ) as HTMLElement[]
+  setupReveal()
+  setupParticles()
+  window.addEventListener('resize', onResize)
+})
 
-  particlesContainer.value = Array.from(
-    document.querySelectorAll('.particles-container span')
-  ) as HTMLElement[]
-
-  // Movimiento de partículas global según el mouse
-  window.addEventListener('mousemove', (e) => {
-    const mouseX = e.clientX
-    const mouseY = e.clientY
-
-    particlesGlobal.value.forEach((p, index) => {
-      const speed = 0.04 + index * 0.01
-      const rect = p.getBoundingClientRect()
-      const dx = mouseX - (rect.left + rect.width / 2)
-      const dy = mouseY - (rect.top + rect.height / 2)
-      p.style.transform = `translate(${-dx * speed}px, ${-dy * speed}px)`
-    })
-  })
-
-  // Efecto "consola viva" para partículas internas
-  const inputs = document.querySelectorAll('.register-form input')
-  inputs.forEach(input => {
-    input.addEventListener('input', () => {
-      particlesContainer.value.forEach((p) => {
-        const offsetX = (Math.random() - 0.5) * 20
-        const offsetY = (Math.random() - 0.5) * 20
-        const scale = 0.5 + Math.random() * 1
-        p.style.transform = `translate(${offsetX}px, ${offsetY}px) scale(${scale})`
-
-        // Volver a animación original después de 300ms
-        setTimeout(() => {
-          p.style.transform = ''
-        }, 300)
-      })
-    })
-  })
+onBeforeUnmount(() => {
+  if (animationId) cancelAnimationFrame(animationId)
+  window.removeEventListener('resize', onResize)
 })
 
 useHead({
-  title: 'Contacto | VortexGames',
+  title: 'LucyCell Tech Center | Corporativo',
   meta: [
-    {
-      name: 'description',
-      content: 'Contáctanos para dudas, sugerencias o colaboraciones en VortexGames.'
-    },
-    { property: 'og:title', content: 'Contacto | VortexGames' },
-    {
-      property: 'og:description',
-      content: 'Ponte en contacto con el equipo de VortexGames.'
-    },
-    { property: 'og:type', content: 'website' },
-    { property: 'og:image', content: '/og/contact.png' }
+    { name: 'description', content: 'Centro técnico corporativo especializado en reparación avanzada.' }
   ]
 })
 
-// Función de redirección
-const redirectToLibrary = () => {
-  // Aquí puedes agregar validaciones si quieres
-  window.location.href = "library.html"
+function sendToWhatsApp() {
+  const message = `
+Hola, quiero solicitar una evaluación técnica:
+
+Nombre: ${name.value}
+Teléfono: ${phone.value}
+Dispositivo: ${device.value}
+Problema: ${problem.value}
+`
+  const encoded = encodeURIComponent(message)
+  window.open(`https://wa.me/50687469019?text=${encoded}`, '_blank')
 }
 </script>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;800&display=swap');
 
-.register-page {
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #0a0a1f;
+.taller-page {
+  min-height: 100vh;
+  padding: 120px 40px;
+  background: #03030a;
   font-family: 'Orbitron', sans-serif;
-  overflow: hidden;
+  color: white;
   position: relative;
+  overflow-x: hidden;
 }
 
-/* Fondo animado */
-.background-lights {
+.bg-canvas {
   position: absolute;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle at 20% 20%, #00ffff55, transparent 30%),
-              radial-gradient(circle at 80% 80%, #ff00ff55, transparent 30%);
-  animation: float 10s infinite alternate;
+  top: 0;
+  left: 0;
+  width: 100%;
+  /* altura la controla el canvas con JS */
   z-index: 0;
 }
 
-@keyframes float {
-  0% { transform: translate(0, 0); }
-  50% { transform: translate(-60px, 60px); }
-  100% { transform: translate(0, 0); }
+/* Nota: asegúrate que el navbar tenga estos estilos para estar encima */
+/*
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 80px; // o la altura real que uses
+  z-index: 10;
+}
+*/
+
+.reveal {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: 1s ease;
 }
 
-/* Partículas fuera del cuadro */
-.particles-global span {
-  position: absolute;
-  display: block;
-  border-radius: 50%;
-  opacity: 0.7;
-  background: linear-gradient(45deg, #00ffff, #ff00ff);
-  width: 4px;
-  height: 4px;
-  filter: drop-shadow(0 0 8px #00ffff) drop-shadow(0 0 8px #ff00ff);
-  will-change: transform;
-  animation: floatGlobal 4s ease-in-out infinite alternate;
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-.particles-global span:nth-child(1){ top:10%; left:15%; animation-duration:8s;}
-.particles-global span:nth-child(2){ top:25%; left:5%; animation-duration:9s;}
-.particles-global span:nth-child(3){ top:15%; left:80%; animation-duration:7s;}
-.particles-global span:nth-child(4){ top:40%; left:40%; animation-duration:10s;}
-.particles-global span:nth-child(5){ top:55%; left:70%; animation-duration:8.5s;}
-.particles-global span:nth-child(6){ top:60%; left:30%; animation-duration:9.2s;}
-.particles-global span:nth-child(7){ top:75%; left:55%; animation-duration:9.8s;}
-.particles-global span:nth-child(8){ top:85%; left:20%; animation-duration:10s;}
-.particles-global span:nth-child(9){ top:90%; left:90%; animation-duration:8.3s;}
-.particles-global span:nth-child(10){ top:5%; left:50%; animation-duration:9.6s;}
-
-@keyframes floatGlobal {
-  0% { opacity: 0.6; }
-  50% { opacity: 1; }
-  100% { opacity: 0.6; }
-}
-
-/* Contenedor tipo panel */
-.register-container {
+section {
   position: relative;
-  z-index: 1;
-  background: #1c1c2f;
-  border: 3px solid #bf97ea;
-  border-radius: 15px;
-  padding: 40px 30px;
-  width: 350px;
-  box-shadow: 0 0 20px #bf97ea, 0 0 40px #6d307a;
-  overflow: hidden;
-}
-
-/* Partículas dentro del contenedor */
-.particles-container {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  overflow: hidden;
-  pointer-events: none;
-}
-
-.particles-container span {
-  position: absolute;
-  display: block;
-  border-radius: 50%;
-  opacity: 0.8;
-  background: linear-gradient(45deg, #bf97ea, #6d307a);
-  filter: drop-shadow(0 0 8px #bf97ea) drop-shadow(0 0 8px #6d307a);
-  width: 3px;
-  height: 3px;
-  animation: moveParticle 5s linear infinite;
-}
-
-.particles-container span:nth-child(1){ top:10%; left:5%; animation-duration:6s;}
-.particles-container span:nth-child(2){ top:20%; left:20%; animation-duration:8s;}
-.particles-container span:nth-child(3){ top:30%; left:50%; animation-duration:10s;}
-.particles-container span:nth-child(4){ top:15%; left:70%; animation-duration:7s;}
-.particles-container span:nth-child(5){ top:40%; left:80%; animation-duration:9s;}
-.particles-container span:nth-child(6){ top:50%; left:30%; animation-duration:6.5s;}
-.particles-container span:nth-child(7){ top:60%; left:60%; animation-duration:8.5s;}
-.particles-container span:nth-child(8){ top:70%; left:10%; animation-duration:7.5s;}
-.particles-container span:nth-child(9){ top:80%; left:40%; animation-duration:9.5s;}
-.particles-container span:nth-child(10){ top:90%; left:90%; animation-duration:10s;}
-
-@keyframes moveParticle {
-  0%{ transform: translate(0,0) scale(0.5); }
-  25%{ transform: translate(10px,-10px) scale(1); }
-  50%{ transform: translate(-10px,10px) scale(0.7); }
-  75%{ transform: translate(15px,-5px) scale(1); }
-  100%{ transform: translate(0,0) scale(0.5); }
-}
-
-/* Título estilo HUD gamer */
-.register-container h1 {
-  font-size: 2.5rem;
-  color: #bf97ea;
-  text-shadow: 0 0 10px #bf97ea, 0 0 20px #6d307a;
-  margin-bottom: 0.5rem;
+  z-index: 2;
+  margin-bottom: 100px;
   text-align: center;
 }
 
-/* Formulario */
-.register-form {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  position: relative;
-  z-index: 1;
+/* ===== TITULO NEON FLOW ===== */
+.taller-hero h1 {
+  font-family: 'Orbitron', sans-serif;
+  text-align: center;
+  font-size: clamp(3rem,5vw,4.5rem);
+  font-weight: 900;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+
+  background: linear-gradient(90deg, #7f5cff, #00e0ff, #7a48b1);
+  background-size: 500% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: neonFlow 60s ease infinite;
+
+  text-shadow:
+    0 0 10px rgba(127,92,255,0.25),
+    0 0 20px rgba(0,255,255,0.3),
+    0 0 40px rgba(127,92,255,0.4);
 }
 
-.register-form input {
-  padding: 12px;
-  border: none;
-  border-radius: 8px;
-  background-color: #111127;
-  color: #fff;
-  font-size: 0.9rem;
-  outline: none;
-  box-shadow: 0 0 5px #bf97ea;
+.metrics {
+  display: flex;
+  justify-content: center;
+  gap: 60px;
+}
+
+.metric h3 {
+  font-size: 2.5rem;
+  color: #00ffff;
+}
+
+.certifications h2 {
+  margin-bottom: 40px;
+}
+
+.cert-grid {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.cert {
+  padding: 20px 30px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.1);
   transition: 0.3s;
 }
 
-.register-form input::placeholder {
-  color: #888;
+.cert:hover {
+  box-shadow: 0 0 25px #00ffff;
 }
 
-.register-form input:focus {
-  box-shadow: 0 0 15px #bf97ea, 0 0 25px #6d307a;
-  background-color: #22223b;
+.taller-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  max-width: 1200px;
+  margin: auto;
 }
 
-.register-form button {
-  padding: 12px;
+.glass {
+  backdrop-filter: blur(20px);
+  background: rgba(255,255,255,0.05);
+  padding: 40px;
+  border-radius: 20px;
+}
+
+.taller-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.taller-form input,
+.taller-form textarea {
+  padding: 14px;
+  border-radius: 10px;
   border: none;
-  border-radius: 8px;
-  background: linear-gradient(45deg, #bf97ea, #6d307a);
-  color: #fff;
-  font-size: 1rem;
+  background: rgba(0,0,0,0.6);
+  color: white;
+}
+
+.taller-form button {
+  padding: 16px;
+  border-radius: 12px;
+  border: none;
   font-weight: bold;
+  background: linear-gradient(45deg,#7f5cff,#00ffff);
   cursor: pointer;
-  transition: 0.3s;
-  box-shadow: 0 0 10px #bf97ea, 0 0 20px #6d307a;
 }
 
-.register-form button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 0 25px #bf97ea, 0 0 40px #6d307a;
+@media(max-width:900px){
+  .metrics { flex-direction: column; gap: 30px; }
+  .taller-content { grid-template-columns: 1fr; }
 }
 
-/* Barras HUD superior e inferior */
-.register-container::before,
-.register-container::after {
-  content: "";
-  position: absolute;
-  height: 3px;
-  width: 80%;
-  background: linear-gradient(90deg, #bf97ea, #6d307a);
-  top: 0;
-  left: 10%;
-  box-shadow: 0 0 10px #bf97ea, 0 0 20px #6d307a;
-  border-radius: 2px;
-}
-
-.register-container::after {
-  bottom: 0;
-  top: auto;
-}
-
-/* Barras de energía animadas inferiores */
-.energy-bars.bottom {
-  position: absolute;
-  bottom: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 60%;
-  height: 5px;
-  display: flex;
-  gap: 5px;
-}
-
-/* Barras laterales verticales */
-.energy-bars.left,
-.energy-bars.right {
-  position: absolute;
-  top: 10%;
-  height: 80%;
-  width: 5px;
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
-
-.energy-bars.left { left: -2px; }
-.energy-bars.right { right: -2px; }
-
-.energy-bars .bar {
-  border-radius: 2px;
-  animation: energy 1.5s infinite alternate, colorShift 4s infinite alternate;
-}
-
-.energy-bars.bottom .bar {
-  flex: 1;
-  width: 100%;
-}
-
-.energy-bars.left .bar,
-.energy-bars.right .bar {
-  flex: 1;
-  width: 100%;
-}
-
-.energy-bars .bar1 { animation-delay: 0s, 0s; }
-.energy-bars .bar2 { animation-delay: 0.3s, 1s; }
-.energy-bars .bar3 { animation-delay: 0.6s, 2s; }
-
-@keyframes energy {
-  0% { transform: scaleY(0.4); opacity: 0.6; }
-  50% { transform: scaleY(1); opacity: 1; }
-  100% { transform: scaleY(0.4); opacity: 0.6; }
-}
-
-@keyframes colorShift {
-  0%, 25%, 50%, 75%, 100% { background: linear-gradient(90deg, #bf97ea, #6d307a); }
+@keyframes neonFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 </style>

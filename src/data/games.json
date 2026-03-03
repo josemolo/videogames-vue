@@ -5,7 +5,7 @@
     "name": "Cyber Adventure",
     "description": "Un juego de acción futurista.",
     "price": 28000,
-    "stock": 4,
+    "stock": 5,
     "image": "https://picsum.photos/300/180"
   },
   {
@@ -14,7 +14,7 @@
     "name": "Fantasy World",
     "description": "Explora un mundo lleno de magia.",
     "price": 26000,
-    "stock": 4,
+    "stock": 5,
     "image": "https://picsum.photos/300/180"
   },
   {
@@ -23,7 +23,142 @@
     "name": "Racing Pro",
     "description": "Carreras a máxima velocidad.",
     "price": 30000,
-    "stock": 4,
+    "stock": 5,
+    "image": "https://picsum.photos/300/180"
+  },
+  {
+    "id": 4,
+    "consoleId": "play5",
+    "name": "Cyber Adventure",
+    "description": "Un juego de acción futurista.",
+    "price": 28000,
+    "stock": 5,
+    "image": "https://picsum.photos/300/180"
+  },
+  {
+    "id": 5,
+    "consoleId": "play5",
+    "name": "Fantasy World",
+    "description": "Explora un mundo lleno de magia.",
+    "price": 26000,
+    "stock": 5,
+    "image": "https://picsum.photos/300/180"
+  },
+  {
+    "id": 6,
+    "consoleId": "play5",
+    "name": "Racing Pro",
+    "description": "Carreras a máxima velocidad.",
+    "price": 30000,
+    "stock": 5,
+    "image": "https://picsum.photos/300/180"
+  },
+  {
+    "id": 7,
+    "consoleId": "xboxx",
+    "name": "Cyber Adventure",
+    "description": "Un juego de acción futurista.",
+    "price": 28000,
+    "stock": 5,
+    "image": "https://picsum.photos/300/180"
+  },
+  {
+    "id": 8,
+    "consoleId": "xboxx",
+    "name": "Fantasy World",
+    "description": "Explora un mundo lleno de magia.",
+    "price": 26000,
+    "stock": 5,
+    "image": "https://picsum.photos/300/180"
+  },
+  {
+    "id": 9,
+    "consoleId": "xboxx",
+    "name": "Racing Pro",
+    "description": "Carreras a máxima velocidad.",
+    "price": 30000,
+    "stock": 5,
+    "image": "https://picsum.photos/300/180"
+  },
+  {
+    "id": 10,
+    "consoleId": "xboxs",
+    "name": "Cyber Adventure",
+    "description": "Un juego de acción futurista.",
+    "price": 28000,
+    "stock": 5,
+    "image": "https://picsum.photos/300/180"
+  },
+  {
+    "id": 11,
+    "consoleId": "xboxs",
+    "name": "Fantasy World",
+    "description": "Explora un mundo lleno de magia.",
+    "price": 26000,
+    "stock": 5,
+    "image": "https://picsum.photos/300/180"
+  },
+  {
+    "id": 12,
+    "consoleId": "xboxs",
+    "name": "Racing Pro",
+    "description": "Carreras a máxima velocidad.",
+    "price": 30000,
+    "stock": 5,
+    "image": "https://picsum.photos/300/180"
+  },
+  {
+    "id": 13,
+    "consoleId": "play4",
+    "name": "Cyber Adventure",
+    "description": "Un juego de acción futurista.",
+    "price": 28000,
+    "stock": 5,
+    "image": "https://picsum.photos/300/180"
+  },
+  {
+    "id": 14,
+    "consoleId": "play4",
+    "name": "Fantasy World",
+    "description": "Explora un mundo lleno de magia.",
+    "price": 26000,
+    "stock": 5,
+    "image": "https://picsum.photos/300/180"
+  },
+  {
+    "id": 15,
+    "consoleId": "play4",
+    "name": "Racing Pro",
+    "description": "Carreras a máxima velocidad.",
+    "price": 30000,
+    "stock": 5,
+    "image": "https://picsum.photos/300/180"
+  },
+  {
+    "id": 16,
+    "consoleId": "ds",
+    "name": "Cyber Adventure",
+    "description": "Un juego de acción futurista.",
+    "price": 28000,
+    "stock": 5,
+    "image": "https://picsum.photos/300/180"
+  },
+  {
+    "id": 17,
+    "consoleId": "ds",
+    "name": "Fantasy World",
+    "description": "Explora un mundo lleno de magia.",
+    "price": 26000,
+    "stock": 5,
+    "image": "https://picsum.photos/300/180"
+  },
+  {
+    "id": 18,
+    "consoleId": "ds",
+    "name": "Racing Pro",
+    "description": "Carreras a máxima velocidad.",
+    "price": 30000,
+    "stock": 5,
     "image": "https://picsum.photos/300/180"
   }
 ]

@@ -25,9 +25,9 @@
             :key="console.id"
             class="console-card"
             ref="cards"
-            @click="abrirConsola(console.name)"
+            @click="abrirConsola(console.id)"
           >
-            <img :src="console.image" :alt="console.name" class="console-img blur-up" loading="lazy"  @load="onImageLoad"/>
+            <img :src="console.image" :alt="console.name" class="console-img" loading="lazy"  @load="onImageLoad"/>
             <h3>{{ console.name }}</h3>
             <p>{{ console.description }}</p>
           </div>
@@ -54,7 +54,7 @@
             :key="console.id"
             class="console-card"
             ref="cards"
-            @click="abrirConsola(console.name)"
+            @click="abrirConsola(console.id)"
           >
             <img :src="console.image" :alt="console.name" class="console-img" />
             <h3>{{ console.name }}</h3>
@@ -83,7 +83,7 @@
             :key="console.id"
             class="console-card"
             ref="cards"
-            @click="abrirConsola(console.name)"
+            @click="abrirConsola(console.id)"
           >
             <img :src="console.image" :alt="console.name" class="console-img" />
             <h3>{{ console.name }}</h3>
@@ -109,36 +109,38 @@ const cards = ref<HTMLElement[]>([])
 const { observe } = useConsoleDetailPreload()
 
 interface ConsoleItem {
-  id: number
+  id: string
   name: string
   description: string
   image: string
 }
 
 const consoles = ref<ConsoleItem[]>([
-  { id: 1, name: 'Nintendo Switch', description: 'Consola híbrida portátil y de hogar.', image: '/images/switch.png' },
-  { id: 2, name: 'PlayStation 5', description: 'Alta potencia y gráficos de última generación.', image: '/images/ps5.png' },
-  { id: 3, name: 'Xbox Series X', description: 'Gran rendimiento y catálogo de juegos.', image: '/images/xboxx.png' },
-  { id: 4, name: 'Xbox Series S', description: 'Versión más económica y compacta.', image: '/images/xboxs.png' },
-  { id: 5, name: 'PlayStation 4', description: 'Gran catálogo de juegos y accesorios.', image: '/images/ps4.png' },
-  { id: 6, name: 'Nintendo 3DS', description: 'Portátil clásico con pantallas 3D.', image: '/images/3ds.png' },
-  { id: 7, name: 'Steam Deck', description: 'PC portátil para juegos de Steam.', image: '/images/steamdeck.png' },
+  { id: 'nintendo', name: 'Nintendo Switch', description: 'Híbrida portátil', image: '/images/switch.png' },
+  { id: 'play5', name: 'PlayStation 5', description: 'Alta potencia realista', image: '/images/ps5.png' },
+  { id: 'xboxx', name: 'Xbox X', description: 'Experiencia gráfica', image: '/images/xboxx.png' },
+  { id: 'xboxs', name: 'Xbox S', description: 'Versión económica compacta', image: '/images/xboxs.png' },
+  { id: 'play4', name: 'PlayStation 4', description: 'Gran catálogo digital', image: '/images/ps4.png' },
+  { id: 'ds', name: 'Nintendo 3DS', description: 'Clásico pantallas 3D', image: '/images/ds.png' },
+  /*{ id: 7, name: 'Steam Deck', description: 'PC portátil para juegos de Steam.', image: '/images/steamdeck.png' },
   { id: 8, name: 'Oculus Quest 2', description: 'Realidad virtual todo en uno.', image: '/images/oculus.png' },
-  { id: 9, name: 'Atari VCS', description: 'Consola retro con juegos clásicos.', image: '/images/atari.png' },
+  { id: 9, name: 'Atari VCS', description: 'Consola retro con juegos clásicos.', image: '/images/atari.png' },*/
 ])
 
-function abrirConsola(name: string) {
-  if (name === "Nintendo Switch") {
+function abrirConsola(id: string) {
+  router.push(`/console/${id}`)
+  /*
+  if (id === "Nintendo Switch") {
     // Aquí puedes abrir una URL externa
-    router.push('/console/nintendo');
-  } else if (name === "PlayStation 5") {
+    router.push(`/console/${id}`);
+  } else if (id === "PlayStation 5") {
     window.open("/ps5", "_blank", "width=800,height=600");
-  } else if (name === "Xbox Series X") {
+  } else if (id) {
     window.open("/xbox", "_blank", "width=800,height=600");
   } else {
     // Por defecto, solo mostrar mensaje
     alert(`Seleccionaste ${name}`);
-  }
+  }*/
 }
 
 function onImageLoad(e: Event) {
@@ -255,8 +257,9 @@ useRouteMetrics()
 }
 
 .console-img {
-  width: 120px;
-  height: auto;
+  width: 140px;
+  height: 140px;
+  object-fit: contain; /* mantiene proporción */
   margin-bottom: 15px;
   border-radius: 10px;
   box-shadow: 0 0 10px #00ffff, 0 0 20px #6d307a;
@@ -423,7 +426,9 @@ h1, h2, h3 {
   }
 
   .console-img {
-    width: 80px;
+    width: 90px;
+    height: 90px;
+    object-fit: contain;
     /*margin-bottom: 8px;*/
   }
 
@@ -439,5 +444,4 @@ h1, h2, h3 {
 }
 
 </style>
-
 

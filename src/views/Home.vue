@@ -43,12 +43,12 @@
             <Card
               v-for="p in featuredProducts"
               :key="p.id"
-              :id="Number(p.id)"
+              :id="p.id"
               :image="p.image"
               :title="p.name"
               :price="Number(p.price)"
               variant="product"
-              :added="addedProductId === Number(p.id)"
+              :added="addedProductId === p.id"
               @buy="handleAddToCart(p)"
             ><!--:description="p.price"-->
               <!--<router-link :to="`/console/${p.id}`" class="product-button primary">Ver producto</router-link>-->
@@ -184,8 +184,8 @@
   const goToShop = () => router.push('/consoles')
   const goToNews = () => router.push('/news')
 
-  const addedGameId = ref<number | null>(null)
-  const addedProductId = ref<number | null>(null)
+  const addedGameId = ref<string | number | null>(null)
+  const addedProductId = ref<string | null>(null)
 
   const email = ref('')
   const loading = ref(false)
@@ -300,7 +300,8 @@
 
   function handleAddToCart(item: any) {
     const action = () => {
-      const isGame = !!item.title
+      const isGame = typeof item.id === 'number'
+      /*const isProduct = !!item.title*/
 
       cartStore.addItem({
         id: item.id.toString(),

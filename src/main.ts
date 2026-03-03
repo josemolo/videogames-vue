@@ -52,6 +52,7 @@ const userStore = useUserStore()
 await userStore.checkUser()
 const cartStore = useCartStore()
 
+
 const { getUser } = useAuth()
 getUser()
 
@@ -70,10 +71,11 @@ cartStore.$subscribe((_mutation, state) => {
   }
 })
 
-cart.loadFromStorage()
+
 
 cart.$subscribe((_mutation, state) => {
   localStorage.setItem('vortex_cart', JSON.stringify(state.items))
 })
+
 
 

@@ -4,12 +4,12 @@ export interface CartItem {
   cartId: string    
   id: string
   name: string
-  title: string
+  title?: string
   price: number
   image?: string
   quantity: number
   stock: number
-  type: 'console' | 'game' | 'accessory' | 'product'
+  type: 'console' | 'game' | 'accessory' | 'product' | 'article'
 }
 
 const STORAGE_KEY = 'vortex_cart'

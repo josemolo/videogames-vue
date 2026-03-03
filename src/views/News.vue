@@ -3,7 +3,7 @@
     <section class="news-page" v-reveal>
       
       <h1 class="page-title neon-text pulse">
-        Actualidad Gamer & Tech
+        Noticias
       </h1>
 
       <NewsSkeleton v-if="loading" />
@@ -183,23 +183,32 @@ useRouteMetrics()
 <style scoped>
 .news-page { max-width: 1200px; margin: 0 auto; padding: 60px 20px; color: white; }
 .page-title { 
-  text-align: center; 
-  font-size: 3rem; 
-  margin-bottom: 60px;
-  font-weight: 800;
-  letter-spacing: 3px;
+  font-family: 'Orbitron', sans-serif;
+  text-align: center;
+  font-size: clamp(2.8rem, 6vw, 4rem); 
+  font-weight: 900;
+  margin-bottom: 70px;
+  letter-spacing: 4px; 
   text-transform: uppercase;
+  
   background: linear-gradient(90deg, #7f5cff, #00e0ff, #7a48b1);
-  background-size: 300%;
+  background-size: 500% auto;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: neonFlow 6s ease infinite;
+  animation: neonFlow 60s ease infinite;
   position: relative;
+
+  text-shadow:
+    0 0 10px rgba(127, 92, 255, 0.224),
+    0 0 20px rgba(255, 0, 255, 0.313),
+    0 0 40px rgba(127, 92, 255, 0.4);
 }
 
+
+
 /* Línea decorativa debajo */
-.page-title::after {
+/*.page-title::after {
   content: '';
   display: block;
   width: 720px;
@@ -208,7 +217,7 @@ useRouteMetrics()
   background: linear-gradient(90deg, #7f5cff, #845c9e);
   border-radius: 10px;
   box-shadow: 0 0 10px #7f5cff, 0 0 20px #583058;
-}
+}*/
 
 /* FEATURED */
 .featured-news { 
@@ -241,7 +250,7 @@ useRouteMetrics()
 .featured-overlay h2 { font-size: 2rem; margin-bottom: 10px; }
 .featured-overlay p { opacity: 0.9; margin-bottom: 10px; }
 .featured-expand { position: absolute; top: 20px; right: 30px; font-size: 2.5rem; font-weight: bold; color: #7f5cff; cursor: pointer; transition: transform 0.4s ease; }
-.featured-expand.rotate { transform: rotate(45deg); color: #ff00ff; }
+.featured-expand.rotate { transform: rotate(45deg); color: #34ccc4; }
 .featured-expanded { 
   position: relative; 
   background: linear-gradient(180deg, rgba(15,15,30,0.95), rgba(10,10,20,0.95)); 

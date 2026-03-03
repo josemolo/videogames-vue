@@ -33,6 +33,8 @@
 import { ref, computed } from 'vue'
 import gamesData from '@/data/gamesCatalog.json'
 
+import { useCartStore } from '@/stores/cart'
+
 interface Game {
   id: number
   title: string
@@ -40,6 +42,8 @@ interface Game {
   price: number
   image: string
 }
+
+const cartStore = useCartStore()
 
 const games = gamesData as Game[]
 
@@ -51,6 +55,20 @@ const filteredGames = computed(() =>
     ? games
     : games.filter(g => g.platform === selectedPlatform.value)
 )
+
+
+function addToCart(game: any) {
+  cartStore.addItem({
+    id: game.id.toString(),
+    name: game.title,
+    title: game.title,
+    price: Number(game.price),
+    image: game.image,
+    stock: 10,
+    type: 'game'
+    
+  })
+}
 </script>
 
 <style scoped>

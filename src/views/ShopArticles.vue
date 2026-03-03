@@ -15,6 +15,8 @@
 <script setup lang="ts">
 import articlesData from '@/data/articles.json'
 
+import { useCartStore } from '@/stores/cart'
+
 interface Article {
   id: number
   title: string
@@ -22,7 +24,22 @@ interface Article {
   image: string
 }
 
+const cartStore = useCartStore()
+
 const articles = articlesData as Article[]
+
+function addToCart(article: any) {
+  cartStore.addItem({
+    id: article.id.toString(),
+    name: article.title,
+    title: article.title,
+    price: Number(article.price),
+    image: article.image,
+    stock: 10,
+    type: 'article',
+  
+  })
+}
 </script>
 
 <style scoped>

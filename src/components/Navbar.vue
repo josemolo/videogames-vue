@@ -52,6 +52,10 @@
         <span v-if="cart.totalItems" class="cart-badge">
           {{ cart.totalItems }}
         </span>
+
+        <span v-if="cartStore.totalItems > 0" class="cart-badge">
+          {{ cartStore.totalItems }}
+        </span>
       </button>
 
     </div>
@@ -71,6 +75,7 @@ import CartPopup from '@/components/CartPopup.vue'
 import { useCartStore } from '@/stores/cart'
 import { useUserStore } from '@/stores/user'
 
+const cartStore = useCartStore()
 
 const cart = useCartStore()
 const userStore = useUserStore()

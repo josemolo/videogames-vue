@@ -1,135 +1,135 @@
-[
-  {
-    "id": "nintendo",
-    "name": "Nintendo Switch",
-    "subtitle": "Consola Híbrida",
-    "image": "/images/switch.png",
-    "description": "",
-    "features": [
-      "🎮 Modo portátil y TV",
-      "🧩 Joy-Con desmontables",
-      "🕹️ Multijugador local y online",
-      "📦 Juegos exclusivos"
-    ],
-    "accessories": [
-      { "name": "Pro Controller", "image": "/images/pro.png" },
-      { "name": "Dock Station", "image": "/images/dock.png" },
-      { "name": "Joy-Con Set", "image": "/images/joycon.png" },
-      { "name": "Carrying Case", "image": "/images/case.png" }
-    ],
-    "price": 180000,
-    "stock": 5
-  },
+  [
+    {
+      "id": "nintendo",
+      "name": "Nintendo Switch",
+      "subtitle": "Consola Híbrida",
+      "image": "/images/switch.png",
+      "description": "",
+      "features": [
+        "🎮 Modo portátil y TV",
+        "🧩 Joy-Con desmontables",
+        "🕹️ Multijugador local y online",
+        "📦 Juegos exclusivos"
+      ],
+      "accessories": [
+        { "name": "Pro Controller", "image": "/images/pro.png" },
+        { "name": "Dock Station", "image": "/images/dock.png" },
+        { "name": "Joy-Con Set", "image": "/images/joycon.png" },
+        { "name": "Carrying Case", "image": "/images/case.png" }
+      ],
+      "price": 180000,
+      "stock": 4
+    },
 
-  {
-    "id": "play5",
-    "name": "Nintendo Switch",
-    "subtitle": "Consola Híbrida",
-    "image": "/images/switch.png",
-    "description": "",
-    "features": [
-      "🎮 Modo portátil y TV",
-      "🧩 Joy-Con desmontables",
-      "🕹️ Multijugador local y online",
-      "📦 Juegos exclusivos"
-    ],
-    "accessories": [
-      { "name": "Pro Controller", "image": "/images/pro.png" },
-      { "name": "Dock Station", "image": "/images/dock.png" },
-      { "name": "Joy-Con Set", "image": "/images/joycon.png" },
-      { "name": "Carrying Case", "image": "/images/case.png" }
-    ],
-    "price": 180000,
-    "stock": 5
-  },
+    {
+      "id": "play5",
+      "name": "PlayStation 5",
+      "subtitle": "Consola Híbrida",
+      "image": "/images/ps5.png",
+      "description": "",
+      "features": [
+        "🎮 Modo portátil y TV",
+        "🧩 Joy-Con desmontables",
+        "🕹️ Multijugador local y online",
+        "📦 Juegos exclusivos"
+      ],
+      "accessories": [
+        { "name": "Pro Controller", "image": "/images/pro.png" },
+        { "name": "Dock Station", "image": "/images/dock.png" },
+        { "name": "Joy-Con Set", "image": "/images/joycon.png" },
+        { "name": "Carrying Case", "image": "/images/case.png" }
+      ],
+      "price": 180000,
+      "stock": 5
+    },
 
-  {
-    "id": "xboxx",
-    "name": "Nintendo Switch",
-    "subtitle": "Consola Híbrida",
-    "image": "/images/switch.png",
-    "description": "",
-    "features": [
-      "🎮 Modo portátil y TV",
-      "🧩 Joy-Con desmontables",
-      "🕹️ Multijugador local y online",
-      "📦 Juegos exclusivos"
-    ],
-    "accessories": [
-      { "name": "Pro Controller", "image": "/images/pro.png" },
-      { "name": "Dock Station", "image": "/images/dock.png" },
-      { "name": "Joy-Con Set", "image": "/images/joycon.png" },
-      { "name": "Carrying Case", "image": "/images/case.png" }
-    ],
-    "price": 180000,
-    "stock": 5
-  },
+    {
+      "id": "xboxx",
+      "name": "Xbox X",
+      "subtitle": "Consola Híbrida",
+      "image": "/images/xboxx.png",
+      "description": "",
+      "features": [
+        "🎮 Modo portátil y TV",
+        "🧩 Joy-Con desmontables",
+        "🕹️ Multijugador local y online",
+        "📦 Juegos exclusivos"
+      ],
+      "accessories": [
+        { "name": "Pro Controller", "image": "/images/pro.png" },
+        { "name": "Dock Station", "image": "/images/dock.png" },
+        { "name": "Joy-Con Set", "image": "/images/joycon.png" },
+        { "name": "Carrying Case", "image": "/images/case.png" }
+      ],
+      "price": 180000,
+      "stock": 0
+    },
 
-  {
-    "id": "xboxs",
-    "name": "Nintendo Switch",
-    "subtitle": "Consola Híbrida",
-    "image": "/images/switch.png",
-    "description": "",
-    "features": [
-      "🎮 Modo portátil y TV",
-      "🧩 Joy-Con desmontables",
-      "🕹️ Multijugador local y online",
-      "📦 Juegos exclusivos"
-    ],
-    "accessories": [
-      { "name": "Pro Controller", "image": "/images/pro.png" },
-      { "name": "Dock Station", "image": "/images/dock.png" },
-      { "name": "Joy-Con Set", "image": "/images/joycon.png" },
-      { "name": "Carrying Case", "image": "/images/case.png" }
-    ],
-    "price": 180000,
-    "stock": 5
-  },
+    {
+      "id": "xboxs",
+      "name": "Xbox S",
+      "subtitle": "Consola Híbrida",
+      "image": "/images/xboxs.png",
+      "description": "",
+      "features": [
+        "🎮 Modo portátil y TV",
+        "🧩 Joy-Con desmontables",
+        "🕹️ Multijugador local y online",
+        "📦 Juegos exclusivos"
+      ],
+      "accessories": [
+        { "name": "Pro Controller", "image": "/images/pro.png" },
+        { "name": "Dock Station", "image": "/images/dock.png" },
+        { "name": "Joy-Con Set", "image": "/images/joycon.png" },
+        { "name": "Carrying Case", "image": "/images/case.png" }
+      ],
+      "price": 180000,
+      "stock": 0
+    },
 
-  {
-    "id": "play4",
-    "name": "Nintendo Switch",
-    "subtitle": "Consola Híbrida",
-    "image": "/images/switch.png",
-    "description": "",
-    "features": [
-      "🎮 Modo portátil y TV",
-      "🧩 Joy-Con desmontables",
-      "🕹️ Multijugador local y online",
-      "📦 Juegos exclusivos"
-    ],
-    "accessories": [
-      { "name": "Pro Controller", "image": "/images/pro.png" },
-      { "name": "Dock Station", "image": "/images/dock.png" },
-      { "name": "Joy-Con Set", "image": "/images/joycon.png" },
-      { "name": "Carrying Case", "image": "/images/case.png" }
-    ],
-    "price": 180000,
-    "stock": 5
-  },
+    {
+      "id": "play4",
+      "name": "PlayStation 4",
+      "subtitle": "Consola Híbrida",
+      "image": "/images/ps4.png",
+      "description": "",
+      "features": [
+        "🎮 Modo portátil y TV",
+        "🧩 Joy-Con desmontables",
+        "🕹️ Multijugador local y online",
+        "📦 Juegos exclusivos"
+      ],
+      "accessories": [
+        { "name": "Pro Controller", "image": "/images/pro.png" },
+        { "name": "Dock Station", "image": "/images/dock.png" },
+        { "name": "Joy-Con Set", "image": "/images/joycon.png" },
+        { "name": "Carrying Case", "image": "/images/case.png" }
+      ],
+      "price": 180000,
+      "stock": 0
+    },
 
 
-  {
-    "id": "ds",
-    "name": "Nintendo Switch",
-    "subtitle": "Consola Híbrida",
-    "image": "/images/switch.png",
-    "description": "",
-    "features": [
-      "🎮 Modo portátil y TV",
-      "🧩 Joy-Con desmontables",
-      "🕹️ Multijugador local y online",
-      "📦 Juegos exclusivos"
-    ],
-    "accessories": [
-      { "name": "Pro Controller", "image": "/images/pro.png" },
-      { "name": "Dock Station", "image": "/images/dock.png" },
-      { "name": "Joy-Con Set", "image": "/images/joycon.png" },
-      { "name": "Carrying Case", "image": "/images/case.png" }
-    ],
-    "price": 180000,
-    "stock": 5
-  }
-]
+    {
+      "id": "ds",
+      "name": "Nintendo 3DS",
+      "subtitle": "Consola Híbrida",
+      "image": "/images/3ds.png",
+      "description": "",
+      "features": [
+        "🎮 Modo portátil y TV",
+        "🧩 Joy-Con desmontables",
+        "🕹️ Multijugador local y online",
+        "📦 Juegos exclusivos"
+      ],
+      "accessories": [
+        { "name": "Pro Controller", "image": "/images/pro.png" },
+        { "name": "Dock Station", "image": "/images/dock.png" },
+        { "name": "Joy-Con Set", "image": "/images/joycon.png" },
+        { "name": "Carrying Case", "image": "/images/case.png" }
+      ],
+      "price": 180000,
+      "stock": 0
+    }
+  ]
 

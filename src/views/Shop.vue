@@ -1,7 +1,7 @@
 <template>
   <div class="shop-wrapper">
     <section class="shop">
-        <h2 class="shop-title">Tienda</h2>
+        <h1 class="section-title">Tienda</h1>
 
         <div class="shop-grid">
 
@@ -13,14 +13,14 @@
             </div>
 
             <div class="shop-card" @click="goTo('/tienda/juegos')">
-                <img src="/images/consolas.png" alt="Juegos">
+                <img src="/images/gameses.png" alt="Juegos">
                 <div class="overlay">
                 <h2>Juegos</h2>
                 </div>
             </div>
 
             <div class="shop-card" @click="goTo('/tienda/articulos')">
-                <img src="/images/consolas.png" alt="Artículos">
+                <img src="/images/articles.png" alt="Artículos">
                 <div class="overlay">
                 <h2>Artículos</h2>
                 </div>
@@ -59,7 +59,7 @@ function goTo(path: string) {
   text-align: center;
   color: white;
 }
-
+/*
 .shop-title {
   font-size: 3rem;
   margin-bottom: 60px;
@@ -68,7 +68,33 @@ function goTo(path: string) {
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
+}*/
+
+.section-title {
+  font-family: 'Orbitron', sans-serif;
+  text-align: center;
+  font-size: clamp(2.8rem, 6vw, 4rem);
+  font-weight: 900;
+  margin-bottom: 70px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+
+  background: linear-gradient(90deg, #7f5cff, #00e0ff, #7a48b1);
+  background-size: 500% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  animation: neonFlow 60s ease infinite;
+  position: relative;
+
+  text-shadow:
+    0 0 10px rgba(127, 92, 255, 0.224),
+    0 0 20px rgba(255, 0, 255, 0.313),
+    0 0 40px rgba(127, 92, 255, 0.4);
 }
+
+
 
 .shop-grid {
   display: grid;
@@ -97,7 +123,7 @@ function goTo(path: string) {
 
 .shop-card:hover {
   transform: translateY(-10px);
-  box-shadow: 0 0 20px #7f5cff, 0 0 40px #ff00ff;
+  box-shadow: 0 0 20px #7f5cff, 0 0 40px #8400ffb9;
 }
 
 .shop-card:hover img {
@@ -115,5 +141,10 @@ function goTo(path: string) {
 .overlay h2 {
   font-size: 2rem;
   text-shadow: 0 0 10px #7f5cff;
+}
+
+@keyframes neonFlow {
+  500% { background-position: 500% }
+  100% { background-position: 150% }
 }
 </style>

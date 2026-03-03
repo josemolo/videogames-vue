@@ -33,11 +33,11 @@
    <button
       v-if="variant === 'product' || variant === 'game'"
       class="add-cart"
-      :class="{ added: props.added }"
+      :class="{ added }" 
       :disabled="stock === 0"
       @click="handleBuy"
-    >
-      <span v-if="props.added">✔ Agregado</span>
+    ><!--: props.added-->
+      <span v-if="added">✔ Agregado</span>
       <span v-else>Agregar al carrito</span>
     </button>
 
@@ -78,7 +78,7 @@ import { ref } from 'vue'  //onMounted, onBeforeUnmount
    PROPS
 ===================== */
 const props = defineProps<{
-  id: number
+  id: string | number
   title: string
   description?: string
   image: string
@@ -87,6 +87,7 @@ const props = defineProps<{
   stock?: number
   added?: boolean
   /*button?: string*/
+  onView?: () => any
 }>()
 
 /* =====================
@@ -103,6 +104,7 @@ const emit = defineEmits<{
 //const cart = useCartStore()
 /*const added = ref(false)*/
 //const cardRef = ref<HTMLElement | null>(null)
+
 
 /* =====================
    ACTIONS
@@ -148,6 +150,7 @@ const handleBuy = () => {
  // name: 'PlayStation 5',
  // price: 499,
 //})
+
 </script>
 
 <style scoped>
@@ -293,7 +296,7 @@ button:active {
   z-index: 2;
 }
 
-.add-cart.added {
+.card .add-cart.added {
   background: linear-gradient(45deg,#7cff7c,#00ffcc);
   box-shadow:
     0 0 15px rgba(124,255,124,0.9),

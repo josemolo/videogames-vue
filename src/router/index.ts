@@ -15,10 +15,10 @@ const routes = [
   { path: '/news', name: 'News', component: () => import('../views/News.vue') },
   { path: '/consoles', name: 'Consoles', component: () => import('../views/Shop.vue') },
   { path: '/contact', name: 'Contact', component:  () => import('../views/Contact.vue') },
-  { path: '/nintendo', name: 'Nintendo', component: () => import('../views/Nintendo.vue') },
+  /*{ path: '/nintendo', name: 'Nintendo', component: () => import('../views/Nintendo.vue') },*/
   { path: '/console/:id', name: 'ConsoleDetail', component: () => import('../views/ConsoleDetail.vue') },
 
-  // 🔐 AUTH
+// 🔐 AUTH
   { path: '/login', component: () => import('@/views/Login.vue') },
   { path: '/verify', component: () => import('@/views/Verify.vue') },
   { path: '/verify-required', component: () => import('@/views/VerifyRequired.vue') },

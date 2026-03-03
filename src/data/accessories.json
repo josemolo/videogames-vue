@@ -2,25 +2,145 @@
   {
     "id": 1,
     "consoleId": "nintendo",
-    "name": "Nintendo Pro Controller",
-    "price": 48000,
-    "stock": 5,
-    "image": "https://picsum.photos/300/200?1"
+    "name": "Pro Controller",
+    "price": 55000,
+    "stock": 0,
+    "image": "/images/procontroler.png"
   },
   {
     "id": 2,
-    "consoleId": "nintendo",  
-    "name": "Dock Nintendo Switch",
-    "price": 65000,
+    "consoleId": "nintendo",
+    "name": "Joy-Con",
+    "price": 42000,
     "stock": 5,
-    "image": "https://picsum.photos/300/200?2"
+    "image": "/images/joy.png"
   },
   {
     "id": 3,
-    "consoleId": "nintendo",
-    "name": "Joy-Con Controllers",
-    "price": 57000,
+    "consoleId": "nintendo",  
+    "name": "Dock Charger",
+    "price": 17000,
     "stock": 5,
-    "image": "https://picsum.photos/300/200?3"
+    "image": "/images/dock.png"
+  },
+  {
+    "id": 4,
+    "consoleId": "play5",
+    "name": "DualSense",
+    "price": 48000,
+    "stock": 5,
+    "image": "/images/dualsense.png"
+  },
+  {
+    "id": 5,
+    "consoleId": "play5",  
+    "name": "PULSE Explore™",
+    "price": 160000,
+    "stock": 5,
+    "image": "/images/pulse.png"
+  },
+  {
+    "id": 6,
+    "consoleId": "play5",
+    "name": "Hori Apex",
+    "price": 95000,
+    "stock": 5,
+    "image": "/images/hori.png"
+  },
+  {
+    "id": 7,
+    "consoleId": "xboxx",
+    "name": "Adaptive Controller",
+    "price": 80000,
+    "stock": 5,
+    "image": "/images/adaptative.png"
+  },
+  {
+    "id": 8,
+    "consoleId": "xboxx",
+    "name": "Wireless Controller",
+    "price": 45000,
+    "stock": 5,
+    "image": "/images/wireles.png"
+  },
+  {
+    "id": 9,
+    "consoleId": "xboxx",  
+    "name": "Skin",
+    "price": 15000,
+    "stock": 5,
+    "image": "/images/skin.png"
+  },
+   {
+    "id": 13,
+    "consoleId": "xboxs",
+    "name": "Wireless Controller",
+    "price": 7000,
+    "stock": 5,
+    "image": "/images/controls.png"
+  },
+  {
+    "id": 14,
+    "consoleId": "xboxs",  
+    "name": "Joystick",
+    "price": 50000,
+    "stock": 5,
+    "image": "/images/joystick.png"
+  },
+  {
+    "id": 15,
+    "consoleId": "xboxs",
+    "name": "Back",
+    "price": 15000,
+    "stock": 5,
+    "image": "/images/pack.png"
+  },
+  {
+    "id": 10,
+    "consoleId": "play4",
+    "name": "Move Gun",
+    "price": 80000,
+    "stock": 5,
+    "image": "/images/move.png"
+  },
+  {
+    "id": 11,
+    "consoleId": "play4",  
+    "name": "KontrolFreek",
+    "price": 6500,
+    "stock": 5,
+    "image": "/images/analogo.png"
+  },
+  {
+    "id": 12,
+    "consoleId": "play4",
+    "name": "VR",
+    "price": 350000,
+    "stock": 5,
+    "image": "/images/vr.png"
+  },
+  {
+    "id": 16,
+    "consoleId": "ds",
+    "name": "Stylus",
+    "price": 6000,
+    "stock": 5,
+    "image": "/images/pen.png"
+  },
+  {
+    "id": 17,
+    "consoleId": "ds",  
+    "name": "Case Games",
+    "price": 18000,
+    "stock": 5,
+    "image": "/images/pokebag.png"
+  },
+  {
+    "id": 18,
+    "consoleId": "ds",
+    "name": "Grip",
+    "price": 8000,
+    "stock": 5,
+    "image": "/images/carcasa.png"
   }
 ]
