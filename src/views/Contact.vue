@@ -6,7 +6,7 @@
 
     <!-- HERO -->
     <section class="taller-hero reveal">
-      <h1>LUCYCELL TECH CENTER</h1>
+      <h1>TECH CENTER</h1>
       <p>Centro técnico especializado en reparación avanzada de dispositivos electrónicos</p>
     </section>
 

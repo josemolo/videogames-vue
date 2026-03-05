@@ -483,5 +483,11 @@ onUnmounted(() => {
   .hero-actions a {
     width: 90%;         /* Casi todo el ancho, pero con margen */
     max-width: none;    /* Sin límite para ajustar */
+    margin: 0 auto;      /* Centrar los botones */
+}
+
+ /* Ajustar tamaño del título para pantallas muy pequeñas */
+  .hero-content h1.neon-text {
+    font-size: clamp(2.5rem, 7vw, 4rem);
 }
 </style>
