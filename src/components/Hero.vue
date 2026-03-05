@@ -360,6 +360,10 @@ onUnmounted(() => {
   align-items: center;
   justify-content: center;
   transition: all 0.3s ease;
+  width: auto;
+  min-width: 140px;     /* Tamaño mínimo cómodo para tocar */
+  max-width: 220px;     /* Tamaño máximo para que no se extiendan mucho */
+  box-sizing: border-box; /* Incluye padding dentro del ancho */
 }
 
 .hero-actions button {
@@ -471,8 +475,13 @@ onUnmounted(() => {
   50% { opacity: 0.85; } /*transform: translateY(0);*/
 }
 
-@media (max-width: 600px) {
+@media (max-width: 400px) {
   .hero-actions { flex-direction: column; }
   /*.hero-content h1 { font-size: 3rem; }*/
+}
+
+  .hero-actions a {
+    width: 90%;         /* Casi todo el ancho, pero con margen */
+    max-width: none;    /* Sin límite para ajustar */
 }
 </style>
