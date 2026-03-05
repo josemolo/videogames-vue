@@ -24,14 +24,14 @@
     {
       "id": "play5",
       "name": "PlayStation 5",
-      "subtitle": "Consola Híbrida",
+      "subtitle": "Realidad Gamer",
       "image": "/images/ps5.png",
       "description": "",
       "features": [
-        "Modo portátil y TV",
-        "Joy-Con desmontables",
-        "Multijugador local y online",
-        "Juegos exclusivos"
+         "Gráficos hasta 4K con Ray Tracing",
+         "SSD ultrarrápido para cargas instantáneas",
+         "Control DualSense con retroalimentación háptica",
+         "Amplia colección de juegos exclusivos"
       ],
       "accessories": [
         { "name": "Pro Controller", "image": "/images/pro.png" },
@@ -46,14 +46,14 @@
     {
       "id": "xboxx",
       "name": "Xbox X",
-      "subtitle": "Consola Híbrida",
+      "subtitle": "Potencia Avanzada",
       "image": "/images/xboxx.png",
       "description": "",
       "features": [
-        "Modo portátil y TV",
-        "Joy-Con desmontables",
-        "Multijugador local y online",
-        "Juegos exclusivos"
+        "Resolución hasta 4K real",
+        "Almacenamiento SSD ultrarrápido",
+        "Compatibilidad con juegos de generaciones anteriores",
+        "Acceso a Xbox Game Pass"
       ],
       "accessories": [
         { "name": "Pro Controller", "image": "/images/pro.png" },
@@ -68,14 +68,14 @@
     {
       "id": "xboxs",
       "name": "Xbox S",
-      "subtitle": "Consola Híbrida",
+      "subtitle": "Rendimiento Digital",
       "image": "/images/xboxs.png",
       "description": "",
       "features": [
-        "Modo portátil y TV",
-        "Joy-Con desmontables",
-        "Multijugador local y online",
-        "Juegos exclusivos"
+        "Diseño compacto totalmente digital",
+        "Carga rápida con SSD",
+        "Resolución hasta 1440p",
+        "Biblioteca completa con Xbox Game Pass"
       ],
       "accessories": [
         { "name": "Pro Controller", "image": "/images/pro.png" },
@@ -90,14 +90,14 @@
     {
       "id": "play4",
       "name": "PlayStation 4",
-      "subtitle": "Consola Híbrida",
+      "subtitle": "Portátil 3D",
       "image": "/images/ps4.png",
       "description": "",
       "features": [
-        "Modo portátil y TV",
-        "Joy-Con desmontables",
-        "Multijugador local y online",
-        "Juegos exclusivos"
+          "Pantalla superior con efecto 3D sin gafas",
+          "Amplio catálogo de juegos portátiles",
+          "Controles táctiles y botones clásicos",
+          "Funciones StreetPass y multijugador local"
       ],
       "accessories": [
         { "name": "Pro Controller", "image": "/images/pro.png" },

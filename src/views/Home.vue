@@ -432,7 +432,18 @@
   
     .hero-text{margin-top:1rem;font-size:clamp(1.1rem,2.5vw,1.4rem);opacity:0.95;}
   .hero-actions{margin-top:2.5rem;display:flex;gap:1.2rem;justify-content:center;flex-wrap:wrap}
-  .hero-actions button{padding:0.9rem 2.4rem;font-size:1.1rem;border-radius:12px;cursor:pointer;transition:all 0.3s ease;font-weight:600}
+  .hero-actions button{
+    padding:0.9rem 2.4rem;
+    font-size:1.1rem;
+    border-radius:12px;
+    cursor:pointer;
+    transition:all 0.3s ease;
+    font-weight:600;
+
+    width: auto;       /* Evita que ocupen todo el ancho */
+    min-width: 140px;  /* Tamaño mínimo legible */
+    max-width: 250px;  /* Tamaño máximo razonable */
+  }
   .primary{border:none;background:linear-gradient(45deg,#ffd900cd,#BFA06D);color:#fff;box-shadow:0 0 30px rgba(255,215,0,0.6)}
   .primary:hover{transform:translateY(-4px);box-shadow:0 0 50px rgba(255, 217, 0, 0.612)}
   .secondary{background:transparent;color:#e6e3a7;border:2px solid #e6e6a7}
@@ -539,7 +550,12 @@
 }
 
   /* RESPONSIVE */
-  @media(max-width:900px){
+  @media(max-width:500px){
+
+    .hero-actions button {
+      width: 90%;      /* Que no toque los bordes en pantallas muy pequeñas */
+      max-width: none;
+    }
     .hero-actions{
       flex-direction:column
     }

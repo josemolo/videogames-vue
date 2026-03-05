@@ -79,7 +79,7 @@
 
             <ul class="features-list">
               <li v-for="(item, i) in selectedConsole.features" :key="i">
-                <span class="feature-icon">✔️</span>
+                <span class="feature-icon">⚛</span>
                 <span class="feature-text">{{ item }}</span>
               </li>
             </ul>
@@ -601,7 +601,7 @@
   .content {
     display: flex;
     flex-direction: row;
-    align-items: stretch;
+    align-items: center;
     gap: 40px;
     flex-wrap: wrap;
     justify-content: center;
@@ -806,6 +806,8 @@
     flex-direction: column;
     gap: 12px;
     padding-left: 0;
+    align-items: center; /* centra horizontalmente los li */
+    text-align: center;  /* para texto dentro */
   }
 
   .features-list li {
@@ -818,11 +820,17 @@
     padding: 0;
     margin: 20px 0;
     margin-bottom: 10px;
+    justify-content: center; /* centra los items dentro del li */
   }
-
+  
   .feature-icon {
     font-size: 1.3rem;
-    color: #2100f4;
+    color: #ebdca18b;
+  }
+
+  /* Si quieres que sea dorado */
+  .feature-icon.golden {
+    color: #ffedb2; /* color dorado clásico */
   }
 
   .buttons {
@@ -975,7 +983,7 @@
 
   .game-desc {
     font-size: 0.85rem;
-    color: #9f93f8;
+    color: #f8df93;
     margin-bottom: 12px;
   }
 
@@ -996,7 +1004,7 @@
   }
 
   .game-stock.out {
-    color: #684dff;
+    color: #ffed4d;
     /*font-weight: bold;*/
   }
 
@@ -1010,7 +1018,7 @@
     /*text-align: center;*/
     margin-bottom: 25px;
 
-    color: #9898f0;
+    color: #ffffcee7;
     /*letter-spacing: 1.5px;*/
 
     text-shadow:
@@ -1041,10 +1049,10 @@
   }
 
   .accessory-card {
-    background: #0213ff;
+    background: #ffd10285;
     border-radius: 15px;
     padding: 15px;
-    box-shadow: 0 0 15px rgb(35, 5, 233);
+    box-shadow: 0 0 15px rgba(233, 210, 5, 0.635);
   }
 
   .accessory-card img {
@@ -1071,7 +1079,7 @@
   }
 
   .accessories-row::-webkit-scrollbar-thumb {
-    background: rgb(25, 0, 255);
+    background: rgba(255, 221, 0, 0.667);
     border-radius: 10px;
   }
 
