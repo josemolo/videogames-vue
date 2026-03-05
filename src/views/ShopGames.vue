@@ -74,15 +74,15 @@ function addToCart(game: any) {
 <style scoped>
 .games-wrapper {
   padding: 60px 20px;
-  background: #0a0a1f;
-  color: white;
+  background: #9f0e0e15;
+  color: rgb(255, 233, 198);
 }
 
 .games-title {
   text-align: center;
   font-size: 3rem;
   margin-bottom: 40px;
-  text-shadow: 0 0 15px #7f5cff;
+  text-shadow: 0 0 15px #f3ecafe2;
 }
 
 /* FILTRO */
@@ -94,17 +94,17 @@ function addToCart(game: any) {
 .platform-filter button {
   margin: 0 10px;
   padding: 10px 20px;
-  border: 2px solid #7f5cff;
+  border: 2px solid #e1e09d8a;
   background: transparent;
-  color: white;
+  color: rgb(255, 252, 219);
   cursor: pointer;
   transition: 0.3s;
 }
 
 .platform-filter button.active,
 .platform-filter button:hover {
-  background: #7f5cff;
-  box-shadow: 0 0 15px #7f5cff;
+  background: #fffd9558;
+  box-shadow: 0 0 15px #7e803ab9;
 }
 
 /* GRID */
@@ -115,23 +115,23 @@ function addToCart(game: any) {
 }
 
 .game-card {
-  background: #111127;
+  background: #d4af3715;
   border-radius: 15px;
   padding: 20px;
   text-align: center;
   transition: 0.3s;
-  border: 1px solid rgba(127,92,255,0.3);
+  border: 1px solid rgba(235, 232, 179, 0.571);
 }
 
 .game-card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 0 20px #7f5cff;
+  box-shadow: 0 0 20px #d2d08877;
 }
 
 .price {
   display: block;
   margin-top: 10px;
-  color: #ff00ff;
+  color: #eae6bb;
   font-weight: bold;
 }
 

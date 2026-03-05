@@ -70,8 +70,8 @@ const checkout = () => {
 <style scoped>
 .library {
   padding: 20px;
-  color: #fff;
-  background: #0a0a1f;
+  color: #fff1b0;
+  background: #000000;
   min-height: 100vh;
   font-family: 'Orbitron', sans-serif;
 }
@@ -83,12 +83,12 @@ const checkout = () => {
 }
 
 .game-card {
-  background: #1c1c2f;
+  background: #111111;
   padding: 15px;
   border-radius: 10px;
-  border: 2px solid #bf97ea;
+  border: 2px solid #ffd9008b;
   width: 200px;
-  box-shadow: 0 0 10px #bf97ea, 0 0 20px #6d307a;
+  box-shadow: 0 0 10px #ffd90083, 0 0 20px #BFA06D;
 }
 
 .game-card input {
@@ -106,17 +106,17 @@ const checkout = () => {
   padding: 8px;
   border: none;
   border-radius: 5px;
-  background: linear-gradient(45deg, #bf97ea, #6d307a);
-  color: #fff;
+  background: linear-gradient(45deg, #ffd900aa, #BFA06D);
+  color: #000000;
   cursor: pointer;
 }
 
 .cart {
   margin-top: 30px;
-  background: #1c1c2f;
+  background: #111111;
   padding: 15px;
   border-radius: 10px;
-  border: 2px solid #bf97ea;
+  border: 2px solid #ffd900bb;
   width: 400px;
 }
 
@@ -125,8 +125,8 @@ const checkout = () => {
   padding: 10px;
   border: none;
   border-radius: 5px;
-  background: linear-gradient(45deg, #bf97ea, #6d307a);
-  color: #fff;
+  background: linear-gradient(45deg, #ffd900bd, #BFA06D);
+  color: #000000;
   cursor: pointer;
 }
 </style>

@@ -36,8 +36,8 @@ defineProps({
   text-align: center;
   margin-bottom: 2.5rem;
   font-size: clamp(2rem, 5vw, 2.5rem);
-  color: #7f5cff;
-  text-shadow: 0 0 10px #7f5cff;
+  color: #1500ff;
+  text-shadow: 0 0 10px #3741d4;
 }
 
 .grid {

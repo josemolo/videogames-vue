@@ -5,7 +5,7 @@
     "name": "Cyber Adventure",
     "description": "Un juego de acción futurista.",
     "price": 28000,
-    "stock": 5,
+    "stock": 0,
     "image": "https://picsum.photos/300/180"
   },
   {
@@ -14,7 +14,7 @@
     "name": "Fantasy World",
     "description": "Explora un mundo lleno de magia.",
     "price": 26000,
-    "stock": 5,
+    "stock": 1,
     "image": "https://picsum.photos/300/180"
   },
   {

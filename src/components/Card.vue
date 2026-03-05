@@ -157,10 +157,10 @@ const handleBuy = () => {
 .card {
   display: flex;
   flex-direction: column;
-  background: #111;
+  background: #93791421;
   border-radius: 14px;
   padding: 1rem;
-  color: white;
+  color: rgb(255, 251, 238);
   text-align: center;
   position: relative;
   z-index: 1;
@@ -204,8 +204,8 @@ const handleBuy = () => {
 
 .card:hover {
   transform: translateY(-10px) scale(1.02);
-  box-shadow: 0 0 25px rgba(127,92,255,0.6), 0 0 60px rgba(127,92,255,0.25);
-  filter: drop-shadow(0 0 12px rgba(127,92,255,0.6));
+  box-shadow: 0 0 25px rgba(255, 200, 0, 0.484), 0 0 60px rgba(255, 255, 255, 0);
+  filter: drop-shadow(0 0 12px rgb(159, 159, 159));
 }
 
 .card::before {
@@ -214,7 +214,7 @@ const handleBuy = () => {
   inset: -50%;
   background: radial-gradient(
     circle,
-    rgba(127,92,255,0.25),
+    rgba(170, 154, 84, 0.05),
     transparent 70%
   );
   opacity: 0;
@@ -239,8 +239,8 @@ const handleBuy = () => {
     filter 0.4s ease;
   
   box-shadow:
-    0 10px 25px rgba(127,92,255,0.35),
-    0 0 35px rgba(127,92,255,0.25);
+    0 10px 25px rgb(120, 106, 64),
+    0 0 35px rgb(140, 140, 140);
 }
 /*
 filter: blur(0px);
@@ -266,15 +266,15 @@ button {
   margin-top: 1rem;
   padding: 0.6rem 1.4rem;
   border: none;
-  background: linear-gradient(45deg,#7f5cff,#503ec2);
-  color: white;
+  background: linear-gradient(45deg,#f4e290,#f6da76);
+  color: #eae08b;
   border-radius: 10px;
   cursor: pointer;
   /*transition: background-color 0.3s ease, transform 0.2s ease;*/
 }
 
 button:hover {
-  background: linear-gradient(45deg,#5a3bcc,#381f9d);
+  background: linear-gradient(45deg,#bcb74e,#b8a657);
   transform: translateY(-2px);
 }
 
@@ -287,8 +287,8 @@ button:active {
   margin-top: auto;
   padding: 0.6rem 1.4rem;
   border: none;
-  background: linear-gradient(45deg,#7f5cff,#00ffff);
-  color: white;
+  background: linear-gradient(45deg,#ddc070,#ffd00064);
+  color: #fffbe1;
   border-radius: 10px;
   cursor: pointer;
   pointer-events: auto;
@@ -346,7 +346,7 @@ button:active {
 .card-price {
   font-weight: bold;
   /*margin-top: auto;*/
-  color: #7f5cff;
+  color:#faf5d7;
 }
 
 .testimonial-card {

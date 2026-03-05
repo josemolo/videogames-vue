@@ -123,8 +123,8 @@ input {
 }
 
 button {
-  background: #511d71;
-  color: white;
+  background: #ffae0091;
+  color: #ffffff;
   font-weight: bold;
   padding: 8px 12px;
   border-radius: 6px;
@@ -134,17 +134,17 @@ button {
 }
 
 button:hover {
-  background: #7f5cff;
+  background: #544d3b;
 }
 
 .toggle {
   margin-top: 10px;
   cursor: pointer;
   text-align: center;
-  color: #cfcfcf;
+  color: #ffffff;
 }
 .toggle:hover {
-  color: white;
+  color: rgb(255, 255, 255);
 }
 
 .password-wrapper {

@@ -1,6 +1,6 @@
   <template>  
     <div class="home-wrapper">
-      <canvas ref="canvasRef" class="particle-canvas"></canvas>
+      <!--<canvas ref="canvasRef" class="particle-canvas"></canvas>-->
       <div class="home">
 
       <Hero 
@@ -138,7 +138,7 @@
   import SectionGrid from '@/components/SectionGrid.vue'
   import Card from '@/components/Card.vue'
 
-  import { useParticles } from '@/composables/useParticles'
+  /*import { useParticles } from '@/composables/useParticles'*/
 
   import gamesData from '@/data/games.json'
   import featuredProductsData from '@/data/featuredProducts.json'
@@ -161,10 +161,10 @@
   useRouteMetrics()
 
   useHead({
-    title: 'LucyCell | Consolas, Juegos y Accesorios Gamer',
+    title: 'LUCYCELL | Consolas, Juegos y Accesorios Gamer',
     meta: [
       { name: 'description', content: 'Bienvenido a Gaming Hub, tu portal de videojuegos.' },
-      { property: 'og:title', content: 'LucyCell | Consolas y Juegos' },
+      { property: 'og:title', content: 'LUCYCELL | Consolas y Juegos' },
       { property: 'og:description', name: 'description', content: 'Compra consolas, juegos y accesorios gamer con envíos rápidos y precios competitivos.' },
       { property: 'og:image', content: 'https://res.cloudinary.com/usuario/image/upload/banner.jpg'},
       { property: 'og:type', content: 'website' },
@@ -225,7 +225,7 @@
 
   const gamingBg = "https://res.cloudinary.com/dakkfinnu/video/upload/v1767195871/gaming_g0o04l.mp4";
 
-  const canvasRef = ref<HTMLCanvasElement | null>(null)
+  /*const canvasRef = ref<HTMLCanvasElement | null>(null)*/
 
     
   //const simpleSections = [
@@ -331,9 +331,9 @@
     }
   }
 
-  let stopParticles: (() => void) | null = null
+  /*let stopParticles: (() => void) | null = null*/
 
-  onMounted(async () => {
+  /*onMounted(async () => {
     //await nextTick()
     
      //if (canvasRef.value) {
@@ -343,12 +343,12 @@
 
   onBeforeUnmount(() => {
     if (stopParticles) stopParticles()
-  })
+  })*/
 
 
 
   
-  //useParticles(canvasRef)
+  //useParticles(canvasRef)*/
 
   console.log('games:', games)
 
@@ -391,7 +391,7 @@
   }
 
   .carousel-row::-webkit-scrollbar-thumb {
-    background: #7f5cff;
+    background: #e0d798;
     border-radius: 10px;
   }
 
@@ -421,30 +421,33 @@
 
  
 
-  .hero{position:relative;height:100vh;display:flex;justify-content:center;align-items:center;text-align:center;color:#fff;overflow:hidden;}
+  .hero{position:relative;height:100vh;display:flex;justify-content:center;align-items:center;text-align:center;color:#efe5b3;overflow:hidden;}
   .hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(0.2) contrast(1.1);z-index:-3}
   .hero-overlay{position:absolute;inset:0;background:rgba(0,0,0,0.7);z-index:-2}
   .hero-content{position:relative;max-width:900px;padding:20px;z-index:2;animation:fadeUp 1s ease-out forwards;}
-  .badge{display:inline-block;padding:6px 14px;margin-bottom:1rem;border-radius:20px;font-size:0.8rem;background:rgba(137,117,183,0.2);border:1px solid rgba(137,117,183,0.6);backdrop-filter:blur(6px)}
-  .hero-title{font-size:clamp(3rem,8vw,6rem);font-weight:900;font-family:'Orbitron',sans-serif;color:#b8a7e6;text-shadow:0 0 20px rgba(184,167,230,0.8),0 0 40px rgba(95,70,180,0.6);}
-  .hero-text{margin-top:1rem;font-size:clamp(1.1rem,2.5vw,1.4rem);opacity:0.95;}
+  .badge{display:inline-block;padding:6px 14px;margin-bottom:1rem;border-radius:20px;font-size:0.8rem;background:rgba(255,215,0,0.15);border:1px solid rgba(255,215,0,0.6);backdrop-filter:blur(6px)}
+  
+  .hero-title{
+    font-size:clamp(3rem,8vw,6rem);font-weight:900;font-family:'Orbitron',sans-serif;color:#93894f;text-shadow:0 0 20px rgba(221, 204, 118, 0.84),0 0 40px rgba(171, 180, 70, 0.6);}
+  
+    .hero-text{margin-top:1rem;font-size:clamp(1.1rem,2.5vw,1.4rem);opacity:0.95;}
   .hero-actions{margin-top:2.5rem;display:flex;gap:1.2rem;justify-content:center;flex-wrap:wrap}
   .hero-actions button{padding:0.9rem 2.4rem;font-size:1.1rem;border-radius:12px;cursor:pointer;transition:all 0.3s ease;font-weight:600}
-  .primary{border:none;background:linear-gradient(45deg,#7f5cff,#503ec2);color:#fff;box-shadow:0 0 30px rgba(127,92,255,0.6)}
-  .primary:hover{transform:translateY(-4px);box-shadow:0 0 50px rgba(127,92,255,0.9)}
-  .secondary{background:transparent;color:#b8a7e6;border:2px solid #b8a7e6}
-  .secondary:hover{background:rgba(184,167,230,0.15)}
+  .primary{border:none;background:linear-gradient(45deg,#ffd900cd,#BFA06D);color:#fff;box-shadow:0 0 30px rgba(255,215,0,0.6)}
+  .primary:hover{transform:translateY(-4px);box-shadow:0 0 50px rgba(255, 217, 0, 0.612)}
+  .secondary{background:transparent;color:#e6e3a7;border:2px solid #e6e6a7}
+  .secondary:hover{background:rgba(68, 0, 255, 0.15)}
   .particle-canvas{position:fixed;inset:0;z-index:-3;pointer-events:none}
 
   /* SECCIONES */
   section {
     padding:4rem 2rem;
     text-align:center;
-    color:#fff;
+    color:#fff0bc;
     max-width: 1400px;  /* 🔥 centra contenido */
     margin: 0 auto;
   }
-  section h2{font-size:clamp(2rem,5vw,2.5rem);margin-bottom:2rem;color:#7f5cff;text-shadow:0 0 10px #7f5cff;}
+  section h2{font-size:clamp(2rem,5vw,2.5rem);margin-bottom:2rem;color:#f9eead;text-shadow:0 0 10px #fff4b8;}
 
   /* GRIDS */
   .category-grid, .product-grid, .offer-grid, .upcoming-grid, .news-grid, .testimonial-grid{
@@ -460,10 +463,10 @@
 
   /* TARJETAS */
   .category-card, .product-card, .offer-card, .upcoming-card, .news-card, .testimonial-card{
-    background:#111111;border-radius:12px;overflow:hidden;padding:1rem;transition:0.3s;box-shadow:0 0 15px rgba(127,92,255,0.2);
+    background:#111111;border-radius:12px;overflow:hidden;padding:1rem;transition:0.3s;box-shadow:0 0 15px rgba(255, 252, 92, 0.2);
   }
   .category-card:hover, .product-card:hover, .offer-card:hover, .upcoming-card:hover, .news-card:hover, .testimonial-card:hover{
-    transform:translateY(-5px);box-shadow:0 0 25px rgba(127,92,255,0.6);filter:drop-shadow(0 0 10px #7f5cff);
+    transform:translateY(-5px);box-shadow:0 0 25px rgba(255, 228, 92, 0.6);filter:drop-shadow(0 0 10px #ffd900a3);
   }
 
   /* NEWSLETTER */
@@ -477,8 +480,8 @@
     font-weight: 600;
     font-size: 1rem;
     color: #fff;
-    background: linear-gradient(45deg, #7f5cff, #503ec2);
-    box-shadow: 0 0 20px rgba(127, 92, 255, 0.5);
+    background: linear-gradient(45deg, #ffd900b2, #BFA06D);
+    box-shadow: 0 0 20px rgba(255, 222, 92, 0.5);
     transition: all 0.3s ease;
     position: relative;
     min-width: 160px;
@@ -486,7 +489,7 @@
 
   .newsletter-btn:hover {
     transform: translateY(-3px);
-    box-shadow: 0 0 35px rgba(127, 92, 255, 0.9);
+    box-shadow: 0 0 35px rgba(255, 217, 0, 0.699);
   }
 
   .newsletter-btn:disabled {
@@ -509,7 +512,7 @@
   .footer{padding:2rem;text-align:center;background:#000;color:#fff;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap}
   .footer .social a {
     margin:0 1rem;
-    color:#7f5cff;
+    color:#ffd900a0;
     text-decoration:none;
     transition: all 0.3s ease;
   }
@@ -517,7 +520,7 @@
   .footer .social a:hover {
     color: #fff;
     transform: translateY(-3px);
-    text-shadow:0 0 12px #7f5cff
+    text-shadow:0 0 12px #ffd900a8
   }
 
   .home {
@@ -526,6 +529,8 @@
 
   /* ANIMACIONES */
   @keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+
+  
 
   @keyframes spin {
   to {

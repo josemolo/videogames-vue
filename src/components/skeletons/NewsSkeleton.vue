@@ -17,14 +17,14 @@
 /* Skeleton base */
 .skeleton {
   opacity: 0.85;
-  background: rgba(255,255,255,0.05);
+  background: rgba(255, 255, 255, 0);
   border-radius: 5px;
   padding: 10px;
   margin-bottom: 10px;
 }
 
 .skeleton h3, .skeleton p {
-  background: rgba(255,255,255,0.1);
+  background: rgba(255, 255, 255, 0);
   border-radius: 4px;
   height: 1rem;
   margin-bottom: 5px;
@@ -36,19 +36,19 @@
   width: 70%;
   margin: 0 auto 20px;
   border-radius: 8px;
-  background-color: #2a2a40;
+  background-color: #ffffff00;
 }
 
 /* Items */
 .skeleton-item {
-  border-bottom: 1px solid #6d307a;
+  border-bottom: 1px solid #ffffff00;
   padding: 10px 0;
 }
 
 .skeleton-line {
   height: 14px;
   border-radius: 6px;
-  background-color: #2a2a40;
+  background-color: #fce696b5;
 }
 
 .skeleton-line.title {

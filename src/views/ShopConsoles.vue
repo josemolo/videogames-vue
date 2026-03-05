@@ -184,7 +184,7 @@ useRouteMetrics()
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  background: #0a0a1f;
+  background: #d4af3715;
   padding: 20px;
   box-sizing: border-box;
   overflow-x: hidden;
@@ -194,22 +194,22 @@ useRouteMetrics()
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  background: #1c1c2f;
-  border: 3px solid #bf97ea;
+  background: #ffffff23;
+  border: 3px solid #897637a0;
   border-radius: 15px;
   width: 100%;
   max-width: 1200px;
   padding: 30px;
-  box-shadow: 0 0 20px #bf97ea, 0 0 40px #6d307a;
+  box-shadow: 0 0 20px #7a7a7a, 0 0 40px #a9a0457d;
   font-family: 'Orbitron', sans-serif;
-  color: #fff;
+  color: #f5faaa6b;
   overflow-y: auto;
 }
 
 .window h1 {
   text-align: center;
-  color: #bf97ea;
-  text-shadow: 0 0 12px #bf97ea, 0 0 25px #6d307a;
+  color: #efefefc0;
+  text-shadow: 0 0 12px #ffd500b5, 0 0 25px #ffd5004a;
   margin-bottom: 30px;
 }
 
@@ -222,8 +222,8 @@ useRouteMetrics()
 }
 
 .console-card {
-  background: #111127;
-  border: 2px solid #6d307a;
+  background: #77734f00;
+  border: 2px solid #cfc18188;
   border-radius: 15px;
   padding: 20px;
 
@@ -234,7 +234,7 @@ useRouteMetrics()
   min-height: 250px;
   text-align: center;
 
-  box-shadow: 0 0 15px #bf97ea, 0 0 30px #6d307a;
+  box-shadow: 0 0 15px #d7c677a5, 0 0 30px #757575;
   transition: 0.3s;
 
   display: flex;
@@ -248,12 +248,12 @@ useRouteMetrics()
 
 .console-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 0 25px #bf97ea, 0 0 45px #6d307a;
+  box-shadow: 0 0 25px #5d5d5dd0, 0 0 45px #bcb756ad;
 }
 
 .console-img:hover {
   transform: scale(1.15); /* agranda la imagen */
-  box-shadow: 0 0 20px #00ffff, 0 0 40px #6d307a;
+  box-shadow: 0 0 20px #5d5d5dd0, 0 0 40px #bcb756ad;
 }
 
 .console-img {
@@ -262,23 +262,23 @@ useRouteMetrics()
   object-fit: contain; /* mantiene proporción */
   margin-bottom: 15px;
   border-radius: 10px;
-  box-shadow: 0 0 10px #00ffff, 0 0 20px #6d307a;
+  box-shadow: 0 0 10px #d7c677a5, 0 0 20px #757575;
   transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .console-card h3 {
-  color: #00ffff;
+  color: #dcd5ba;
   margin-bottom: 10px;
   font-size: 1.3rem;
 }
 
 .console-card p {
   font-size: 1rem;
-  color: #ccc;
+  color: #d1c890ef;
 }
 
 .console-content {
-  background: #1a1a2f;
+  background: #f0ebaf7c;
   border-radius: 10px;
   width: 100%;
   height: 100%; /* ocupa toda la altura del console-card */
@@ -288,7 +288,7 @@ useRouteMetrics()
   align-items: center;
   justify-content: space-around; /* distribuye uniformemente imagen, título y descripción */
   box-sizing: border-box;
-  box-shadow: inset 0 0 10px #6d307a, inset 0 0 20px #bf97ea;
+  box-shadow: inset 0 0 10px #f3f99c74, inset 0 0 20px #f9ff9066;
   transition: transform 0.3s, box-shadow 0.3s;
 }
 
@@ -299,29 +299,29 @@ useRouteMetrics()
 
 button.buy, button.back {
   padding: 10px 20px;
-  border: 2px solid #00ffff;
+  border: 2px solid #e6f19150;
   border-radius: 12px;
   background: transparent;
-  color: #00ffff;
+  color: #fdff9b8c;
   font-weight: bold;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 0 10px #00ffff, 0 0 20px #6d307a;
+  box-shadow: 0 0 10px #e7eb9973, 0 0 20px #deda7385;
 }
 
 button.buy:hover {
-  box-shadow: 0 0 20px #00ffff, 0 0 40px #6d307a;
+  box-shadow: 0 0 20px #eff48399, 0 0 40px #dde66599;
   transform: translateY(-3px);
 }
 
 button.back:hover {
-  box-shadow: 0 0 15px #bf97ea, 0 0 30px #6d307a;
+  box-shadow: 0 0 15px #e2f16a8d, 0 0 30px #f4f47969;
   transform: translateY(-2px);
 }
 
 /* Glow en títulos */
 h1, h2, h3 {
-  text-shadow: 0 0 8px #00ffff, 0 0 15px #6d307a;
+  text-shadow: 0 0 8px #d4c9a58c, 0 0 15px #cec2847e;
 }
 
 .skeleton {
@@ -335,7 +335,7 @@ h1, h2, h3 {
   width: 120px;
   height: 120px;
   border-radius: 10px;
-  background: #1f1f3d;
+  background: #eef1827b;
   margin-bottom: 15px;
 }
 
@@ -343,7 +343,7 @@ h1, h2, h3 {
   width: 70%;
   height: 18px;
   border-radius: 6px;
-  background: #1f1f3d;
+  background: #fcf68565;
   margin-bottom: 10px;
 }
 
@@ -351,7 +351,7 @@ h1, h2, h3 {
   width: 90%;
   height: 14px;
   border-radius: 6px;
-  background: #1f1f3d;
+  background: #faff9377;
 }
 
 .shimmer {
@@ -367,7 +367,7 @@ h1, h2, h3 {
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(191, 151, 234, 0.35),
+    rgba(255, 253, 135, 0.514),
     transparent
   );
   animation: shimmer 1.2s infinite;

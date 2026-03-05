@@ -10,8 +10,8 @@
 
     <!-- Contenido -->
     <div class="hero-content">
-      <span class="badge">🎮 TIENDA GAMER</span>
-      <h1 class="neon-text">LucyCell</h1>
+      <span class="badge">TIENDA GAMER</span>
+      <h1 class="neon-text">LUCYCELL</h1>
       <p class="neon-text">Tecnología y estilo a tu alcance</p>
       <div class="hero-actions">
         <router-link to="/consoles" class="primary glow">Comprar ahora</router-link>
@@ -53,12 +53,116 @@ defineProps({
 
 const particleCanvas = ref(null)
 let animationId = null
+
+
 let resizeHandler = null
 let visibilityHandler = null  
 
 const prefersReducedMotion = window.matchMedia(
   '(prefers-reduced-motion: reduce)'
 ).matches
+
+const particles = []
+
+function createParticles(canvasWidth, canvasHeight) {
+  particles.length = 0
+
+  for (let i = 0; i < 60; i++) {
+    particles.push({
+      x: Math.random() * canvasWidth,
+      y: Math.random() * canvasHeight,
+      radius: Math.random() * 2,
+      speedX: (Math.random() - 0.5) * 0.6,
+      speedY: (Math.random() - 0.5) * 0.6
+    })
+  }
+}
+
+function setupCanvasSize() {
+  const canvas = particleCanvas.value
+  if (!canvas) return
+
+  canvas.width = window.innerWidth
+  canvas.height = window.innerHeight
+}
+
+function animate() {
+  const canvas = particleCanvas.value
+  if (!canvas) return
+
+  const ctx = canvas.getContext('2d')
+  if (!ctx) return
+
+  ctx.clearRect(0,0,canvas.width,canvas.height)
+
+  particles.forEach(p => {
+
+    p.x += p.speedX
+    p.y += p.speedY
+
+    if (p.x < 0 || p.x > canvas.width) p.speedX *= -1
+    if (p.y < 0 || p.y > canvas.height) p.speedY *= -1
+
+    ctx.beginPath()
+    ctx.arc(p.x, p.y, p.radius, 0, Math.PI*2)
+    ctx.fillStyle = 'rgba(255,215,0,0.7)'
+    ctx.shadowColor = '#FFD700'
+    ctx.shadowBlur = 8
+
+    ctx.fill()
+
+    ctx.shadowBlur = 0
+  })
+
+  /* ===== LÍNEAS ENTRE PARTÍCULAS ===== */
+
+  for (let i = 0; i < particles.length; i++) {
+    for (let j = i + 1; j < particles.length; j++) {
+
+      const dx = particles[i].x - particles[j].x
+      const dy = particles[i].y - particles[j].y
+      const distance = Math.sqrt(dx * dx + dy * dy)
+
+      if (distance < 120) {
+
+        const opacity = 1 - distance / 120
+
+        ctx.beginPath()
+        ctx.moveTo(particles[i].x, particles[i].y)
+        ctx.lineTo(particles[j].x, particles[j].y)
+
+        ctx.strokeStyle = `rgba(255,215,0,${opacity * 0.4})`
+        ctx.lineWidth = 1
+
+        ctx.stroke()
+      }
+    }
+  }
+
+  animationId = requestAnimationFrame(animate)
+}
+
+function setupParticles(){
+  setupCanvasSize()
+  createParticles(window.innerWidth, window.innerHeight)
+  animate()
+}
+
+function onResize(){
+  setupCanvasSize()
+  createParticles(window.innerWidth, window.innerHeight)
+}
+
+onMounted(()=>{
+  setupParticles()
+  window.addEventListener('resize', onResize)
+})
+
+onUnmounted(()=>{
+  if(animationId) cancelAnimationFrame(animationId)
+  window.removeEventListener('resize', onResize)
+})
+
 
 onMounted(async() => {
   if (prefersReducedMotion) return
@@ -95,7 +199,7 @@ onMounted(async() => {
   }))
 
   const maxDist = 120 * 120
-
+  /*
   const animate = () => {
     ctx.clearRect(0, 0, canvas.width, canvas.height)
 
@@ -111,7 +215,7 @@ onMounted(async() => {
       ctx.fillStyle = 'rgba(127,92,255,0.8)'
       ctx.fill()
     })
-
+    /*
     for (let i = 0; i < particles.length; i++) {
       for (let j = i + 1; j < particles.length; j++) {
         const dx = particles[i].x - particles[j].x
@@ -127,12 +231,12 @@ onMounted(async() => {
           ctx.stroke()
         }
       }
-    }
+    }*
 
     animationId = requestAnimationFrame(animate)
-  }
+  }*/
 
-
+  
   animate()
 
   visibilityHandler = () => {
@@ -181,7 +285,7 @@ onUnmounted(() => {
 .hero-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0,0,0,0.7);
+  background: rgba(0, 0, 0, 0.484);
   z-index: -2;
   pointer-events: none;
 }
@@ -200,18 +304,19 @@ onUnmounted(() => {
   margin-bottom: 1rem;
   border-radius: 20px;
   font-size: 0.9rem;
-  background: rgba(127,92,255,0.2);
-  border: 1px solid rgba(127,92,255,0.6);
-  text-shadow: 0 0 5px rgba(127,92,255,0.8);
+  background: rgba(33, 30, 19, 0.249);
+  border: 1px solid rgba(176, 139, 5, 0.406);
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.97);
 }
 
 .neon-text {
-  color: #7f5cff;
+  color: #d4af37ac;
+
   text-shadow:
-    0 0 5px #7f5cff,
-    0 0 10px #7f5cff,
-    0 0 20px #503ec2,
-    0 0 40px #503ec2;
+    0 0 5px #c9c09d,
+    0 0 10px #fff0c5,
+    0 0 20px #918771,
+    0 0 40px #d4af37a6;
     /*0 0 60px #7f5cff,
     0 0 80px #503ec2;*/
   animation: flicker 2s infinite alternate;
@@ -274,10 +379,10 @@ onUnmounted(() => {
   border: none;
   cursor: pointer;
   font-weight: 600;*/
-  color: white;
+  color: #fef9d6;
 
-  background: linear-gradient(45deg, #7f5cff, #503ec2);
-  box-shadow: 0 0 20px rgba(127,92,255,0.45);
+  background: linear-gradient(45deg, #d4af376b, #d4b53963);
+  box-shadow: 0 0 20px rgba(255, 236, 174, 0.701);
 
   transition:
   transform 0.25s ease,
@@ -287,7 +392,7 @@ onUnmounted(() => {
 
 .primary:hover {
   transform: translateY(-4px) scale(1.02);
-  box-shadow: 0 0 35px rgba(127,92,255,0.7), 0 0 70px rgba(80,62,194,0.4);
+  box-shadow: 0 0 35px rgba(155, 148, 118, 0.872), 0 0 70px rgba(255, 184, 3, 0.279);
 }
 
 /*.primary:active {
@@ -318,21 +423,22 @@ onUnmounted(() => {
 
 
 .secondary {
+  transition:
+  transform 0.25s ease,
+  box-shadow 0.25s ease,
+  filter 0.25s ease;
   /*background: transparent;
   border: 2px solid #b8a7e6;*/
-  color: white;
-  background: linear-gradient(45deg, #ff4fd8, #ff2f92);
-  box-shadow: 0 0 20px rgba(255,79,216,0.45);
+  color: #fef9d6;
+  background: linear-gradient(45deg, #d4af376b, #d4b53963);
+  box-shadow: 0 0 35px rgba(228, 206, 156, 0.582), 0 0 70px rgba(255, 184, 3, 0.153);
 }
 
 .secondary:hover {
   /*background: rgba(184, 167, 230, 0.15);*/
   transform: translateY(-4px) scale(1.02);
-  box-shadow:
-    0 0 35px rgba(255,79,216,0.7),
-    0 0 70px rgba(255,47,146,0.4);
+  box-shadow: 0 0 35px rgba(155, 148, 118, 0.872), 0 0 70px rgba(255, 184, 3, 0.279);
 }
-
 .glow {
   /*box-shadow: 0 0 15px rgba(127,92,255,0.8), 0 0 30px rgba(127,92,255,0.6);*/
   transition: all 0.3s ease;
@@ -345,8 +451,14 @@ onUnmounted(() => {
 .particle-canvas {
   position: absolute;
   inset: 0;
-  z-index: 1;
+  z-index: 0;
   pointer-events: none;
+}
+
+@keyframes neonFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 @keyframes fadeUp {

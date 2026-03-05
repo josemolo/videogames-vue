@@ -123,7 +123,7 @@ defineExpose({ open: openCart })
 .cart-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.55);
+  background: rgba(0, 0, 0, 0.484);
   backdrop-filter: blur(4px);
   display: flex;
   justify-content: center;
@@ -140,10 +140,10 @@ defineExpose({ open: openCart })
   /*max-width: 95vw;
   max-height: 80vh;
   overflow-y: auto;*/
-  background: #201644;
-  color: #fff;
+  background: #937a1433;
+  color: #fffed7;
   border-radius: 12px;
-  box-shadow: 0 0 20px #59111b;
+  box-shadow: 0 0 20px rgba(255, 200, 0, 0.484);
   padding: 15px;
   font-family: 'Orbitron', sans-serif;
   animation: slideIn 0.25s ease;/*ease-out */
@@ -168,7 +168,7 @@ defineExpose({ open: openCart })
   /*justify-content: space-between;*/
   align-items: center;
   gap: 10px;
-  background: #19dfb425;
+  background: #937a1433;
   padding: 10px;
   border-radius: 8px;
   /*position: relative;*/
@@ -209,8 +209,8 @@ defineExpose({ open: openCart })
   height: 18px;
   border: none;
   border-radius: 6px;
-  background: #19dfb486;
-  color: #fff;
+  background: #efe4b0f8;
+  color: #f3dc91;
   cursor: pointer;
   font-weight: bold;
 }
@@ -225,8 +225,8 @@ defineExpose({ open: openCart })
 
 .checkout-btn {
   width: 100%;
-  background: #25d366;
-  color: white;
+  background: #44ff8988;
+  color: #fffcd4;
   font-weight: bold; 
   border: none;
   padding: 10px;
@@ -260,7 +260,7 @@ defineExpose({ open: openCart })
 
 .cart-header h2 {
   /*font-size: 1.3rem;*/
-  color: #19dfb4;
+  color: #fff1c0;
 }
 
 .item-info p {
@@ -268,9 +268,9 @@ defineExpose({ open: openCart })
 }
 
 .item-actions button {
-  background: #19dfb486;
+  background: #ffae0091;
   border: none;
-  color: white;
+  color: #483314;
   border-radius: 4px;
   cursor: pointer;
   padding: 2px 6px;
@@ -291,14 +291,14 @@ defineExpose({ open: openCart })
 }
 
 .checkout-btn:hover {
-  background: #20b358;
+  background: #79ff4c;
 }
 
 .close-btn {
   background: transparent;
   border: none;
   font-size: 1.3rem;
-  color: #fff;
+  color: #fffbb7;
   cursor: pointer;
 }
 
@@ -314,8 +314,8 @@ defineExpose({ open: openCart })
   height: 28px;
   border: none;
   border-radius: 6px;
-  background: #7f5cff;
-  color: #fff;
+  background: #e6e2b4;
+  color: #fff5c8;
   cursor: pointer;
   font-weight: bold;
 }

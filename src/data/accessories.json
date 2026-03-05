@@ -12,7 +12,7 @@
     "consoleId": "nintendo",
     "name": "Joy-Con",
     "price": 42000,
-    "stock": 5,
+    "stock": 1,
     "image": "/images/joy.png"
   },
   {

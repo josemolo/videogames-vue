@@ -54,10 +54,10 @@ function goTo(path: string) {
 <style scoped>
 .shop-wrapper {
   min-height: 100vh;
-  background: #0a0a1f;
+  background: #d4af3715;
   padding: 60px 20px;
   text-align: center;
-  color: white;
+  color: rgba(248, 240, 209, 0.763);
 }
 /*
 .shop-title {
@@ -79,7 +79,7 @@ function goTo(path: string) {
   letter-spacing: 4px;
   text-transform: uppercase;
 
-  background: linear-gradient(90deg, #7f5cff, #00e0ff, #7a48b1);
+  background: linear-gradient(90deg, #0000006d, #FFF8DC, #b8a237);
   background-size: 500% auto;
   -webkit-background-clip: text;
   background-clip: text;
@@ -89,9 +89,9 @@ function goTo(path: string) {
   position: relative;
 
   text-shadow:
-    0 0 10px rgba(127, 92, 255, 0.224),
-    0 0 20px rgba(255, 0, 255, 0.313),
-    0 0 40px rgba(127, 92, 255, 0.4);
+    0 0 10px rgba(55, 0, 255, 0),
+    0 0 20px rgba(255, 179, 0, 0.087),
+    0 0 40px rgba(83, 85, 83, 0);
 }
 
 
@@ -110,7 +110,7 @@ function goTo(path: string) {
   overflow: hidden;
   cursor: pointer;
   transition: 0.4s ease;
-  border: 2px solid rgba(127,92,255,0.3);
+  border: 2px solid rgba(255, 255, 255, 0.493);
 }
 
 .shop-card img {
@@ -123,7 +123,7 @@ function goTo(path: string) {
 
 .shop-card:hover {
   transform: translateY(-10px);
-  box-shadow: 0 0 20px #7f5cff, 0 0 40px #8400ffb9;
+  box-shadow: 0 0 20px #f3dc9ebf, 0 0 40px #c4b37996;
 }
 
 .shop-card:hover img {
@@ -135,12 +135,12 @@ function goTo(path: string) {
   bottom: 0;
   width: 100%;
   padding: 30px;
-  background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+  background: linear-gradient(to top, rgba(235, 225, 50, 0.279), transparent);
 }
 
 .overlay h2 {
   font-size: 2rem;
-  text-shadow: 0 0 10px #7f5cff;
+  text-shadow: 0 0 10px #fcf5b6;
 }
 
 @keyframes neonFlow {

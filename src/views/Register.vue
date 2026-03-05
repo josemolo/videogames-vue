@@ -105,7 +105,7 @@ async function handleRegister(e: Event) {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #0a0a1f;
+  background: #1f0a0a;
   font-family: 'Orbitron', sans-serif;
   overflow: hidden;
   position: relative;

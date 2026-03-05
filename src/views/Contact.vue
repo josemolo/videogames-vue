@@ -162,9 +162,39 @@ function animate() {
 
     ctx.beginPath()
     ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2)
-    ctx.fillStyle = 'rgba(0,255,255,0.5)'
+    ctx.fillStyle = 'rgba(255,215,0,0.7'
+    ctx.shadowColor = '#FFD700'
+    ctx.shadowBlur = 8
+
     ctx.fill()
+
+    ctx.shadowBlur = 0
   })
+
+  /* ===== LÍNEAS ENTRE PARTÍCULAS ===== */
+
+  for (let i = 0; i < particles.length; i++) {
+    for (let j = i + 1; j < particles.length; j++) {
+
+      const dx = particles[i].x - particles[j].x
+      const dy = particles[i].y - particles[j].y
+      const distance = Math.sqrt(dx * dx + dy * dy)
+
+      if (distance < 120) {
+
+        const opacity = 1 - distance / 120
+
+        ctx.beginPath()
+        ctx.moveTo(particles[i].x, particles[i].y)
+        ctx.lineTo(particles[j].x, particles[j].y)
+
+        ctx.strokeStyle = `rgba(255,215,0,${opacity * 0.4})`
+        ctx.lineWidth = 1
+
+        ctx.stroke()
+      }
+    }
+  }
 
   animationId = requestAnimationFrame(animate)
 }
@@ -218,9 +248,9 @@ Problema: ${problem.value}
 .taller-page {
   min-height: 100vh;
   padding: 120px 40px;
-  background: #03030a;
+  background: #0a0903;
   font-family: 'Orbitron', sans-serif;
-  color: white;
+  color: rgb(255, 243, 182);
   position: relative;
   overflow-x: hidden;
 }
@@ -272,7 +302,7 @@ section {
   letter-spacing: 4px;
   text-transform: uppercase;
 
-  background: linear-gradient(90deg, #7f5cff, #00e0ff, #7a48b1);
+  background: linear-gradient(90deg, #FFD700, #fff0b3, #BFA06D);
   background-size: 500% auto;
   -webkit-background-clip: text;
   background-clip: text;
@@ -280,9 +310,9 @@ section {
   animation: neonFlow 60s ease infinite;
 
   text-shadow:
-    0 0 10px rgba(127,92,255,0.25),
-    0 0 20px rgba(0,255,255,0.3),
-    0 0 40px rgba(127,92,255,0.4);
+    0 0 10px rgba(255,215,0,0.25),
+    0 0 20px rgba(255,248,220,0.3),
+    0 0 40px rgba(191,160,109,0.4);
 }
 
 .metrics {
@@ -293,7 +323,7 @@ section {
 
 .metric h3 {
   font-size: 2.5rem;
-  color: #00ffff;
+  color: #ffd9009b;
 }
 
 .certifications h2 {
@@ -309,14 +339,14 @@ section {
 
 .cert {
   padding: 20px 30px;
-  background: rgba(255,255,255,0.05);
+  background: rgba(255,215,0,0.05);
   border-radius: 12px;
-  border: 1px solid rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,215,0,0.15);
   transition: 0.3s;
 }
 
 .cert:hover {
-  box-shadow: 0 0 25px #00ffff;
+  box-shadow: 0 0 25px #ffd900b1;
 }
 
 .taller-content {
@@ -329,7 +359,7 @@ section {
 
 .glass {
   backdrop-filter: blur(20px);
-  background: rgba(255,255,255,0.05);
+  background: rgba(255,215,0,0.05);
   padding: 40px;
   border-radius: 20px;
 }
@@ -346,7 +376,7 @@ section {
   border-radius: 10px;
   border: none;
   background: rgba(0,0,0,0.6);
-  color: white;
+  color: rgb(255, 242, 186);
 }
 
 .taller-form button {
@@ -354,7 +384,7 @@ section {
   border-radius: 12px;
   border: none;
   font-weight: bold;
-  background: linear-gradient(45deg,#7f5cff,#00ffff);
+  background: linear-gradient(45deg,#ffd90096,#BFA06D);
   cursor: pointer;
 }
 

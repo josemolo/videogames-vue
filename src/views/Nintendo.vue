@@ -98,7 +98,7 @@ useHead({
 <style scoped>
 .nintendo-page {
   background: #000;
-  color: #fff;
+  color: #ffd8cf;
   font-family: 'Orbitron', sans-serif;
   width: 100%;
   overflow-x: hidden;
@@ -117,15 +117,15 @@ useHead({
 .hero h1 {
   font-size: 3rem;
   margin-bottom: 1rem;
-  color: #00ffff;
-  text-shadow: 0 0 20px rgba(127,92,255,0.9);
+  color: #ffd9007e;
+  text-shadow: 0 0 20px rgba(255, 217, 0, 0.468);
 }
 
 .hero-image {
   width: 300px;
   margin: 2rem 0;
   margin-bottom: 1.5rem;
-  filter: drop-shadow(0 0 30px rgba(127,92,255,0.8));
+  filter: drop-shadow(0 0 30px rgba(255,215,0,0.7));
 }
 
 .subtitle {
@@ -135,20 +135,20 @@ useHead({
 }
 
 .cta {
-  background: linear-gradient(45deg, #7f5cff, #503ec2);
-  color: #fff;
+  background: linear-gradient(45deg, #ffd9009f, #BFA06D);
+  color: #000000;
   border: none;
   padding: 0.9rem 2rem;
   border-radius: 30px;
   cursor: pointer;
   font-size: 1rem;
-  box-shadow: 0 0 25px rgba(127,92,255,0.7);
+  box-shadow: 0 0 25px rgba(255,215,0,0.6);
   transition: transform 0.2s, box-shadow 0.3s;
 }
 
 .cta:hover {
   transform: translateY(-2px);
-  box-shadow: 0 0 40px rgba(127,92,255,1);
+  box-shadow: 0 0 40px rgba(255, 217, 0, 0.605);
 }
 
 /* ABOUT */
@@ -157,7 +157,7 @@ useHead({
   margin: 3rem auto;
   padding: 0 1rem;
   text-align: center;
-  color: #ccc;
+  color: #fffba9;
   line-height: 1.6;
 }
 
@@ -174,11 +174,11 @@ useHead({
   background: #111;
   padding: 1rem 1.5rem;
   border-radius: 12px;
-  box-shadow: 0 0 15px rgba(127,92,255,0.4);
+  box-shadow: 0 0 15px rgba(255,215,0,0.4);
   min-width: 160px;
   text-align: center;
   font-size: 1rem;
-  color: #00ffff;
+  color: #ffd900b6;
 }
 
 /* ACCESORIOS */
@@ -192,7 +192,7 @@ useHead({
 .accessories h2 {
   text-align: center;
   margin-bottom: 2rem;
-  color: #7f5cff;
+  color: #ffd900a4;
 }
 
 .accessory-list {
@@ -208,7 +208,7 @@ useHead({
   padding: 1rem;
   width: 180px;
   text-align: center;
-  box-shadow: 0 0 15px rgba(127,92,255,0.4);
+  box-shadow: 0 0 15px rgba(255,215,0,0.4);
 }
 
 .accessory-card img {
@@ -217,7 +217,7 @@ useHead({
 }
 
 .accessory-card span {
-  color: #00ffff;
+  color: #ffd900a5;
   font-size: 0.9rem;
   display: block;
 }
@@ -226,7 +226,7 @@ useHead({
 .final-cta {
   text-align: center;
   padding: 4rem 2rem;
-  background: linear-gradient(180deg, #000, #0b0b22);
+  background: linear-gradient(180deg, #000000, #111111);
 }
 
 .final-cta h2 {
@@ -242,15 +242,15 @@ useHead({
 
 .secondary {
   background: transparent;
-  border: 2px solid #7f5cff;
+  border: 2px solid #ffd900b5;
   border-radius: 30px;
   padding: 0.9rem 2rem;
-  color: #7f5cff;
+  color: #ffd90098;
   cursor: pointer;
 }
 
 .secondary:hover {
-  background: #7f5cff;
+  background: #ffd9008e;
   color: #000;
 }
 </style>

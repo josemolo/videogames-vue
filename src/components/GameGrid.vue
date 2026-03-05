@@ -66,7 +66,7 @@ function getCardAnimationStyle(index) {
 }
 
 .card{
-  background:#111;
+  background:#ffffff;
   padding:1rem;
   border-radius:16px;
   opacity: 0; /* Start hidden, appear with animation */
@@ -75,7 +75,7 @@ function getCardAnimationStyle(index) {
 }
 .card:hover{
   transform:translateY(-8px) scale(1.05);
-  box-shadow: 0 0 20px rgba(127,92,255,0.6);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
 }
 
 img{width:100%;border-radius:12px}

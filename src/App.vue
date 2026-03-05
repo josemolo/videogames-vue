@@ -71,7 +71,7 @@ useHead({
 
 <style>
 #app {
-  background-color: #0b0b0f;
+  background-color: #0e0c09;
   min-height: 100vh;
 }
 
@@ -142,7 +142,7 @@ html, body {
 
 .console-img:hover {
   transform: scale(1.15);
-  box-shadow: 0 0 25px #00ffff, 0 0 50px #6d307a;
+  box-shadow: 0 0 25px #ffe10079, 0 0 50px #7a69309a;
   transition: 0.4s;
 }
 

@@ -35,7 +35,7 @@ defineExpose({ open, close, message  })
   width: 100vw;
   height: 100vh;
   backdrop-filter: blur(5px);
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(255, 175, 2, 0);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -43,15 +43,15 @@ defineExpose({ open, close, message  })
 }
 
 .modal-content {
-  background: #1f1f3d;
+  background: #d4af377e;
   padding: 20px;
   border-radius: 12px;
   min-width: 300px;
   max-width: 500px;
   position: relative;
-  color: white;
+  color: rgb(255, 255, 255);
   font-family: 'Orbitron', sans-serif;
-  box-shadow: 0 0 20px #511d71;
+  box-shadow: 0 0 20px rgba(212,175,55,0.6)
 }
 
 .close-button {
@@ -60,11 +60,11 @@ defineExpose({ open, close, message  })
   right: 10px;
   background: transparent;
   border: none;
-  color: #cfcfcf;
+  color: #ffffff;
   font-size: 1.2rem;
   cursor: pointer;
 }
 .close-button:hover {
-  color: white;
+  color: rgb(255, 255, 255);
 }
 </style>

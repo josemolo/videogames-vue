@@ -45,8 +45,8 @@ function addToCart(article: any) {
 <style scoped>
 .articles-wrapper {
   padding: 60px 20px;
-  background: linear-gradient(135deg, #0a0a1f, #14143a);
-  color: white;
+  background: linear-gradient(135deg, #7873644d, #b4a35f25);
+  color: rgb(255, 251, 212);
 }
 
 .articles-title {
@@ -59,17 +59,17 @@ function addToCart(article: any) {
 /* GLASS */
 .glass-card {
   backdrop-filter: blur(15px);
-  background: rgba(255,255,255,0.05);
+  background: rgb(173, 122, 12, 0.308);
   border-radius: 20px;
   padding: 25px;
   text-align: center;
-  border: 1px solid rgba(255,255,255,0.1);
+  border: 1px solid rgba(255, 255, 255, 0.511);
   transition: 0.3s;
 }
 
 .glass-card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 0 20px rgba(127,92,255,0.6);
+  box-shadow: 0 0 20px rgb(255, 252, 203);
 }
 
 .articles-grid {

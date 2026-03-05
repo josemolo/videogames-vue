@@ -135,7 +135,7 @@ const go = (link: string) => {
   margin-bottom: 3rem;
 
   overflow: hidden;
-  background: #0b0b0f;
+  background: #0631c000;
 }
 
 .carousel-swiper {
@@ -160,10 +160,10 @@ const go = (link: string) => {
   inset: 0;
   background: linear-gradient(
     to right,
-    rgba(0,0,0,0.75),
-    rgba(0,0,0,0.15) 40%,
-    rgba(0,0,0,0.15) 60%,
-    rgba(0,0,0,0.75)
+    rgba(86, 86, 86, 0.283),
+    rgba(186, 186, 186, 0.244) 40%,
+    rgba(186, 143, 4, 0.228) 60%,
+    rgba(217, 157, 7, 0.315)
   );
   pointer-events: none;
 }
@@ -176,14 +176,14 @@ const go = (link: string) => {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  color: white;
+  color: rgb(245, 190, 11);
   text-align: center;
   padding: 2rem;
 }
 
 .overlay h2 {
   font-size: clamp(2.2rem, 5vw, 3rem);
-  text-shadow: 0 0 25px rgba(127,92,255,0.8);
+  text-shadow: 0 0 25px rgba(255, 255, 255, 0.986);
 }
 
 .overlay p {
@@ -194,7 +194,7 @@ const go = (link: string) => {
 
 .swiper-button-next,
 .swiper-button-prev {
-  color: #7f5cff;
+  color: #737374;
   transform: scale(0.9);
   transition: transform 0.3s ease, opacity 0.3s ease;
   opacity: 0.6;
@@ -207,7 +207,7 @@ const go = (link: string) => {
 }
 
 .swiper-pagination-bullet {
-  background: #7f5cff;
+  background: #ffae0091;
   opacity: 0.4;
 }
 
