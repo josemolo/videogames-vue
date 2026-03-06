@@ -1,7 +1,6 @@
 <template>
   <div class="games-wrapper">
     <h1 class="games-title">Juegos</h1>
-
     <!-- FILTRO -->
     <div class="platform-filter">
       <button
@@ -13,7 +12,6 @@
         {{ p }}
       </button>
     </div>
-
     <!-- GRID -->
     <transition-group name="fade" tag="div" class="games-grid">
       <div
@@ -30,9 +28,9 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
 import gamesData from '@/data/gamesCatalog.json'
 
+import { ref, computed } from 'vue'
 import { useCartStore } from '@/stores/cart'
 
 interface Game {
@@ -56,7 +54,6 @@ const filteredGames = computed(() =>
     : games.filter(g => g.platform === selectedPlatform.value)
 )
 
-
 function addToCart(game: any) {
   cartStore.addItem({
     id: game.id.toString(),
@@ -66,83 +63,35 @@ function addToCart(game: any) {
     image: game.image,
     stock: 10,
     type: 'game'
-    
   })
 }
 </script>
 
 <style scoped>
-.games-wrapper {
-  padding: 60px 20px;
-  background: #9f0e0e15;
-  color: rgb(255, 233, 198);
-}
+.games-wrapper { padding: 60px 20px; background: #9f0e0e15; color: rgb(255, 233, 198); }
 
-.games-title {
-  text-align: center;
-  font-size: 3rem;
-  margin-bottom: 40px;
-  text-shadow: 0 0 15px #f3ecafe2;
-}
+.games-title { text-align: center; font-size: 3rem; margin-bottom: 40px; text-shadow: 0 0 15px #f3ecafe2; }
 
 /* FILTRO */
-.platform-filter {
-  text-align: center;
-  margin-bottom: 40px;
-}
+.platform-filter { text-align: center; margin-bottom: 40px; }
 
-.platform-filter button {
-  margin: 0 10px;
-  padding: 10px 20px;
-  border: 2px solid #e1e09d8a;
-  background: transparent;
-  color: rgb(255, 252, 219);
-  cursor: pointer;
-  transition: 0.3s;
-}
+.platform-filter button { margin: 0 10px; padding: 10px 20px; border: 2px solid #e1e09d8a; background: transparent; color: rgb(255, 252, 219); cursor: pointer; transition: 0.3s; }
 
 .platform-filter button.active,
-.platform-filter button:hover {
-  background: #fffd9558;
-  box-shadow: 0 0 15px #7e803ab9;
-}
+.platform-filter button:hover { background: #fffd9558; box-shadow: 0 0 15px #7e803ab9; }
 
 /* GRID */
-.games-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 30px;
-}
+.games-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 30px; }
 
-.game-card {
-  background: #d4af3715;
-  border-radius: 15px;
-  padding: 20px;
-  text-align: center;
-  transition: 0.3s;
-  border: 1px solid rgba(235, 232, 179, 0.571);
-}
+.game-card { background: #d4af3715; border-radius: 15px; padding: 20px; text-align: center; transition: 0.3s; border: 1px solid rgba(235, 232, 179, 0.571); }
 
-.game-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 0 20px #d2d08877;
-}
+.game-card:hover { transform: translateY(-6px); box-shadow: 0 0 20px #d2d08877; }
 
-.price {
-  display: block;
-  margin-top: 10px;
-  color: #eae6bb;
-  font-weight: bold;
-}
+.price { display: block; margin-top: 10px; color: #eae6bb; font-weight: bold; }
 
 .fade-enter-active,
-.fade-leave-active {
-  transition: all 0.4s ease;
-}
+.fade-leave-active { transition: all 0.4s ease; }
 
 .fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-  transform: translateY(20px);
-}
+.fade-leave-to { opacity: 0; transform: translateY(20px); }
 </style>

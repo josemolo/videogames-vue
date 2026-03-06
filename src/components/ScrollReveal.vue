@@ -6,6 +6,7 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
+
 const el = ref()
 const show = ref(false)
 
@@ -19,5 +20,6 @@ onMounted(() => {
 
 <style scoped>
 div{opacity:0;transform:translateY(40px);transition:1s}
+
 .show{opacity:1;transform:none}
 </style>

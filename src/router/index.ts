@@ -1,14 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-
 import { useUserStore } from '@/stores/user'
-/*
-import Home from '../views/Home.vue'
-import News from '../views/News.vue'
-import Consoles from '../views/Consoles.vue'
-import Contact from '../views/Contact.vue'
-import Nintendo from '../views/Nintendo.vue'
-import ConsoleDetail from '@/views/ConsoleDetail.vue'
-*/
 
 const routes = [
   { path: '/', name: 'Home', component: () => import('../views/Home.vue') },
@@ -23,28 +14,12 @@ const routes = [
   { path: '/verify', component: () => import('@/views/Verify.vue') },
   { path: '/verify-required', component: () => import('@/views/VerifyRequired.vue') },
 
-  {
-    path: '/checkout',
-    component: () => import('@/views/Checkout.vue'),
-    meta: { requiresVerified: true }
-  },
+  { path: '/checkout', component: () => import('@/views/Checkout.vue'), meta: { requiresVerified: true } },
 
-  {
-    path: '/tienda',
-    component: () => import('@/views/Shop.vue')
-  },
-  {
-    path: '/tienda/consolas',
-    component: () => import('@/views/ShopConsoles.vue')
-  },
-  {
-    path: '/tienda/juegos',
-    component: () => import('@/views/ShopGames.vue')
-  },
-  {
-    path: '/tienda/articulos',
-    component: () => import('@/views/ShopArticles.vue')
-  }
+  { path: '/tienda', component: () => import('@/views/Shop.vue') },
+  { path: '/tienda/consolas', component: () => import('@/views/ShopConsoles.vue') },
+  { path: '/tienda/juegos', component: () => import('@/views/ShopGames.vue') },
+  { path: '/tienda/articulos', component: () => import('@/views/ShopArticles.vue') }
 ]
 
 const router = createRouter ({
@@ -85,46 +60,3 @@ export function preloadRoute(name: string) {
     component()
   }
 }
-
-
-
-
-//  Helper para preload inteligente
-//export function preloadRoute(name: string) {
-//  const route = routes.find(r => r.name === name)
-//
-//  if (!route) return
-//
-//  const component = route.component
-//
-  // Si el componente es lazy (import dinámico), lo ejecutamos
-//  if (typeof component === 'function') {
-//    component()
-//  }
-//}
-
-
-
-
-
-
-
-/*
-import { createRouter, createWebHistory } from 'vue-router'
-import Register from '../views/Register.vue'
-import Library from '../views/Library.vue'
-import News from '../views/News.vue'
-import Consoles from '../views/Consoles.vue'
-
-const routes = [
-  { path: '/', component: Register },
-  { path: '/library', component: Library },
-  { path: '/news', component: News },
-  { path: '/consoles', component: Consoles },
-]
-
-export const router = createRouter({
-  history: createWebHistory(),
-  routes,
-})
-*/

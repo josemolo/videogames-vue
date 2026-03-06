@@ -2,10 +2,9 @@
 import { ref } from 'vue'
 import { supabase } from '@/lib/supabase'
 
-export const user = ref<any>(null)   // Estado global del usuario logueado
-
+export const user = ref<any>(null) // Estado global del usuario logueado
 export function useAuth() {
-
+  
   // 🔹 Registrar usuario
   async function register(email: string, password: string) {
     const { data, error } = await supabase.auth.signUp({

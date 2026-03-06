@@ -1,30 +1,25 @@
 <template>
   <main class="nintendo-page">
-
     <!-- HERO -->
     <section class="hero">
       <div class="hero-content"></div>
         <h1>{{ console.name }}</h1>
         <img :src="console.image" :alt="console.name" class="hero-image" />
         <p class="subtitle">{{ console.subtitle }}</p>
-
         <button class="cta" @click="consultar">
           Consultar disponibilidad
         </button>
     </section>
-
     <!-- DESCRIPCIÓN -->
     <section class="about">
       <p>{{ console.description }}</p>
     </section>
-
     <!-- FEATURES -->
     <section class="features">
       <div v-for="(feature, index) in console.features" :key="index" class="feature">
         <span>{{ feature }}</span>
       </div>
     </section>
-
     <!-- ACCESORIOS -->
     <section class="accessories" v-if="console.accessories && console.accessories.length">
       <h2>Accesorios compatibles</h2>
@@ -35,7 +30,6 @@
         </div>
       </div>
     </section>
-
     <!-- CTA FINAL -->
     <section class="final-cta">
       <h2>¿Quieres saber disponibilidad hoy?</h2>
@@ -44,7 +38,6 @@
         <button class="secondary" @click="volver">Volver a consolas</button>
       </div>
     </section>
-
   </main>
 </template>
 
@@ -96,162 +89,51 @@ useHead({
 </script>
 
 <style scoped>
-.nintendo-page {
-  background: #000;
-  color: #ffd8cf;
-  font-family: 'Orbitron', sans-serif;
-  width: 100%;
-  overflow-x: hidden;
-}
+.nintendo-page { background: #000; color: #ffd8cf; font-family: 'Orbitron', sans-serif; width: 100%; overflow-x: hidden; }
 
 /* HERO */
-.hero {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  padding: 4rem 2rem;
-  background: radial-gradient(circle at top, #1a1a3a, #000);
-}
+.hero { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 4rem 2rem; background: radial-gradient(circle at top, #1a1a3a, #000); }
 
-.hero h1 {
-  font-size: 3rem;
-  margin-bottom: 1rem;
-  color: #ffd9007e;
-  text-shadow: 0 0 20px rgba(255, 217, 0, 0.468);
-}
+.hero h1 { font-size: 3rem; margin-bottom: 1rem; color: #ffd9007e; text-shadow: 0 0 20px rgba(255, 217, 0, 0.468); }
 
-.hero-image {
-  width: 300px;
-  margin: 2rem 0;
-  margin-bottom: 1.5rem;
-  filter: drop-shadow(0 0 30px rgba(255,215,0,0.7));
-}
+.hero-image { width: 300px; margin: 2rem 0; margin-bottom: 1.5rem; filter: drop-shadow(0 0 30px rgba(255,215,0,0.7)); }
 
-.subtitle {
-  font-size: 1.2rem;
-  margin-bottom: 2rem;
-  opacity: 0.85;
-}
+.subtitle { font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.85; }
 
-.cta {
-  background: linear-gradient(45deg, #ffd9009f, #BFA06D);
-  color: #000000;
-  border: none;
-  padding: 0.9rem 2rem;
-  border-radius: 30px;
-  cursor: pointer;
-  font-size: 1rem;
-  box-shadow: 0 0 25px rgba(255,215,0,0.6);
-  transition: transform 0.2s, box-shadow 0.3s;
-}
+.cta { background: linear-gradient(45deg, #ffd9009f, #BFA06D); color: #000000; border: none; padding: 0.9rem 2rem; border-radius: 30px; cursor: pointer; font-size: 1rem; box-shadow: 0 0 25px rgba(255,215,0,0.6); transition: transform 0.2s, box-shadow 0.3s; }
 
-.cta:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 0 40px rgba(255, 217, 0, 0.605);
-}
+.cta:hover { transform: translateY(-2px); box-shadow: 0 0 40px rgba(255, 217, 0, 0.605); }
 
 /* ABOUT */
-.about {
-  max-width: 900px;
-  margin: 3rem auto;
-  padding: 0 1rem;
-  text-align: center;
-  color: #fffba9;
-  line-height: 1.6;
-}
+.about { max-width: 900px; margin: 3rem auto; padding: 0 1rem; text-align: center; color: #fffba9; line-height: 1.6; }
 
 /* FEATURES */
-.features {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 1.5rem;
-  margin: 3rem 2rem;
-}
+.features { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.5rem; margin: 3rem 2rem; }
 
-.feature {
-  background: #111;
-  padding: 1rem 1.5rem;
-  border-radius: 12px;
-  box-shadow: 0 0 15px rgba(255,215,0,0.4);
-  min-width: 160px;
-  text-align: center;
-  font-size: 1rem;
-  color: #ffd900b6;
-}
+.feature { background: #111; padding: 1rem 1.5rem; border-radius: 12px; box-shadow: 0 0 15px rgba(255,215,0,0.4); min-width: 160px; text-align: center; font-size: 1rem; color: #ffd900b6; }
 
 /* ACCESORIOS */
-.accessories {
-  max-width: 1000px;
-  margin: 4rem auto;
-  padding: 0 1rem;
-  text-align: center;
-}
+.accessories { max-width: 1000px; margin: 4rem auto; padding: 0 1rem; text-align: center; }
 
-.accessories h2 {
-  text-align: center;
-  margin-bottom: 2rem;
-  color: #ffd900a4;
-}
+.accessories h2 { text-align: center; margin-bottom: 2rem; color: #ffd900a4; }
 
-.accessory-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 2rem;
-  justify-content: center;
-}
+.accessory-list { display: flex; flex-wrap: wrap; gap: 2rem; justify-content: center; }
 
-.accessory-card {
-  background: #111;
-  border-radius: 12px;
-  padding: 1rem;
-  width: 180px;
-  text-align: center;
-  box-shadow: 0 0 15px rgba(255,215,0,0.4);
-}
+.accessory-card { background: #111; border-radius: 12px; padding: 1rem; width: 180px; text-align: center; box-shadow: 0 0 15px rgba(255,215,0,0.4); }
 
-.accessory-card img {
-  width: 100px;
-  margin-bottom: 0.5rem;
-}
+.accessory-card img { width: 100px; margin-bottom: 0.5rem; }
 
-.accessory-card span {
-  color: #ffd900a5;
-  font-size: 0.9rem;
-  display: block;
-}
+.accessory-card span { color: #ffd900a5; font-size: 0.9rem; display: block; }
 
 /* FINAL CTA */
-.final-cta {
-  text-align: center;
-  padding: 4rem 2rem;
-  background: linear-gradient(180deg, #000000, #111111);
-}
+.final-cta { text-align: center; padding: 4rem 2rem; background: linear-gradient(180deg, #000000, #111111); }
 
-.final-cta h2 {
-  margin-bottom: 2rem;
-}
+.final-cta h2 { margin-bottom: 2rem; }
 
-.cta-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  flex-wrap: wrap;
-}
+.cta-buttons { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
 
-.secondary {
-  background: transparent;
-  border: 2px solid #ffd900b5;
-  border-radius: 30px;
-  padding: 0.9rem 2rem;
-  color: #ffd90098;
-  cursor: pointer;
-}
+.secondary { background: transparent; border: 2px solid #ffd900b5; border-radius: 30px; padding: 0.9rem 2rem; color: #ffd90098; cursor: pointer; }
 
-.secondary:hover {
-  background: #ffd9008e;
-  color: #000;
-}
+.secondary:hover { background: #ffd9008e; color: #000; }
 </style>
 

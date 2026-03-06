@@ -1,13 +1,15 @@
-import { ViteSSG } from 'vite-ssg'
 import App from './App.vue'
-import { createRouter } from './router'
+import reveal from './directives/reveal'
+import router from './router'
+
+import { ViteSSG } from 'vite-ssg'
+/*import { createRouter } from './router'*/
 import { createPinia } from 'pinia'
 import { createHead } from '@vueuse/head'
-import reveal from './directives/reveal'
 
 export const createApp = ViteSSG(
     App,
-    { routes: createRouter().options.routes },
+    { routes: router.options.routes },
     ({ app, router }) => {
         const pinia = createPinia()
         const head = createHead()        

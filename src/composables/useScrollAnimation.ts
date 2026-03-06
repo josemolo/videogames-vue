@@ -25,8 +25,3 @@ export function useScrollAnimation(selector = '.card') {
     observer?.disconnect()
   })
 }
-
-
-//declare module '@/composables/useScrollAnimation' {
-//  export function useScrollAnimation(): void
-//}

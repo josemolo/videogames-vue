@@ -58,8 +58,6 @@ export const useCartStore = defineStore('cart', {
       this.saveToStorage()
     },  
       
-
-
     decreaseItem(cartId: string) {
       const item = this.items.find(i => i.cartId === cartId)
       if (!item) return
@@ -101,22 +99,5 @@ export const useCartStore = defineStore('cart', {
         this.clearCart()
       }
     },  
-
-    /*
-    updateQuantity(id:number, quantity:number){
-      const item = this.items.find(i => i.id === id)
-      if(!item) return
-      if(quantity <= 0) {
-        this.removeItem(id)
-        return
-      }  
-      
-       // ⛔ no exceder stock
-      item.quantity = Math.min(quantity, item.stock)
-      this.saveToStorage()
-    },
-
-    */
-
   },
 })

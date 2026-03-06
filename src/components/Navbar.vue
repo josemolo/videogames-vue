@@ -3,7 +3,6 @@
     <!-- Logo y carrito -->
     <div class="top-row">
       <h1 class="logo">LUCYCELL</h1>
-
       <!-- Dropdown de usuario -->
       <div class="user-dropdown">
         <button @click="toggleUserMenu" class="user-button">
@@ -12,7 +11,6 @@
             {{ userStore.user?.username }}
           </span>
         </button>
-
         <ul v-if="userMenuOpen" class="dropdown-menu">
           <li v-if="!userStore.isLoggedIn" @click="openLogin">Iniciar sesión</li>
           <li v-if="!userStore.isLoggedIn" @click="openLogin">Crear cuenta nueva</li>
@@ -43,26 +41,21 @@
         </nav>
       </div>
       <button class="cart-icon" @click.stop="openCartPopup">
-        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox=" 0 24 24" fill="none" stroke="#1f9faf" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1f9faf" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
           <circle cx="9" cy="22" r="2"/>
           <circle cx="20" cy="22" r="2"/>
           <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h7.72a2 2 0 0 0 2-1.61L23 6H6"/>
         </svg>
-
         <span v-if="cart.totalItems" class="cart-badge">
           {{ cart.totalItems }}
         </span>
-
         <span v-if="cartStore.totalItems > 0" class="cart-badge">
           {{ cartStore.totalItems }}
         </span>
       </button>
-
     </div>
-
-      <!-- MODALES -->
+    <!-- MODALES -->
     <LoginModal ref="loginModalRef" />
-
     <!-- Componente del carrito -->
     <CartPopup ref="cartPopupRef" />
   </header>
@@ -76,23 +69,17 @@ import { useCartStore } from '@/stores/cart'
 import { useUserStore } from '@/stores/user'
 
 const cartStore = useCartStore()
-
 const cart = useCartStore()
 const userStore = useUserStore()
-
 const isOpen = ref(false)
 const userMenuOpen = ref(false)
 const menuRef = ref<HTMLElement | null>(null)
-
 const loginModalRef = ref<InstanceType<typeof LoginModal> | null>(null)
 const cartPopupRef = ref<InstanceType<typeof CartPopup> | null>(null)
 
 const toggleMenu = () => isOpen.value = !isOpen.value 
 const closeMenu = () => isOpen.value = false 
 const toggleUserMenu = () => userMenuOpen.value = !userMenuOpen.value 
-
-
-
 
 // 🔐 Abrir login global
 const openLogin = () => { 
@@ -116,7 +103,6 @@ const logout = () => {
   userMenuOpen.value = false 
 }
 
-
 /* 🔥 Cerrar menú al hacer click fuera */
 const handleClickOutside = (event: MouseEvent) => {
   if (menuRef.value && !menuRef.value.contains(event.target as Node)) {
@@ -130,7 +116,6 @@ const handleForgotPassword = async () => {
   await userStore.forgotPassword(email)
 }
 
-
 onMounted(() => {
   document.addEventListener('click', handleClickOutside)
   userStore.setLoginModalRef(loginModalRef)
@@ -141,105 +126,105 @@ onBeforeUnmount(() => {
 })
 </script>
 
-
-
 <style>
- body {
-    overflow-x: hidden;
-  }
+ body { overflow-x: hidden; }
+
  .user-dropdown { position: relative; } 
+ 
  .user-button { display: flex; align-items: center; gap: 2px; padding: 8px 14px; border-radius: 30px; border: 1px solid rgba(176, 139, 5, 0.406); background: rgba(152, 126, 29, 0.409); backdrop-filter: blur(10px); cursor: pointer; transition: all 0.3s ease; } 
+ 
  /* Icono circular */ 
  .user-icon { width: 26px; height: 26px; border-radius: 50%; background: linear-gradient(135deg, #7b7b7b67, #efefef8e); box-shadow: 0 0 10px rgba(212,175,55,0.6);position: relative; } 
+ 
  /* Cabeza */ 
  .user-icon::before { content: ''; position: absolute; top: 6px; left: 50%; transform: translateX(-50%); width: 8px; height: 8px; background: #00000047; border-radius: 50%; } 
+ 
  /* Cuerpo */ 
  .user-icon::after { content: ''; position: absolute; bottom: 4px; left: 50%; transform: translateX(-50%); width: 14px; height: 8px; background: #09090958; border-radius: 10px 10px 0 0; } 
+ 
  /* Estado logueado */ 
  .user-icon.logged { background: linear-gradient(135deg, #d3cb8a79, #6ccd04); box-shadow: 0 0 12px rgb(255, 255, 255), 0 0 24px rgba(255, 255, 255, 0.5); animation: pulseGreen 2s infinite ease-in-out; } 
+ 
  /* Username */ 
  .username { font-family: 'Orbitron', sans-serif; font-size: 0.9rem; color: #ececec; letter-spacing: 1px; } 
+ 
  /* Hover futurista */ 
  .user-button:hover { border-color: #cdccff; box-shadow: 0 0 10px rgba(99, 99, 99, 0.6), 0 0 20px rgba(255, 203, 135, 0.612); transform: translateY(-2px); } 
+ 
  .dropdown-menu { position: absolute; top: 100%; right: 0; background: #d4af3715; border: 1px solid #ffffff2b; list-style: none; padding: 5px 0; margin: 0; width: 200px; z-index: 50; } 
+ 
  .dropdown-menu li { padding: 8px 12px; cursor: pointer; font-family: 'Orbitron', sans-serif; color: #737374; } 
+ 
  .dropdown-menu li:hover { background: #4747475a; color: #ffffff; } 
- .header { display: flex; flex-direction: column; gap: 5px; padding: 10px 30px; background: linear-gradient(90deg, #d4af3713, #d4b5391d); color: rgb(255, 255, 255); box-shadow: 0 0 15px rgba(255, 255, 255, 0.861); } 
+ 
+ .header { display: flex; flex-direction: column; gap: 5px; padding: 10px 30px; background: linear-gradient(90deg, #d4af3713, #d4b5391d); color: rgb(255, 255, 255); box-shadow: 0 0 15px rgba(255, 239, 167, 0.861); } 
+ 
  /* FILA 1: logo izquierda, usuario derecha */ 
  .top-row, .bottom-row { display: flex; justify-content: space-between; align-items: center; margin-top: 5px; } 
+ 
  .top-bar { display: flex; justify-content: space-between; align-items: center; } 
+ 
  .logo { font-family: 'Orbitron', sans-serif; font-weight: 900; font-size: 1.8rem; background: linear-gradient( 90deg, #ffffff1b, #ddc070, #ffffff1b); background-size: 200%; background-clip: text; /* 👈 estándar */ -webkit-background-clip: text; color: transparent; -webkit-text-fill-color: transparent; animation: glow 4s linear infinite; cursor: pointer; } 
+ 
  .cart-icon { position: relative; background: transparent; border: none; cursor: pointer; margin-right: 10px; } 
+ 
  .cart-badge { position: absolute; top: -6px; right: -8px; background: #ffffff; color: rgba(0, 0, 0, 0.568); font-size: 0.7rem; font-weight: bold; padding: 2px 6px; border-radius: 50%; box-shadow: 0 0 8px #ffffff; } 
+ 
  /* Botón carrito */ 
  .cart-button { background: transparent; border: none; color: rgb(255, 255, 255); font-size: 1.5rem; cursor: pointer; margin-right: 6px; /* 👈 ajusta este valor */ } 
+ 
  .cart-badge { position: absolute; top: -6px; right: -10px; background: #00ff7342; font-size: 0.7rem; font-weight: bold; padding: 3px 7px; border-radius: 999px; box-shadow: 0 0 8px rgba(207, 207, 207, 0.589); } 
+ 
  .hamburger { background: transparent; border: none; cursor: pointer; padding: 5px; display: flex; flex-direction: column; justify-content: center; z-index: 100; } 
+ 
  /* Botón hamburguesa */ 
  .hamburger-container { display: flex; justify-content: flex-start; margin-top: 10px; } 
+ 
  .hamburger span { display: block; width: 26px; height: 3px; margin: 5px 0; background: #d4c4377e; /* color base */ border-radius: 5px; transition: background 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease; box-shadow: 0 0 6px rgb(255, 255, 255); } 
+ 
  .hamburger:hover span { background: #ccc18a; box-shadow: 0 0 8px rgba(255, 255, 255, 0.9), 0 0 16px rgba(255, 213, 0, 0.6); } 
+ 
  .hamburger.active span { background: #d4af377e; box-shadow: 0 0 8px rgba(236, 236, 236, 0.9), 0 0 16px rgba(255, 196, 0, 0.6); transform: scaleX(0.85); } 
+ 
  .menu-hamburger { position: relative; display: flex; align-items: center; margin-top: 6px; /* 👈 baja ligeramente el botón */ } 
+ 
  /* Menú desplegable */ 
- .nav { position: absolute; left: 45px; top: 50%; transform: translateY(-50%) scaleX(0); transform-origin: left; display: flex; flex-direction: row; gap: 30px; padding: 14px 28px; background: rgba(255, 175, 2, 0); border: 1px solid #ffffff4b; border-radius: 14px; backdrop-filter: blur(12px); transition: transform 0.4s cubic-bezier(0.77, 0, 0.18, 1); white-space: nowrap; /* 🔥 CLAVE */ } 
+ .nav { position: absolute; left: 45px; top: 50%; transform: translateY(-50%) scaleX(0); transform-origin: left; display: flex; flex-direction: row; gap: 30px; padding: 14px 28px; background: rgba(255, 175, 2, 0); border: 1px solid #ffffff4b; border-radius: 14px; backdrop-filter: blur(12px); transition: transform 0.4s cubic-bezier(0.77, 0, 0.18, 1); white-space: nowrap; /* CLAVE */ } 
+ 
  .nav.open { transform: translateY(-50%) scaleX(1); /* suficiente para mostrar todos los links */ } 
+ 
  /* Animación escalonada */ 
  .nav-link { opacity: 0; transform: translateX(-10px); transition: all 0.3s ease; color: #737374; font-family: 'Orbitron', sans-serif; text-decoration: none; letter-spacing: 1px; } 
+
  .nav.open .nav-link { opacity: 1; transform: translateX(0); } 
  .nav.open .nav-link:nth-child(1) { transition-delay: 0.05s; } 
  .nav.open .nav-link:nth-child(2) { transition-delay: 0.1s; } 
  .nav.open .nav-link:nth-child(3) { transition-delay: 0.15s; } 
  .nav.open .nav-link:nth-child(4) { transition-delay: 0.2s; } 
+ 
  .nav-link:hover { color: #ffe9acde; text-shadow: 0 0 8px rgba(255, 238, 165, 0.772), } 
+ 
  .nav-link::after { content: ''; position: absolute; left: 0; bottom: -4px; width: 0%; height: 2px; background: #b4ad9976; transition: width 0.3s ease; } 
+ 
  .nav-link:hover::after { width: 100%; } 
- @keyframes glow { 0% { background-position: 0% } 100% { background-position: 200% } } /* Animación suave */ 
- @keyframes pulseGreen { 0% { box-shadow: 0 0 8px rgba(43, 255, 0, 0.6), 0 0 16px rgba(255, 255, 255, 0.411); } 50% { box-shadow: 0 0 16px rgb(255, 255, 255), 0 0 32px rgba(248, 248, 248, 0.6); } 100% { box-shadow: 0 0 8px rgba(23, 132, 52, 0.612), 0 0 16px rgba(6, 174, 70, 0.502); } }
+ 
+ @keyframes glow { 
+    0% { background-position: 0% } 
+    100% { background-position: 200% } 
+  }/* Animación suave */ 
+ 
+  @keyframes pulseGreen { 
+    0% { box-shadow: 0 0 8px rgba(43, 255, 0, 0.6), 0 0 16px rgba(255, 255, 255, 0.411); } 
+    50% { box-shadow: 0 0 16px rgb(255, 255, 255), 0 0 32px rgba(248, 248, 248, 0.6); } 
+    100% { box-shadow: 0 0 8px rgba(23, 132, 52, 0.612), 0 0 16px rgba(6, 174, 70, 0.502); } 
+  }
 
  /* 🔥 CONTROL MÓVIL SIN CAMBIAR DISEÑO */
  @media (max-width: 480px) {
-  
-  .header {
-      overflow-x: hidden;
-    }
+  .header { overflow-x: hidden; }
 
-  
-   .nav {
-    gap: 10px;
-    padding: 6px 10px;
-    max-width: calc(100vw - 120px);
-    overflow: hidden;
-  }
+  .nav { gap: 10px; padding: 6px 10px; max-width: calc(100vw - 120px); overflow: hidden;  }
 
-  .nav-link {
-    font-size: 0.6rem;
-  }
+  .nav-link { font-size: 0.6rem; }
  }
-
- /*@media (min-width: 768px) {
-    .nav {
-    position: fixed;
-    top: 70px;  altura header 
-    left: 0;
-
-    width: 100%;
-    max-width: 100vw;
-
-    flex-direction: column;
-    gap: 20px;
-
-    padding: 20px;
-
-    transform: scaleY(0);
-    transform-origin: top;
-
-    border-radius: 0;
-    z-index: 999;
-  }
-
-    .nav.open {
-      transform: scaleY(1);
-  }
-  }*/
 </style>

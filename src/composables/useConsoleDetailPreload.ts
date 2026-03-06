@@ -12,12 +12,8 @@ export function useConsoleDetailPreload() {
     }
 
   onMounted(() => {
-    //if (preloaded) return
     if (!('IntersectionObserver' in window)) {
-      //preloadRoute('ConsoleDetail')
-      //preloaded = true
-      //return
-
+      
       runWhenIdle(() => preloadRoute('ConsoleDetail'))
       preloaded = true
       return
@@ -26,9 +22,6 @@ export function useConsoleDetailPreload() {
     observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting && !preloaded) {
-          //preloadRoute('ConsoleDetail')
-          //preloaded = true
-          //observer?.disconnect()
 
           runWhenIdle(() => preloadRoute('ConsoleDetail'))
           preloaded = true

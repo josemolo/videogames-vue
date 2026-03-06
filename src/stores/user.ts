@@ -46,7 +46,6 @@ export const useUserStore = defineStore('user', {
         this.user = data.user
         this.isLoggedIn = true
         this.isVerified = !!data.user.email_confirmed_at
-        /*this.showLoginModal = false*/
 
         alert('Cuenta creada. Revisa tu correo para confirmar tu email.')
         return true
@@ -107,8 +106,6 @@ export const useUserStore = defineStore('user', {
       const cart = useCartStore()
       cart.clearCart()
     },
-
-
 
     openLoginModal(action?: () => void) {
       if (action) this.pendingAction = action

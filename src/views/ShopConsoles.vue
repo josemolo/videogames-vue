@@ -2,7 +2,6 @@
   <div class="full-window">
     <div class="window consoles">
       <h1>Consolas / Juegos / Artículos</h1>
-
       <!-- ================= Fila superior ================= -->
       <div class="row">
         <!-- Skeleton -->
@@ -17,7 +16,6 @@
             <div class="skeleton-text shimmer"></div>
           </div>
         </template>
-
         <!-- Contenido real -->
         <template v-else>
           <div
@@ -33,7 +31,6 @@
           </div>
         </template>
       </div>
-
       <!-- ================= Fila central ================= -->
       <div class="row">
         <template v-if="loading">
@@ -47,7 +44,6 @@
             <div class="skeleton-text shimmer"></div>
           </div>
         </template>
-
         <template v-else>
           <div
             v-for="console in consoles.slice(3, 6)"
@@ -62,7 +58,6 @@
           </div>
         </template>
       </div>
-
       <!-- ================= Fila inferior ================= -->
       <div class="row">
         <template v-if="loading">
@@ -76,7 +71,6 @@
             <div class="skeleton-text shimmer"></div>
           </div>
         </template>
-
         <template v-else>
           <div
             v-for="console in consoles.slice(6, 9)"
@@ -178,270 +172,82 @@ useRouteMetrics()
 </script>
 
 <style scoped>
-.full-window {
-  width: 100%;
-  min-height: calc(100vh - 60px); /* ajustado para navbar */
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  background: #d4af3715;
-  padding: 20px;
-  box-sizing: border-box;
-  overflow-x: hidden;
-}
+.full-window { width: 100%; min-height: calc(100vh - 60px); /* ajustado para navbar */ display: flex; justify-content: center; align-items: flex-start; background: #d4af3715; padding: 20px; box-sizing: border-box; overflow-x: hidden; }
 
-.window {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  background: #ffffff23;
-  border: 3px solid #897637a0;
-  border-radius: 15px;
-  width: 100%;
-  max-width: 1200px;
-  padding: 30px;
-  box-shadow: 0 0 20px #7a7a7a, 0 0 40px #a9a0457d;
-  font-family: 'Orbitron', sans-serif;
-  color: #f5faaa6b;
-  overflow-y: auto;
-}
+.window { display: flex; flex-direction: column; justify-content: flex-start; background: #ffffff23; border: 3px solid #897637a0; border-radius: 15px; width: 100%; max-width: 1200px; padding: 30px; box-shadow: 0 0 20px #7a7a7a, 0 0 40px #a9a0457d; font-family: 'Orbitron', sans-serif; color: #f5faaa6b; overflow-y: auto; }
 
-.window h1 {
-  text-align: center;
-  color: #efefefc0;
-  text-shadow: 0 0 12px #ffd500b5, 0 0 25px #ffd5004a;
-  margin-bottom: 30px;
-}
+.window h1 { text-align: center; color: #efefefc0; text-shadow: 0 0 12px #ffd500b5, 0 0 25px #ffd5004a; margin-bottom: 30px; }
 
-.row {
-  display: flex;
-  justify-content: center;
-  gap: 30px;
-  margin-bottom: 30px;
-  flex-wrap: wrap;
-}
+.row { display: flex; justify-content: center; gap: 30px; margin-bottom: 30px; flex-wrap: wrap; }
 
-.console-card {
-  background: #77734f00;
-  border: 2px solid #cfc18188;
-  border-radius: 15px;
-  padding: 20px;
+.console-card { background: #77734f00; border: 2px solid #cfc18188; border-radius: 15px; padding: 20px; flex: 1 1 280px; max-width: 350px; width: 100%; min-height: 250px; text-align: center; box-shadow: 0 0 15px #d7c677a5, 0 0 30px #757575; transition: 0.3s; display: flex; flex-direction: column; align-items: center; cursor: pointer; transform: translateY(20px) scale(0.96); animation: cardFadeIn 0.6s ease-out forwards; }
 
-  flex: 1 1 280px;
-  max-width: 350px;
-  width: 100%;
+.console-card:hover { transform: translateY(-5px); box-shadow: 0 0 25px #5d5d5dd0, 0 0 45px #bcb756ad; }
 
-  min-height: 250px;
-  text-align: center;
+.console-img:hover { transform: scale(1.15); /* agranda la imagen */ box-shadow: 0 0 20px #5d5d5dd0, 0 0 40px #bcb756ad; }
 
-  box-shadow: 0 0 15px #d7c677a5, 0 0 30px #757575;
-  transition: 0.3s;
+.console-img { width: 140px; height: 140px; object-fit: contain; /* mantiene proporción */ margin-bottom: 15px; border-radius: 10px; box-shadow: 0 0 10px #d7c677a5, 0 0 20px #757575; transition: transform 0.3s, box-shadow 0.3s; }
 
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.console-card h3 { color: #dcd5ba; margin-bottom: 10px; font-size: 1.3rem; }
 
-  cursor: pointer;
-  transform: translateY(20px) scale(0.96);
-  animation: cardFadeIn 0.6s ease-out forwards;
-}
+.console-card p { font-size: 1rem; color: #d1c890ef; }
 
-.console-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 0 25px #5d5d5dd0, 0 0 45px #bcb756ad;
-}
-
-.console-img:hover {
-  transform: scale(1.15); /* agranda la imagen */
-  box-shadow: 0 0 20px #5d5d5dd0, 0 0 40px #bcb756ad;
-}
-
-.console-img {
-  width: 140px;
-  height: 140px;
-  object-fit: contain; /* mantiene proporción */
-  margin-bottom: 15px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px #d7c677a5, 0 0 20px #757575;
-  transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.console-card h3 {
-  color: #dcd5ba;
-  margin-bottom: 10px;
-  font-size: 1.3rem;
-}
-
-.console-card p {
-  font-size: 1rem;
-  color: #d1c890ef;
-}
-
-.console-content {
-  background: #f0ebaf7c;
-  border-radius: 10px;
-  width: 100%;
-  height: 100%; /* ocupa toda la altura del console-card */
-  padding: 15px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around; /* distribuye uniformemente imagen, título y descripción */
-  box-sizing: border-box;
-  box-shadow: inset 0 0 10px #f3f99c74, inset 0 0 20px #f9ff9066;
-  transition: transform 0.3s, box-shadow 0.3s;
-}
+.console-content { background: #f0ebaf7c; border-radius: 10px; width: 100%; height: 100%; /* ocupa toda la altura del console-card */ padding: 15px; display: flex; flex-direction: column; align-items: center; justify-content: space-around; /* distribuye uniformemente imagen, título y descripción */ box-sizing: border-box; box-shadow: inset 0 0 10px #f3f99c74, inset 0 0 20px #f9ff9066; transition: transform 0.3s, box-shadow 0.3s; }
 
 /* Stagger automático */
 .console-card:nth-child(1) { animation-delay: 0.05s; }
+
 .console-card:nth-child(2) { animation-delay: 0.12s; }
+
 .console-card:nth-child(3) { animation-delay: 0.18s; }
 
-button.buy, button.back {
-  padding: 10px 20px;
-  border: 2px solid #e6f19150;
-  border-radius: 12px;
-  background: transparent;
-  color: #fdff9b8c;
-  font-weight: bold;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 0 10px #e7eb9973, 0 0 20px #deda7385;
-}
+button.buy, button.back { padding: 10px 20px; border: 2px solid #e6f19150; border-radius: 12px; background: transparent; color: #fdff9b8c; font-weight: bold; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 0 10px #e7eb9973, 0 0 20px #deda7385; }
 
-button.buy:hover {
-  box-shadow: 0 0 20px #eff48399, 0 0 40px #dde66599;
-  transform: translateY(-3px);
-}
+button.buy:hover { box-shadow: 0 0 20px #eff48399, 0 0 40px #dde66599; transform: translateY(-3px); }
 
-button.back:hover {
-  box-shadow: 0 0 15px #e2f16a8d, 0 0 30px #f4f47969;
-  transform: translateY(-2px);
-}
+button.back:hover { box-shadow: 0 0 15px #e2f16a8d, 0 0 30px #f4f47969; transform: translateY(-2px); }
 
 /* Glow en títulos */
-h1, h2, h3 {
-  text-shadow: 0 0 8px #d4c9a58c, 0 0 15px #cec2847e;
-}
+h1, h2, h3 { text-shadow: 0 0 8px #d4c9a58c, 0 0 15px #cec2847e; }
 
-.skeleton {
-  pointer-events: none;
-  opacity: 1 !important;
-  transform: none !important;
-  animation: none !important;
-}
+.skeleton { pointer-events: none; opacity: 1 !important; transform: none !important; animation: none !important; }
 
-.skeleton-img {
-  width: 120px;
-  height: 120px;
-  border-radius: 10px;
-  background: #eef1827b;
-  margin-bottom: 15px;
-}
+.skeleton-img { width: 120px; height: 120px; border-radius: 10px; background: #eef1827b; margin-bottom: 15px; }
 
-.skeleton-title {
-  width: 70%;
-  height: 18px;
-  border-radius: 6px;
-  background: #fcf68565;
-  margin-bottom: 10px;
-}
+.skeleton-title { width: 70%; height: 18px; border-radius: 6px; background: #fcf68565; margin-bottom: 10px; }
 
-.skeleton-text {
-  width: 90%;
-  height: 14px;
-  border-radius: 6px;
-  background: #faff9377;
-}
+.skeleton-text { width: 90%; height: 14px; border-radius: 6px; background: #faff9377; }
 
-.shimmer {
-  position: relative;
-  overflow: hidden;
-}
+.shimmer { position: relative; overflow: hidden; }
 
-.shimmer::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  transform: translateX(-100%);
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 253, 135, 0.514),
-    transparent
-  );
-  animation: shimmer 1.2s infinite;
-}
+.shimmer::after { content: ''; position: absolute; inset: 0; transform: translateX(-100%); background: linear-gradient( 90deg, transparent, rgba(255, 253, 135, 0.514), transparent ); animation: shimmer 1.2s infinite; }
 
-.blur-up {
-  filter: blur(12px);
-  transform: scale(1.05);
-  transition:
-    filter 0.6s ease,
-    transform 0.6s ease;
-}
+.blur-up { filter: blur(12px); transform: scale(1.05); transition: filter 0.6s ease, transform 0.6s ease; }
 
-.blur-up.loaded {
-  filter: blur(0);
-  transform: scale(1);
-}
+.blur-up.loaded { filter: blur(0); transform: scale(1); }
 
 @keyframes shimmer {
-  100% {
-    transform: translateX(100%);
-  }
+  100% { transform: translateX(100%); }
 }
 
 @keyframes cardFadeIn {
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
+  to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
 @media (max-width: 600px) {
-  .full-window {
-    padding: 10px;
-  }  
+  .full-window { padding: 10px; }  
 
-  .window {
-    padding: 15px 10px;
-  }
+  .window { padding: 15px 10px; }
 
-  .row {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 10px;
-  }
+  .row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
 
-   .console-card {
-    width: 100%;
-    max-width: 100%;
-    flex: unset;
-    padding: 12px;
-    min-height: 190px;
-    
-    /*aspect-ratio: 1 / 1.2;
-    justify-content: center;*/
-  }
+  .console-card { width: 100%; max-width: 100%; flex: unset; padding: 12px; min-height: 190px; }
 
-  .console-img {
-    width: 90px;
-    height: 90px;
-    object-fit: contain;
-    /*margin-bottom: 8px;*/
-  }
+  .console-img { width: 90px; height: 90px; object-fit: contain; }
 
-  .console-card h3 {
-    font-size: 0.95rem;
-    /*margin-bottom: 6px;*/
-  }
+  .console-card h3 { font-size: 0.95rem; }
 
-  .console-card p {
-    font-size: 0.8rem;
-    /*line-height: 1.2;*/
-  }
+  .console-card p { font-size: 0.8rem; }
 }
-
 </style>
 

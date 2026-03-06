@@ -1,15 +1,12 @@
 <template>
   <div class="taller-page">
-
     <!-- CANVAS PARTICLES -->
     <canvas ref="canvasRef" class="bg-canvas"></canvas>
-
     <!-- HERO -->
     <section class="taller-hero reveal">
       <h1>TECH CENTER</h1>
       <p>Centro técnico especializado en reparación avanzada de dispositivos electrónicos</p>
     </section>
-
     <!-- MÉTRICAS -->
     <section class="metrics reveal">
       <div class="metric">
@@ -25,7 +22,6 @@
         <span>Tiempo promedio (hrs)</span>
       </div>
     </section>
-
     <!-- CERTIFICACIONES -->
     <section class="certifications reveal">
       <h2>Estándares & Garantía</h2>
@@ -36,10 +32,8 @@
         <div class="cert">Diagnóstico profesional</div>
       </div>
     </section>
-
     <!-- GRID PRINCIPAL -->
     <section class="taller-content">
-
       <div class="glass reveal">
         <h2>Servicios Especializados</h2><br>
         <ul>
@@ -50,10 +44,8 @@
           <li>Recuperación de sistema</li>
         </ul>
       </div>
-
       <div class="glass reveal">
         <h2>Solicitar Evaluación Técnica</h2>
-
         <form @submit.prevent="sendToWhatsApp" class="taller-form">
           <input v-model="name" type="text" placeholder="Nombre completo" required />
           <input v-model="phone" type="text" placeholder="Teléfono" required />
@@ -62,7 +54,6 @@
           <button type="submit">Contactar por WhatsApp</button>
         </form>
       </div>
-
     </section>
   </div>
 </template>
@@ -172,7 +163,6 @@ function animate() {
   })
 
   /* ===== LÍNEAS ENTRE PARTÍCULAS ===== */
-
   for (let i = 0; i < particles.length; i++) {
     for (let j = i + 1; j < particles.length; j++) {
 
@@ -245,148 +235,41 @@ Problema: ${problem.value}
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;800&display=swap');
 
-.taller-page {
-  min-height: 100vh;
-  padding: 120px 40px;
-  background: #0a0903;
-  font-family: 'Orbitron', sans-serif;
-  color: rgb(255, 243, 182);
-  position: relative;
-  overflow-x: hidden;
-}
+section { position: relative; z-index: 2; margin-bottom: 100px; text-align: center; }
 
-.bg-canvas {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  /* altura la controla el canvas con JS */
-  z-index: 0;
-}
+.taller-page { min-height: 100vh; padding: 120px 40px; background: #0a0903; font-family: 'Orbitron', sans-serif; color: rgb(255, 243, 182); position: relative; overflow-x: hidden; }
 
-/* Nota: asegúrate que el navbar tenga estos estilos para estar encima */
-/*
-.navbar {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  height: 80px; // o la altura real que uses
-  z-index: 10;
-}
-*/
+.bg-canvas { position: absolute; top: 0; left: 0; width: 100%; /* altura la controla el canvas con JS */ z-index: 0; }
 
-.reveal {
-  opacity: 0;
-  transform: translateY(50px);
-  transition: 1s ease;
-}
+.reveal { opacity: 0; transform: translateY(50px); transition: 1s ease; }
 
-.reveal.active {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-section {
-  position: relative;
-  z-index: 2;
-  margin-bottom: 100px;
-  text-align: center;
-}
+.reveal.active { opacity: 1; transform: translateY(0); }
 
 /* ===== TITULO NEON FLOW ===== */
-.taller-hero h1 {
-  font-family: 'Orbitron', sans-serif;
-  text-align: center;
-  font-size: clamp(3rem,5vw,4.5rem);
-  font-weight: 900;
-  letter-spacing: 4px;
-  text-transform: uppercase;
+.taller-hero h1 { font-family: 'Orbitron', sans-serif; text-align: center; font-size: clamp(3rem,5vw,4.5rem); font-weight: 900; letter-spacing: 4px; text-transform: uppercase; background: linear-gradient(90deg, #FFD700, #fff0b3, #BFA06D); background-size: 500% auto; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; animation: neonFlow 60s ease infinite; text-shadow: 0 0 10px rgba(255,215,0,0.25), 0 0 20px rgba(255,248,220,0.3), 0 0 40px rgba(191,160,109,0.4); }
 
-  background: linear-gradient(90deg, #FFD700, #fff0b3, #BFA06D);
-  background-size: 500% auto;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: neonFlow 60s ease infinite;
+.metrics { display: flex; justify-content: center; gap: 60px; }
 
-  text-shadow:
-    0 0 10px rgba(255,215,0,0.25),
-    0 0 20px rgba(255,248,220,0.3),
-    0 0 40px rgba(191,160,109,0.4);
-}
+.metric h3 { font-size: 2.5rem; color: #ffd9009b; }
 
-.metrics {
-  display: flex;
-  justify-content: center;
-  gap: 60px;
-}
+.certifications h2 { margin-bottom: 40px; }
 
-.metric h3 {
-  font-size: 2.5rem;
-  color: #ffd9009b;
-}
+.cert-grid { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; }
 
-.certifications h2 {
-  margin-bottom: 40px;
-}
+.cert { padding: 20px 30px; background: rgba(255,215,0,0.05); border-radius: 12px; border: 1px solid rgba(255,215,0,0.15); transition: 0.3s; }
 
-.cert-grid {
-  display: flex;
-  justify-content: center;
-  gap: 30px;
-  flex-wrap: wrap;
-}
+.cert:hover { box-shadow: 0 0 25px #ffd900b1; }
 
-.cert {
-  padding: 20px 30px;
-  background: rgba(255,215,0,0.05);
-  border-radius: 12px;
-  border: 1px solid rgba(255,215,0,0.15);
-  transition: 0.3s;
-}
+.taller-content { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; max-width: 1200px; margin: auto; }
 
-.cert:hover {
-  box-shadow: 0 0 25px #ffd900b1;
-}
+.glass { backdrop-filter: blur(20px); background: rgba(255,215,0,0.05); padding: 40px; border-radius: 20px; }
 
-.taller-content {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 60px;
-  max-width: 1200px;
-  margin: auto;
-}
-
-.glass {
-  backdrop-filter: blur(20px);
-  background: rgba(255,215,0,0.05);
-  padding: 40px;
-  border-radius: 20px;
-}
-
-.taller-form {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
+.taller-form { display: flex; flex-direction: column; gap: 15px; }
 
 .taller-form input,
-.taller-form textarea {
-  padding: 14px;
-  border-radius: 10px;
-  border: none;
-  background: rgba(0,0,0,0.6);
-  color: rgb(255, 242, 186);
-}
+.taller-form textarea { padding: 14px; border-radius: 10px; border: none; background: rgba(0,0,0,0.6); color: rgb(255, 242, 186); }
 
-.taller-form button {
-  padding: 16px;
-  border-radius: 12px;
-  border: none;
-  font-weight: bold;
-  background: linear-gradient(45deg,#ffd90096,#BFA06D);
-  cursor: pointer;
-}
+.taller-form button {padding: 16px; border-radius: 12px; border: none; font-weight: bold; background: linear-gradient(45deg,#ffd90096,#BFA06D); cursor: pointer; }
 
 @media(max-width:900px){
   .metrics { flex-direction: column; gap: 30px; }

@@ -1,3 +1,12 @@
+<template>
+  <div class="verify">
+    <h2>Verifica tu identidad</h2>
+
+    <button @click="sendEmail">Enviar por correo</button>
+    <button @click="sendWhatsApp">Enviar por WhatsApp</button>
+  </div>
+</template>
+
 <script setup lang="ts">
 import { useUserStore } from '@/stores/user'
 import { useRouter, useRoute } from 'vue-router'
@@ -24,11 +33,3 @@ function sendWhatsApp() {
 }
 </script>
 
-<template>
-  <div class="verify">
-    <h2>Verifica tu identidad</h2>
-
-    <button @click="sendEmail">Enviar por correo</button>
-    <button @click="sendWhatsApp">Enviar por WhatsApp</button>
-  </div>
-</template>

@@ -2,23 +2,19 @@
   <div class="register-page">
     <!-- Fondo animado -->
     <div class="background-lights"></div>
-
     <!-- Partículas fuera del cuadro -->
     <div class="particles-global">
       <span></span><span></span><span></span><span></span><span></span>
       <span></span><span></span><span></span><span></span><span></span>
     </div>
-
     <!-- Contenedor de formulario -->
     <div class="register-container">
       <h1>REGISTER</h1>
-
       <!-- Partículas dentro del contenedor -->
       <div class="particles-container">
         <span></span><span></span><span></span><span></span><span></span>
         <span></span><span></span><span></span><span></span><span></span>
       </div>
-
       <form class="register-form" @submit.prevent="handleRegister">
         <input v-model="username" type="text" placeholder="User name" />
         <input v-model="email" type="email" placeholder="Email" />
@@ -29,7 +25,6 @@
           <span v-else class="spinner"></span>
         </button>
       </form>
-
       <!-- Barras de energía animadas -->
       <div class="energy-bars bottom">
         <div class="bar bar1"></div>
@@ -100,16 +95,7 @@ async function handleRegister(e: Event) {
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
 
-.register-page {
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #1f0a0a;
-  font-family: 'Orbitron', sans-serif;
-  overflow: hidden;
-  position: relative;
-}
+.register-page { height: 100vh; display: flex; justify-content: center; align-items: center; background: #1f0a0a; font-family: 'Orbitron', sans-serif; overflow: hidden; position: relative; }
 
 /* ... todo tu CSS de partículas y barras ... */
 </style>

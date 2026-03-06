@@ -1,7 +1,6 @@
 <template>
   <div class="window news skeleton">
     <h1 class="skeleton-title"></h1>
-
     <ul>
       <li v-for="i in 3" :key="i" class="news-item skeleton-item">
         <h3>██████████████</h3>
@@ -15,48 +14,19 @@
 
 <style scoped>
 /* Skeleton base */
-.skeleton {
-  opacity: 0.85;
-  background: rgba(255, 255, 255, 0);
-  border-radius: 5px;
-  padding: 10px;
-  margin-bottom: 10px;
-}
+.skeleton { opacity: 0.85; background: rgba(255, 255, 255, 0); border-radius: 5px; padding: 10px; margin-bottom: 10px; }
 
-.skeleton h3, .skeleton p {
-  background: rgba(255, 255, 255, 0);
-  border-radius: 4px;
-  height: 1rem;
-  margin-bottom: 5px;
-}
+.skeleton h3, .skeleton p { background: rgba(255, 255, 255, 0); border-radius: 4px; height: 1rem; margin-bottom: 5px; }
 
 /* Título fake */
-.skeleton-title {
-  height: 32px;
-  width: 70%;
-  margin: 0 auto 20px;
-  border-radius: 8px;
-  background-color: #ffffff00;
-}
+.skeleton-title { height: 32px; width: 70%; margin: 0 auto 20px; border-radius: 8px; background-color: #ffffff00; }
 
 /* Items */
-.skeleton-item {
-  border-bottom: 1px solid #ffffff00;
-  padding: 10px 0;
-}
+.skeleton-item { border-bottom: 1px solid #ffffff00; padding: 10px 0; }
 
-.skeleton-line {
-  height: 14px;
-  border-radius: 6px;
-  background-color: #fce696b5;
-}
+.skeleton-line { height: 14px; border-radius: 6px; background-color: #fce696b5; }
 
-.skeleton-line.title {
-  width: 60%;
-  margin-bottom: 8px;
-}
+.skeleton-line.title { width: 60%; margin-bottom: 8px; }
 
-.skeleton-line.text {
-  width: 90%;
-}
+.skeleton-line.text { width: 90%; }
 </style>

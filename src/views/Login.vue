@@ -1,3 +1,13 @@
+<template>
+  <form @submit.prevent="handleLogin"></form>
+    <input v-model="email" placeholder="Correo" />
+    <input v-model="password" type="password" placeholder="Contraseña" />
+    <button type="submit" :disabled="loading">
+      <span v-if="!loading">Iniciar sesión</span>
+      <span v-else class="spinner"></span>
+    </button>
+</template>
+
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useUserStore } from '@/stores/user'
@@ -29,13 +39,3 @@ async function handleLogin() {
 }
 </script>
 
-
-<template>
-  <form @submit.prevent="handleLogin"></form>
-    <input v-model="email" placeholder="Correo" />
-    <input v-model="password" type="password" placeholder="Contraseña" />
-    <button type="submit" :disabled="loading">
-      <span v-if="!loading">Iniciar sesión</span>
-      <span v-else class="spinner"></span>
-    </button>
-</template>

@@ -1,17 +1,16 @@
-import { createApp } from 'vue'
-import { createPinia } from 'pinia'
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
-import { createHead } from '@vueuse/head'
-
 import App from './App.vue'
 import router from './router'
-import { setupPredictivePreload } from '@/router/predictivePreload'
-import { setupRouteMetrics } from '@/router/metrics'
 import reveal from './directives/reveal'
 
+
+import { createApp } from 'vue'
+import { createPinia } from 'pinia'
+import { createHead } from '@vueuse/head'
+import { setupPredictivePreload } from '@/router/predictivePreload'
+import { setupRouteMetrics } from '@/router/metrics'
 import { useUserStore } from '@/stores/user'  
 import { useCartStore } from '@/stores/cart'
-
 import { useAuth } from './composables/useAuth'
 
 /* =====================
@@ -29,8 +28,6 @@ const pinia = createPinia()
 pinia.use(piniaPluginPersistedstate)
 
 const head = createHead()
-
-
 
 /* =====================
    USE PLUGINS (ORDEN IMPORTANTE)
@@ -52,11 +49,8 @@ const userStore = useUserStore()
 await userStore.checkUser()
 const cartStore = useCartStore()
 
-
 const { getUser } = useAuth()
 getUser()
-
-userStore.checkUser
 
 // 🔐 Controlar carrito según sesión
 if (userStore.isLoggedIn) {
@@ -70,8 +64,6 @@ cartStore.$subscribe((_mutation, state) => {
     localStorage.setItem('vortex_cart', JSON.stringify(state.items))
   }
 })
-
-
 
 cart.$subscribe((_mutation, state) => {
   localStorage.setItem('vortex_cart', JSON.stringify(state.items))

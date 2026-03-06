@@ -2,7 +2,6 @@
   <Modal ref="modalRef">
     <h2 v-if="!isRegistering">Iniciar sesión</h2>
     <h2 v-else>Crear cuenta nueva</h2>
-
     <form @submit.prevent="submit">
       <div class="input-group" v-if="isRegistering">
         <label>Usuario:</label>
@@ -21,15 +20,13 @@
             required 
           />
           <span class="toggle-password" @click="showPassword = !showPassword">
-            {{ showPassword ? '🙈' : '👁️' }}
+            <EyeSlashIcon v-if="showPassword" class="eye-icon" />
+            <EyeIcon v-else class="eye-icon" />
           </span>
-
         </div>  
       </div>
-
       <button type="submit">{{ isRegistering ? 'Registrar' : 'Iniciar sesión' }}</button>
     </form>
-
     <p class="toggle" @click="toggleForm">
       {{ isRegistering ? 'Ya tienes cuenta? Inicia sesión' : 'No tienes cuenta? Regístrate' }}
     </p>
@@ -40,10 +37,10 @@
 import { ref } from 'vue'
 import Modal from './Modal.vue'
 import { useUserStore } from '@/stores/user'
+import { EyeIcon, EyeSlashIcon } from '@heroicons/vue/24/solid'
 
 const modalRef = ref<InstanceType<typeof Modal> | null>(null)
 const userStore = useUserStore()
-
 const isRegistering = ref(false)
 const username = ref('')
 const email = ref('')
@@ -78,7 +75,6 @@ async function submit() {
 
     close()
 
-    /*modalRef.value?.close()*/
     // limpiar campos
     username.value = ''
     email.value = ''
@@ -110,67 +106,27 @@ defineExpose({
 </script>
 
 <style scoped>
-.input-group {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 10px;
-}
+input { padding: 6px 8px; border-radius: 6px; border: none; }
 
-input {
-  padding: 6px 8px;
-  border-radius: 6px;
-  border: none;
-}
+button { background: #ccc16073; color: #eff8f0; font-weight: bold; padding: 8px 12px; border-radius: 6px; border: none; cursor: pointer; width: 100%; }
 
-button {
-  background: #ffae0091;
-  color: #ffffff;
-  font-weight: bold;
-  padding: 8px 12px;
-  border-radius: 6px;
-  border: none;
-  cursor: pointer;
-  width: 100%;
-}
+button:hover { background: #544d3b; }
 
-button:hover {
-  background: #544d3b;
-}
+.input-group { display: flex; flex-direction: column; margin-bottom: 10px; }
 
-.toggle {
-  margin-top: 10px;
-  cursor: pointer;
-  text-align: center;
-  color: #ffffff;
-}
-.toggle:hover {
-  color: rgb(255, 255, 255);
-}
+.toggle { margin-top: 10px; cursor: pointer; text-align: center; color: #e9ffe7f3; }
 
-.password-wrapper {
-  position: relative;
-  width: 100%;
-}
+.toggle:hover {  color: rgba(212, 211, 125, 0.642); }
 
-.password-wrapper input {
-  width: 100%;
-  padding-right: 40px;
-}
+.password-wrapper { position: relative; width: 100%; }
 
-.toggle-password {
-  position: absolute;
-  right: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  cursor: pointer;
-  font-size: 0.9rem;
-  user-select: none;
-  opacity: 0.7;
-}
+.password-wrapper input { width: 100%; padding-right: 40px; }
 
-.toggle-password:hover {
-  opacity: 1;
-}
+.toggle-password { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); cursor: pointer; font-size: 0.9rem; user-select: none; opacity: 0.7; }
+
+.toggle-password:hover { opacity: 1; }
+
+.eye-icon { width: 18px; height: 18px; color: black; }
 </style>
 
 

@@ -13,9 +13,6 @@ lerna-debug.log*
 
 build/
 
-
-
-
 # Configuraciones de Visual Studio / VSCode
 .vs/
 .vscode/
@@ -39,7 +36,5 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-
-
 
 /src/assets/videos/gaming.mp4

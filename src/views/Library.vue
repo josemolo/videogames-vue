@@ -1,7 +1,6 @@
 <template>
   <div class="library">
     <h1>Biblioteca de Videojuegos</h1>
-
     <!-- Lista de juegos -->
     <div class="games">
       <div v-for="game in games" :key="game.id" class="game-card">
@@ -12,7 +11,6 @@
         <button @click="addToCart(game)">Agregar al carrito</button>
       </div>
     </div>
-
     <!-- Carrito de compras -->
     <div class="cart">
       <h2>Carrito</h2>
@@ -68,65 +66,17 @@ const checkout = () => {
 </script>
 
 <style scoped>
-.library {
-  padding: 20px;
-  color: #fff1b0;
-  background: #000000;
-  min-height: 100vh;
-  font-family: 'Orbitron', sans-serif;
-}
+.library { padding: 20px; color: #fff1b0; background: #000000; min-height: 100vh; font-family: 'Orbitron', sans-serif; }
 
-.games {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-}
+.games { display: flex; flex-wrap: wrap; gap: 20px; }
 
-.game-card {
-  background: #111111;
-  padding: 15px;
-  border-radius: 10px;
-  border: 2px solid #ffd9008b;
-  width: 200px;
-  box-shadow: 0 0 10px #ffd90083, 0 0 20px #BFA06D;
-}
+.game-card { background: #111111; padding: 15px; border-radius: 10px; border: 2px solid #ffd9008b; width: 200px; box-shadow: 0 0 10px #ffd90083, 0 0 20px #BFA06D; }
 
-.game-card input {
-  width: 60px;
-  margin-top: 5px;
-  padding: 5px;
-  border-radius: 5px;
-  border: none;
-  outline: none;
-  text-align: center;
-}
+.game-card input { width: 60px; margin-top: 5px; padding: 5px; border-radius: 5px; border: none; outline: none; text-align: center; }
 
-.game-card button {
-  margin-top: 10px;
-  padding: 8px;
-  border: none;
-  border-radius: 5px;
-  background: linear-gradient(45deg, #ffd900aa, #BFA06D);
-  color: #000000;
-  cursor: pointer;
-}
+.game-card button { margin-top: 10px; padding: 8px; border: none; border-radius: 5px; background: linear-gradient(45deg, #ffd900aa, #BFA06D); color: #000000; cursor: pointer; }
 
-.cart {
-  margin-top: 30px;
-  background: #111111;
-  padding: 15px;
-  border-radius: 10px;
-  border: 2px solid #ffd900bb;
-  width: 400px;
-}
+.cart { margin-top: 30px; background: #111111; padding: 15px; border-radius: 10px; border: 2px solid #ffd900bb; width: 400px; }
 
-.cart button {
-  margin-top: 10px;
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-  background: linear-gradient(45deg, #ffd900bd, #BFA06D);
-  color: #000000;
-  cursor: pointer;
-}
+.cart button { margin-top: 10px; padding: 10px; border: none; border-radius: 5px; background: linear-gradient(45deg, #ffd900bd, #BFA06D); color: #000000; cursor: pointer; }
 </style>
