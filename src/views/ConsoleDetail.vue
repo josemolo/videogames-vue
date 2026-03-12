@@ -8,7 +8,7 @@
         </h1>
       </div>
       <!-- CONTENIDO PRINCIPAL (VERTICAL) -->
-      <div class="content" v-if="selectedConsole">
+      <div class="content" v-if="!loading && selectedConsole">
         <!-- IMAGEN + DESCRIPCIÓN -->
         <div class="image-section">
           <img
@@ -176,8 +176,247 @@
 
 <script setup lang="ts">
 import { useRoute, useRouter } from 'vue-router'
-import { computed, ref } from 'vue'
-/*import Card from '@/components/Card.vue'*/
+import { ref, onMounted } from 'vue'
+import { supabase } from '@/lib/supabase'
+import { useHead } from '@vueuse/head'
+import { useRouteMetrics } from '@/composables/useRouteMetrics'
+import { useCartStore } from '@/stores/cart'
+import { useUserStore } from '@/stores/user'
+
+interface AccessoryItem {
+  id: string
+  console_id: string
+  name: string
+  price: number
+  stock: number
+  image: string
+}
+
+interface ConsoleItem {
+  id: string
+  name: string
+  subtitle: string
+  image: string
+  description: string
+  features: string[]
+  price: number
+  stock: number
+}
+
+interface GameItem {
+  id: string
+  console_id: string
+  name: string
+  description: string
+  price: number
+  stock: number
+  image: string
+}
+
+const route = useRoute()
+const router = useRouter()
+const consoleSlug = route.params.slug as string
+
+const cart = useCartStore()
+const user = useUserStore()
+
+const selectedConsole = ref<ConsoleItem | null>(null)
+const compatibleAccessories = ref<AccessoryItem[]>([])
+const availableGames = ref<GameItem[]>([])
+const loading = ref(true)
+
+const addedConsole = ref(false)
+const addedGameId = ref<string | null>(null)
+const addedAccessoryId = ref<string | null>(null)
+
+/* =============================
+   CARGAR DATOS DESDE SUPABASE
+============================= */
+
+async function loadConsoleData() {
+
+  loading.value = true
+
+  const consoleSlug = route.params.slug as string
+
+  /* CONSOLA */
+
+  const { data: consoleData, error: consoleError } = await supabase
+    .from('consoles')
+    .select('*')
+    .eq('slug', consoleSlug)
+    .maybeSingle()
+
+  if (consoleError) {
+    console.error(consoleError)
+    loading.value = false
+    return
+  }
+
+  selectedConsole.value = consoleData
+
+  if (!selectedConsole.value) {
+    loading.value = false
+    return
+  }
+
+  /* ACCESORIOS */
+
+  const { data: accessoriesData, error: accessoriesError } = await supabase
+    .from('accessories')
+    .select('*')
+    .eq('console_id', selectedConsole.value.id)
+
+  if (accessoriesError) console.error(accessoriesError)
+  else compatibleAccessories.value = accessoriesData || []
+
+
+  /* JUEGOS */
+
+  const { data: gamesData, error: gamesError } = await supabase
+    .from('games')
+    .select('*')
+    .eq('console_id', selectedConsole.value.id)
+
+  if (gamesError) console.error(gamesError)
+  else availableGames.value = gamesData || []
+
+  loading.value = false
+}
+
+onMounted(loadConsoleData)
+
+/* =============================
+   LOGIN REQUERIDO
+============================= */
+
+function requireLogin(action?: () => void) {
+
+  if (!user.isLoggedIn) {
+    user.openLoginModal(action)
+    return false
+  }
+
+  return true
+}
+
+/* =============================
+   CARRITO
+============================= */
+
+function addConsoleToCart() {
+
+  if (!selectedConsole.value) return
+
+  const action = () => {
+
+    cart.addItem({
+      id: selectedConsole.value!.id,
+      name: selectedConsole.value!.name,
+      title: selectedConsole.value!.name,
+      price: selectedConsole.value!.price ?? 0,
+      image: selectedConsole.value!.image,
+      stock: selectedConsole.value!.stock ?? 0,
+      type: 'console',
+    })
+
+    addedConsole.value = true
+    setTimeout(() => (addedConsole.value = false), 1200)
+  }
+
+  if (!requireLogin(action)) return
+
+  action()
+}
+
+function addGameToCart(game: GameItem) {
+
+  const action = () => {
+
+    cart.addItem({
+      id: game.id,
+      name: game.name,
+      title: game.name,
+      price: game.price ?? 0,
+      image: game.image,
+      stock: game.stock ?? 0,
+      type: 'game',
+    })
+
+    addedGameId.value = game.id
+    setTimeout(() => (addedGameId.value = null), 1200)
+  }
+
+  if (!requireLogin(action)) return
+
+  action()
+}
+
+function addAccessoryToCart(accessory: AccessoryItem) {
+
+  const action = () => {
+
+    cart.addItem({
+      id: accessory.id,
+      name: accessory.name,
+      title: accessory.name,
+      price: accessory.price ?? 0,
+      image: accessory.image,
+      stock: accessory.stock ?? 0,
+      type: 'accessory',
+    })
+
+    addedAccessoryId.value = accessory.id
+    setTimeout(() => (addedAccessoryId.value = null), 1200)
+  }
+
+  if (!requireLogin(action)) return
+
+  action()
+}
+
+/* =============================
+   NAVEGACIÓN
+============================= */
+
+function volver() {
+  router.push('/consoles')
+}
+
+/* =============================
+   SEO
+============================= */
+
+useHead({
+  title: `Consola ${consoleSlug} | VortexGames`,
+  meta: [
+    {
+      name: 'description',
+      content: `Información y detalles de la consola ${consoleSlug}.`
+    },
+    {
+      property: 'og:title',
+      content: `Consola ${consoleSlug} | VortexGames`
+    },
+    {
+      property: 'og:description',
+      content: `Descubre características y datos de la consola ${consoleSlug}.`
+    },
+    { property: 'og:type', content: 'article' },
+    { property: 'og:image', content: '/og/consoles.png' },
+    {
+      property: 'og:image',
+      content: `/og/consoles/${consoleSlug}.png`
+    }
+  ]
+})
+
+useRouteMetrics()
+
+/*import { useRoute, useRouter } from 'vue-router'
+import { ref, computed, onMounted } from 'vue'
+import { supabase } from '@/lib/supabase'
+/*import Card from '@/components/Card.vue'*
 import consolesList from '../data/consoles.json'
 import accessories from '../data/accessories.json'
 import games from '../data/games.json'
@@ -187,7 +426,7 @@ import { useCartStore } from '@/stores/cart'
 import { useUserStore } from '@/stores/user'
 
 interface AccessoryItem {
-  id: number
+  id: string
   consoleId: string
   name: string
   price: number
@@ -207,7 +446,7 @@ interface ConsoleItem {
 }
 
 interface GameItem {
-  id: number
+  id: string
   consoleId: string
   name: string
   description: string
@@ -222,23 +461,36 @@ const id = route.params.id
 const consoleId = route.params.id as string
 const cart = useCartStore()
 const user = useUserStore()
-const addedConsole = ref(false)
-const addedGameId = ref<number | null>(null)
-const addedAccessoryId = ref<number | null>(null)
 
+const addedConsole = ref(false)
+const addedGameId = ref<string | null>(null)
+const addedAccessoryId = ref<string | null>(null)
+
+
+  
 const selectedConsole = computed<ConsoleItem | undefined>(() =>
   consolesList.find(c => c.id === consoleId)
 )
 
 const compatibleAccessories = computed<AccessoryItem[]>(() =>
-  accessories.filter(a => a.consoleId === consoleId)
+  accessories
+    .filter(a => a.consoleId === consoleId)
+    .map(a => ({
+      ...a,
+      id: String(a.id)
+    }))
 )
 
 const availableGames = computed<GameItem[]>(() =>
-  games.filter(g => g.consoleId === consoleId)
+  games
+    .filter(g => g.consoleId === consoleId)
+    .map(g => ({
+      ...g,
+      id: String(g.id)
+    }))
 )
 
-/*FUNCIONES CARRITO*/
+/*FUNCIONES CARRITO*
 function requireLogin(action?: () => void) {
   if (!user.isLoggedIn) {
     user.openLoginModal(action)
@@ -275,7 +527,7 @@ function addGameToCart(game: GameItem) {
   //if (!requireLogin()) return
   const action = () => {
     cart.addItem({
-      id: game.id.toString(),
+      id: game.id,
       name: game.name,
       title: game.name,
       price: game.price ?? 0,
@@ -297,7 +549,7 @@ function addAccessoryToCart(accessory: AccessoryItem) {
 
   const action = () => {
     cart.addItem({
-      id: accessory.id.toString(),
+      id: accessory.id,
       name: accessory.name,
       title: accessory.name,
       price: accessory.price ?? 0,
@@ -352,7 +604,7 @@ useHead({
   ]
 })
 
-useRouteMetrics()
+useRouteMetrics()*/
 </script>
 
 <style scoped>

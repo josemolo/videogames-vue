@@ -31,7 +31,7 @@
         <h2>Productos Destacados</h2>
         <div class="carousel-row">
           <Card
-            v-for="p in featuredProducts"
+            v-for="p in (featuredProductsDynamic.length ? featuredProductsDynamic : featuredProducts)"
             :key="p.id"
             :id="p.id"
             :image="p.image"
@@ -76,7 +76,7 @@
         <h2>Visítanos</h2>
         <div class="location-card">
           <div class="location-info">
-            <h3>LucyCell</h3>
+            <h3></h3>
             <p>
               Costa Rica, Heredia, Santo Domingo<br>
               25 metros oeste de la escuela Ruben Darío, Santa Rosa
@@ -154,6 +154,7 @@ import { useUserStore } from '@/stores/user'
 import { useCartStore } from '@/stores/cart'
 import { supabase } from '@/lib/supabase'
 import type { NewsItem } from '@/types/news'
+import { useProducts } from '@/composables/useProducts'
 
 /*import { useParticles } from '@/composables/useParticles'*/
 
@@ -177,6 +178,8 @@ const userStore = useUserStore()
 const cartStore = useCartStore()
 const router = useRouter()
 
+const { products, getByCategory } = useProducts()
+
 const goToShop = () => router.push('/consoles')
 const goToNews = () => router.push('/news')
 
@@ -185,6 +188,8 @@ const addedProductId = ref<string | null>(null)
 
 const email = ref('')
 const loading = ref(false)
+
+const featuredProductsDynamic = ref<any[]>([])
 
 const games = ref([ 
   { 
@@ -216,6 +221,9 @@ const featuredProducts = ref(featuredProductsData)
 const newsList = ref<NewsItem[]>([])
 onMounted(() => {
   newsList.value = newsData.filter(n => n.showInHome === true)
+
+  // productos destacados desde Supabase
+  featuredProductsDynamic.value = getByCategory('articulos').slice(0,4)
 })
 
 const gamingBg = "https://res.cloudinary.com/dakkfinnu/video/upload/v1767195871/gaming_g0o04l.mp4";
