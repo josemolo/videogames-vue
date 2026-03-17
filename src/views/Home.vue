@@ -15,9 +15,9 @@
             v-for="game in games"
             :key="game.id"
             :id="game.id"  
-            :title="game.title"
+            :title="game.name "
             :description="game.description"
-            :image="game.image"
+            :image="game.image || '/image/no-image.jpg'"
             :price="game.price"
             variant="game"
             :added="addedGameId === game.id"
@@ -137,7 +137,7 @@
 import HomeCarousel from '@/components/HomeCarousel.vue'
 import Hero from '@/components/Hero.vue'
 import Card from '@/components/Card.vue'
-import featuredProductsData from '@/data/featuredProducts.json'
+/*import featuredProductsData from '@/data/featuredProducts.json'*/
 import rawNewsData from '@/data/news.json'
 
 /*import gamingBg from '@/assets/videos/gaming.mp4'*/
@@ -178,7 +178,7 @@ const userStore = useUserStore()
 const cartStore = useCartStore()
 const router = useRouter()
 
-const { products, getByCategory } = useProducts()
+/*const { products, getByCategory } = useProducts()*/
 
 const goToShop = () => router.push('/consoles')
 const goToNews = () => router.push('/news')
@@ -189,8 +189,12 @@ const addedProductId = ref<string | null>(null)
 const email = ref('')
 const loading = ref(false)
 
+const games = ref<any[]>([])
 const featuredProductsDynamic = ref<any[]>([])
 
+
+
+/*
 const games = ref([ 
   { 
     id: 1, 
@@ -214,16 +218,24 @@ const games = ref([
     price: 38000
   }
 ]);
+*/
+
+
 
 const newsData: NewsItem[] = rawNewsData as NewsItem[]
 
-const featuredProducts = ref(featuredProductsData)
+const featuredProducts = ref<any[]>([])
+const featuredGames = ref<any[]>([])
+
+
 const newsList = ref<NewsItem[]>([])
-onMounted(() => {
+
+onMounted(async () => {
+
   newsList.value = newsData.filter(n => n.showInHome === true)
 
-  // productos destacados desde Supabase
-  featuredProductsDynamic.value = getByCategory('articulos').slice(0,4)
+  await loadFeaturedContent()
+
 })
 
 const gamingBg = "https://res.cloudinary.com/dakkfinnu/video/upload/v1767195871/gaming_g0o04l.mp4";
@@ -287,6 +299,60 @@ async function handleSubscribe() {
     alert('Ocurrió un error.')
   } finally {
     loading.value = false
+  }
+}
+
+async function loadFeatured() {
+
+  const { data:games } = await supabase
+    .from('games')
+    .select('*')
+     /*.eq('category','juegos')*/
+    .eq('featured', true)
+    .limit(6)
+
+  featuredGames.value = games || []
+
+  const { data:products } = await supabase
+    .from('products')
+    .select('*')
+    .eq('featured', true)
+    .limit(6)
+
+  featuredProducts.value = products || []
+
+}
+
+async function loadFeaturedContent() {
+
+  /* JUEGOS DESTACADOS */
+
+  const { data: gamesData, error: gamesError } = await supabase
+    .from('products')
+    .select('*')
+    .eq('category','juegos')
+    .eq('featured', true)
+    .limit(6)
+
+  if(gamesError){
+    console.error(gamesError)
+  }else{
+    games.value = gamesData || []
+  }
+
+  /* PRODUCTOS DESTACADOS */
+
+  const { data: productsData, error: productsError } = await supabase
+    .from('products')
+    .select('*')
+    .eq('featured', true)
+    .eq('category','articulos')
+    .limit(6)
+
+  if(productsError){
+    console.error(productsError)
+  }else{
+    featuredProductsDynamic.value = productsData || []
   }
 }
 
