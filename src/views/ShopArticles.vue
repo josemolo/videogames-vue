@@ -251,10 +251,10 @@ function addToCart(article: any) {
 /* FILTRO */
 .platform-filter {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  grid-template-columns: repeat(5, max-content);
+  justify-content: center;
   gap: 12px;
   margin-bottom: 30px;
-  padding: 0 230px;
 }
 
 .platform-filter button {
@@ -310,15 +310,16 @@ text-shadow:
   100% { transform: scale(1); }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .platform-filter {
     grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
+    gap: 8px;
+    padding: 0 10px;
   }
 
   .platform-filter button {
-    font-size: 0.8rem;
-    padding: 8px;
+    font-size: 0.85rem;
+    padding: 8px 12px;
   }
 }
 
