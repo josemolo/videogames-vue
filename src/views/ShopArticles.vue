@@ -1,6 +1,16 @@
 <template>
   <div class="articles-wrapper">
     <h1 class="articles-title gold-title">Artículos</h1>
+    <div class="platform-filter">
+      <button
+        v-for="c in categories"
+        :key="c"
+        :class="{ active: selectedCategory === c }"
+        @click="selectedCategory = c"
+      >
+        {{ c }}
+      </button>
+    </div>
     <div class="articles-grid">
       <div v-for="item in filteredArticles" :key="item.id" class="glass-card">
         <div class="badges">
@@ -56,7 +66,6 @@ interface Article {
 }
 
 const categories = [
-'Todos',
 'SWITCH',
 'PS5',
 'PS4',
@@ -67,7 +76,7 @@ const categories = [
 'IPHONE',
 'SONY',
 'VARIOS'
-]
+] /*'TODOS', */
 
 const selectedCategory = ref('Todos')
 
@@ -101,14 +110,11 @@ onMounted(async () => {
     return
   }
 
-  const order = ['SWITCH','PS5','PS4','XBOXX','XBOXS','3DS','SAMSUNG','IPHONE','SONY','VARIOS']
+  const order = ['TODOS','SWITCH','PS5','PS4','XBOXX','XBOXS','3DS','SAMSUNG','IPHONE','SONY','VARIOS']
 
   articles.value = (data || []).sort((a: Article, b: Article) => {
     return order.indexOf(a.platform ?? '') - order.indexOf(b.platform ?? '')
   })
-
-  articles.value = data || []
-
 })
 
 function addArticleToCart(article: Article) {
@@ -240,6 +246,28 @@ function addToCart(article: any) {
     0 0 15px rgba(124,255,124,0.9),
     0 0 30px rgba(0,255,204,0.9);
   animation: pulseAdd .6s ease;
+}
+
+/* FILTRO */
+.platform-filter {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.platform-filter button {
+  margin: 0 10px;
+  padding: 10px 20px;
+  border: 2px solid #e1e09d8a;
+  background: transparent;
+  color: rgb(255, 252, 219);
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.platform-filter button.active,
+.platform-filter button:hover {
+  background: #fffd9558;
+  box-shadow: 0 0 15px #7e803ab9;
 }
 
 .gold-title{

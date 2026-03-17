@@ -75,7 +75,7 @@ const cartStore = useCartStore()
 
 const games = ref<Game[]>([])
 
-const platforms = ['Todos', 'Switch', 'PS5', 'Xbox', 'PS4', 'Xboxs', '3DS']
+const platforms = ['SWITCH', 'PS5', 'XBOXX', 'PS4', 'XBOXS', '3DS'] /*'TODOS',*/
 const selectedPlatform = ref('Todos')
 
 const addedGameId = ref<string | null>(null)
@@ -92,7 +92,7 @@ onMounted(async () => {
     return
   }
     
-  const order = ['SWITCH','PS5','PS4','XBOXX','XBOXS','3DS']
+  const order = ['TODOS','SWITCH','PS5','PS4','XBOXX','XBOXS','3DS']
 
   games.value = (data || []).sort((a: Game, b: Game) => {
     return order.indexOf(a.platform ?? '') - order.indexOf(b.platform ?? '')
