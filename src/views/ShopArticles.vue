@@ -312,7 +312,7 @@ text-shadow:
 
 @media (max-width: 768px) {
   .platform-filter {
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 8px;
     padding: 0 10px;
   }
