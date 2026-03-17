@@ -250,24 +250,31 @@ function addToCart(article: any) {
 
 /* FILTRO */
 .platform-filter {
-  text-align: center;
-  margin-bottom: 40px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 12px;
+  margin-bottom: 30px;
+  padding: 0 230px;
 }
 
 .platform-filter button {
-  margin: 0 10px;
-  padding: 10px 20px;
+  padding: 10px 12px  ;
   border: 2px solid #e1e09d8a;
   background: transparent;
   color: rgb(255, 252, 219);
   cursor: pointer;
   transition: 0.3s;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  backdrop-filter: blur(6px);
+  background: rgba(255, 215, 0, 0.05);
 }
 
 .platform-filter button.active,
 .platform-filter button:hover {
   background: #fffd9558;
   box-shadow: 0 0 15px #7e803ab9;
+  background: linear-gradient(135deg,#ffd90055,#bfa06d55);
 }
 
 .gold-title{
@@ -301,6 +308,18 @@ text-shadow:
   0% { transform: scale(1); }
   50% { transform: scale(1.08); }
   100% { transform: scale(1); }
+}
+
+@media (max-width: 600px) {
+  .platform-filter {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .platform-filter button {
+    font-size: 0.8rem;
+    padding: 8px;
+  }
 }
 
 .game-card,

@@ -435,7 +435,7 @@ defineProps({
 *{margin:0;padding:0;box-sizing:border-box}
 
 /* SECCIONES */
-section { padding:4rem 1rem 0rem 0rem; text-align:center; color:#fff0bc; max-width: 1400px;  /*centra contenido */ margin: 0 auto; }
+section { padding:4rem 1rem; text-align:center; color:#fff0bc; max-width: 1400px;  /*centra contenido */ margin: 0 auto; }
 
 section h2{font-size:clamp(2rem,5vw,2.5rem);margin-bottom:2rem;color:#f9eead;text-shadow:0 0 10px #fff4b8;}
 
@@ -532,7 +532,7 @@ section h2{font-size:clamp(2rem,5vw,2.5rem);margin-bottom:2rem;color:#f9eead;tex
 
 .footer .social a:hover { color: #fff; transform: translateY(-3px); text-shadow:0 0 12px #ffd900a8 }
 
-.home { overflow-x: visible; }
+.home { overflow-x: hidden; }
 
 .home-wrapper { width: 100vw; overflow-x: visible; margin: 0 auto; }
 
@@ -578,11 +578,6 @@ section h2{font-size:clamp(2rem,5vw,2.5rem);margin-bottom:2rem;color:#f9eead;tex
   .location-map { margin-top: 1.5rem; }
 }
 
-/* RESPONSIVE */
-@media(max-width:900px){
-.location-card{ grid-template-columns:1fr; }
-}
-
 /* ANIMACIONES */
 @keyframes fadeUp { 
   from{ opacity:0;transform:translateY(30px)}
@@ -608,5 +603,37 @@ to { transform: rotate(360deg); }
 /* Solo permitir scroll cuando sea necesario */
 @media (min-width: 1024px) {
   .carousel-row { overflow-x: visible; justify-content: center; }
+}
+
+@media (max-width: 768px) {
+  .carousel-row {
+    width: 100%;
+    max-width: 100%;
+    margin-left: 0;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  .home-wrapper {
+    width: 100%;
+    overflow-x: hidden;
+    margin: 0 auto;
+  }
+
+  section {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .hero-content {
+    padding-left: 16px;
+    padding-right: 16px;
+    max-width: 100%;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .testimonial-card {
+    text-align: center;
+  }
 }
 </style>
